@@ -1,4 +1,7 @@
-# DataFAIRifier
+# ProTRAIT-FAIRifier
+
+**warning: this is an implementation of [https://github.com/maastroclinic/DataFAIRifier](https://github.com/maastroclinic/DataFAIRifier). Please use the implementation branch for all commits.**
+
 The DataFAIRifier is a system that supports the creation and validation of mappings of relational data to ontologies. The system is packaged as a set of Docker images. The frontend of the system is implemented as Jupyter Notebook.
 
 This repository describes the bottom-up DataFAIRifier process, and FAIR (Findable, Accessible, Interoperable, Reusable) data station which will be setup when following the instructions.
