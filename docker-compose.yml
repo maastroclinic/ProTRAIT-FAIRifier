@@ -21,6 +21,7 @@ services:
       - "8088:8088"
     volumes:
       - ./notebooks:/queries/
+      - ./r2rml:/queries/r2rml
     links:
       - postgres:postgresdb
       - graphdb:graphdb
