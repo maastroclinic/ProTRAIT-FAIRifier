@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "2345:5432"
+      - "5432:5432"
   r2rml:
     image: jvsoest/r2rml
     links:
