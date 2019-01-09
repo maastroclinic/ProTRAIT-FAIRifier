@@ -76,7 +76,7 @@ class R2RML_visualizer:
     
     def plotGraph(self):
         # create new graphviz canvas
-        self.graph = Digraph(comment='R2RML Structure', format="png")
+        self.graph = Digraph(comment='R2RML Structure', format="png", engine="fdp")
         self.graph.node_attr.update(color='lightblue2', style='filled')
         
         # create in-memory rdf store and load mapping and terminologies
