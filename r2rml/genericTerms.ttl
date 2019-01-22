@@ -107,9 +107,9 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;
+        rr:predicate roo:P100022;
         rr:objectMap [
-            rr:parentTriplesMap map:personalHistory;
+            rr:parentTriplesMap map:alcoholUseHistory;
         ];
     ];
     rr:predicateObjectMap [
@@ -119,22 +119,10 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_comorbidity;
+        rr:predicate roo:P100255;
         rr:objectMap [
             rr:parentTriplesMap map:comorbidity;
         ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_tumor;
-        rr:objectMap [
-            rr:parentTriplesMap map:tumor;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_comorbidity;
-        rr:objectMap [
-            rr:parentTriplesMap map:comorbidity;
-        ];    
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100248;
@@ -143,15 +131,45 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_diagnosis;
+        rr:predicate roo:P100020;
         rr:objectMap [
-            rr:parentTriplesMap map:diagnosis;
+            rr:parentTriplesMap map:neoplasm;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_treatment;
+        rr:predicate roo:P100024;
         rr:objectMap [
-            rr:parentTriplesMap map:treatment;
+            rr:parentTriplesMap map:surgery;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:radiotherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:immunotherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:hormoneTherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:chemotherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100022;
+        rr:objectMap [
+            rr:parentTriplesMap map:CharlsonComorbidityIndex;
         ];
     ].
     
@@ -163,17 +181,13 @@ map:biologicalSex a rr:TriplesMap;
             rr:class ncit:C28421;
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:maleSex;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:femaleSex;
-        ];
+            rr:predicate roo:P100042;
+            rr:objectMap [
+                rr:column "sex";
+                rr:datatype xsd:string;
+            ];
     ].
+    
     
 map:identifier a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
@@ -196,24 +210,22 @@ map:treatingClinic a rr:TriplesMap;
             rr:class ncit:C19326;
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;
+        rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "treatingClinic"; 
             rr:datatype xsd:string;
         ];
     ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_contact_person;
-        rr:objectMap [
-            rr:column "contactPerson"; 
-            rr:datatype xsd:string;
-        ];
-    ];
+    # rr:predicateObjectMap [
+    #     rr:predicate roo:has_contact_person;
+    #     rr:objectMap [
+    #         rr:column "contactPerson"; 
+    #         rr:datatype xsd:string;
+    #     ];
+    # ];
     rr:predicateObjectMap [
         rr:predicate roo:has_created;
-        rr:objectMap [
-            rr:parentTriplesMap map:registration;
-        ];    
+            
     ].
 
 map:referringClinic a rr:TriplesMap;
@@ -242,6 +254,12 @@ map:registration a rr:TriplesMap;
             rr:column "date"; 
             rr:datatype xsd:date;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:at_hospital;
+        rr:objectMap [
+            rr:parentTriplesMap map:treatingClinic;
+        ];
     ].
 
 map:ageAtDiagnosis a rr:TriplesMap;
@@ -255,6 +273,13 @@ map:ageAtDiagnosis a rr:TriplesMap;
         rr:objectMap [
             rr:column "age"; 
             rr:datatype xsd:integer;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100038;
+        rr:objectMap [
+            rr:column "age"; 
+            rr:parentTriplesMap map:neoplasm;
         ];
     ].   
 
@@ -271,34 +296,7 @@ map:birth a rr:TriplesMap;
                 rr:datatype xsd:gYear;
             ];
         ].
-
-map:maleSex a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-        rr:subjectMap [
-            rr:template "patient/biologicalSex/maleSex/{male}";
-            rr:class ncit:C20197;
-        ];
-        rr:predicateObjectMap [
-            rr:predicate roo:P100042;
-            rr:objectMap [
-                rr:column "male";
-                rr:datatype xsd:string;
-            ];
-        ].
-
-map:femaleSex a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-        rr:subjectMap [
-            rr:template "patient/biologicalSex/femaleSex/{female}";
-            rr:class ncit:C16576;
-        ];
-        rr:predicateObjectMap [
-            rr:predicate roo:P100042;
-            rr:objectMap [
-                rr:column "female";
-                rr:datatype xsd:string;
-            ];
-        ].
+        
 map:educationLevel a rr:TriplesMap;
      rr:logicalTable map:basicQuery;
      rr:subjectMap [
@@ -306,109 +304,13 @@ map:educationLevel a rr:TriplesMap;
             rr:class ncit:C17953;
         ];
         rr:predicateObjectMap [
-            rr:predicate roo:has_highest_completed_level;
+            rr:predicate roo:local_value;
             rr:objectMap [
-                rr:parentTriplesMap map:noFormalEducation;
+                rr:column "educationalLevel";
+                rr:datatype xsd:string;
             ];
-        ];
-        rr:predicateObjectMap [
-            rr:predicate roo:has_highest_completed_level;
-            rr:objectMap [
-                rr:parentTriplesMap map:primaryEducation;
-            ];
-        ];
-        rr:predicateObjectMap [
-            rr:predicate roo:has_highest_completed_level;
-            rr:objectMap [
-                rr:parentTriplesMap map:preparatoryVocationalEducation;
-            ];
-        ];
-        rr:predicateObjectMap [
-            rr:predicate roo:has_highest_completed_level;
-            rr:objectMap [
-                rr:parentTriplesMap map:generalSecondaryEducation;
-            ];
-        ];
-        rr:predicateObjectMap [
-            rr:predicate roo:has_highest_completed_level;
-            rr:objectMap [
-                rr:parentTriplesMap map:secondaryEducation;
-                ];
-        ];
-        rr:predicateObjectMap [
-            rr:predicate roo:has_highest_completed_level;
-            rr:objectMap [
-                rr:parentTriplesMap map:higherGeneralAndPreparatoryScientificEducation;
-                ];
-        ];
-        rr:predicateObjectMap [
-            rr:predicate roo:has_highest_completed_level;
-            rr:objectMap [
-                rr:parentTriplesMap map:higherProfessionalEducation;
-                ];
-        ];
-        rr:predicateObjectMap [
-            rr:predicate roo:has_highest_completed_level;
-            rr:objectMap [
-                rr:parentTriplesMap map:scientificEducation;
-                ];
         ].
-
-map:noFormalEducation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/educationLevel/noFormalEducation{educationLevel}";
-            rr:class ncit:C67122;
-        ].
-
-map:primaryEducation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/educationLevel/primaryEducation{educationLevel}";
-            rr:class ncit:primaryEducation;
-        ].
-
-map:preparatoryVocationalEducation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/educationLevel/preparatoryVocationalEducation{educationLevel}";
-            rr:class ncit:preparatoryVocationalEducation;
-        ].
-
-map:generalSecondaryEducation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/educationLevel/generalSecondaryEducation{educationLevel}";
-            rr:class ncit:generalSecondaryEducation;
-        ].
-
-map:secondaryEducation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/educationLevel/secondaryEducation{educationLevel}";
-            rr:class ncit:secondaryEducation;
-        ].
-
-map:higherGeneralAndPreparatoryScientificEducation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/educationLevel/higherGeneralAndPreparatoryScientificEducation{educationLevel}";
-            rr:class ncit:higherGeneralAndPreparatoryScientificEducation;
-        ].
-
-map:higherProfessionalEducation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/educationLevel/higherProfessionalEducation{educationLevel}";
-            rr:class ncit:higherProfessionalEducation;
-        ].
-
-map:scientificEducation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/educationLevel/scientificEducation{educationLevel}";
-            rr:class ncit:scientificEducation;
-        ].
+        
 
 map:relationshipStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
@@ -417,82 +319,11 @@ map:relationshipStatus a rr:TriplesMap;
             rr:class ncit:C25188;
         ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_status;
-        rr:objectMap [
-            rr:parentTriplesMap map:married;
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "relationshipStatus";
+                rr:datatype xsd:string;
             ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_status;
-        rr:objectMap [
-            rr:parentTriplesMap map:domesticPartnership;
-            ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_status;
-        rr:objectMap [
-            rr:parentTriplesMap map:nonDomesticPartnership;
-            ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_status;
-        rr:objectMap [
-            rr:parentTriplesMap map:widowed;
-            ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_status;
-        rr:objectMap [
-            rr:parentTriplesMap map:divorced;
-            ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_status;
-        rr:objectMap [
-            rr:parentTriplesMap map:single;
-            ];
-    ].
-    
-map:married a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/relationshipStatus/married/{relationshipStatus}";
-            rr:class ncit:C51773;
-        ].
-
-map:domesticPartnership a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/relationshipStatus/domesticPartnership/{relationshipStatus}";
-            rr:class ncit:C53262;
-        ].
-
-map:widowed a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/relationshipStatus/widowed/{relationshipStatus}";
-            rr:class ncit:C51775;
-        ].
-
-map:divorced a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/relationshipStatus/divorced/{relationshipStatus}";
-            rr:class ncit:C51776;
-        ].
-
-map:single a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/relationshipStatus/divorced/{relationshipStatus}";
-            rr:class ncit:single;
-        ].
-
-map:nonDomesticPartnership a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/relationshipStatus/divorced/{relationshipStatus}";
-            rr:class ncit:nonDomesticPartnership;
         ].
 
 map:smokingStatus a rr:TriplesMap;
@@ -534,7 +365,7 @@ map:formerSmoker a rr:TriplesMap;
             rr:class ncit:C67148;
         ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;
+        rr:predicate roo:P100027;
         rr:objectMap [
             rr:parentTriplesMap map:packYears;
             ];
@@ -553,7 +384,7 @@ map:currentSmoker a rr:TriplesMap;
             rr:class ncit:C67147;
         ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;
+        rr:predicate roo:P100027;
         rr:objectMap [
             rr:parentTriplesMap map:packYears;
             ];
@@ -570,21 +401,21 @@ map:timeStoppedSmoking a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
             rr:template "patient/smokingStatus/formerSmoker/timeStoppedSmoking/{time}";
-            rr:class ncit:months_stopped_smoking;
-        ].
-    
-map:personalHistory a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/personalHistory";
-            rr:class ncit:C18772;
+            rr:class ncit:timeStoppedSmoking;
         ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;
+        rr:predicate roo:P100027;
         rr:objectMap [
-            rr:parentTriplesMap map:alcoholUseHistory;
+            rr:parentTriplesMap map:Month;
             ];
     ].
+
+map:Month a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/smokingStatus/formerSmoker/timeStoppedSmoking/{time}";
+            rr:class uo:0000035;
+        ].
 
 map:alcoholUseHistory a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
@@ -593,57 +424,13 @@ map:alcoholUseHistory a rr:TriplesMap;
             rr:class ncit:C81229;
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:occasionalDrinker;
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "alcoholUseHistory";
+                rr:datatype xsd:string;
             ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:activeAlcoholAbuse;
-            ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:historyOfAlcoholism;
-            ]; 
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:noAlcoholUse;
-            ];         
     ].
-
-map:activeAlcoholAbuse a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/personalHistory/alcoholUseHistory/activeAlcoholUse";
-            rr:class ncit:activeAlcoholUse;
-    ].
-
-map:historyOfAlcoholism a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/personalHistory/alcoholUseHistory/historyOfAlcoholism";
-            rr:class ncit:historyOfAlcoholism;
-        ].
-
-map:occasionalDrinker a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/personalHistory/alcoholUseHistory/occasionalDrinker";
-            rr:class ncit:occasionalDrinker;
-        ].
-
-map:noAlcoholUse a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/personalHistory/alcoholUseHistory/noAlcoholUse";
-            rr:class ncit:noAlcoholUse;
-        ].
+    
 
 map:bodyWeight a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
@@ -662,14 +449,14 @@ map:kilogram a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
             rr:template "patient/bodyWeight/kilogram";
-            rr:class ncit:C28252;
+            rr:class uo:0000009;
         ].   
 
 map:bodyHeight a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
             rr:template "patient/bodyHeight";
-            rr:class roo:P100248;
+            rr:class ncit:C94488;
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100027;
@@ -682,263 +469,23 @@ map:centimeter a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
             rr:template "patient/bodyHeight/centimeter";
-            rr:class ncit:C49668;
+            rr:class uo:0000015;
         ].   
 
 map:comorbidity a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
             rr:template "patient/comorbidityIndex";
-            rr:class ncit:C16457;
+            rr:class ncit:C2991;
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;
+        rr:predicate roo:local_value;
         rr:objectMap [
-            rr:parentTriplesMap map:myocardialInfarction;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:CongestiveHeartFailureRequiringHospitilization;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:PerpheralVascularDisease;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:CVA;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:Hemiplegia;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:COPD;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:diabetesMellitus;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:ModerateToSevereChronicKidneyDisease;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:liverDisease;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:pepticUlcerDisease;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:solidTumor;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:leukemia;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:malignantLymphoma;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:HIVOrAids;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:Dementia;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:ConnectiveTissueDisease;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:Hypertension;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:Depression;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:AntitromboticDrugUse;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:DecubitisUlcers;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:CharlsonComorbidityIndex;
+            rr:column "comorbidity"; 
+            rr:datatype xsd:string;
         ];
     ].
 
-map:myocardialInfarction a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/myocardialInfarction";
-            rr:class ncit:myocardialInfarction;
-        ].
-
-map:CongestiveHeartFailureRequiringHospitilization a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/CongestiveHeartFailureRequiringHospitilization";
-            rr:class ncit:CongestiveHeartFailureRequiringHospitilization;
-        ].
-map:PerpheralVascularDisease a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/PerpheralVascularDisease";
-            rr:class ncit:PerpheralVascularDisease;
-        ].
-map:CVA a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/CVA";
-            rr:class ncit:CVA;
-        ].
-map:Hemiplegia a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/Hemiplegia";
-            rr:class ncit:Hemiplegia;
-        ].
-map:COPD a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/COPD";
-            rr:class ncit:COPD;
-        ].
-map:diabetesMellitus a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/diabetesMellitus";
-            rr:class ncit:diabetesMellitus;
-        ].
-map:ModerateToSevereChronicKidneyDisease a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/ModerateToSevereChronicKidneyDisease";
-            rr:class ncit:ModerateToSevereChronicKidneyDisease;
-        ].
-map:liverDisease a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/liverDisease";
-            rr:class ncit:liverDisease;
-        ].
-map:pepticUlcerDisease a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/pepticUlcerDisease";
-            rr:class ncit:pepticUlcerDisease;
-        ].
-map:solidTumor a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/solidTumor";
-            rr:class ncit:solidTumor;
-        ].
-map:leukemia a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/leukemia";
-            rr:class ncit:leukemia;
-        ].
-map:malignantLymphoma a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/malignantLymphoma";
-            rr:class ncit:malignantLymphoma;
-        ].
-map:HIVOrAids a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/HIVOrAids";
-            rr:class ncit:HIVOrAids;
-        ].
-map:Dementia a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/Dementia";
-            rr:class ncit:Dementia;
-        ].
-map:ConnectiveTissueDisease a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/ConnectiveTissueDisease";
-            rr:class ncit:ConnectiveTissueDisease;
-        ].
-map:Hypertension a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/Hypertension";
-            rr:class ncit:Hypertension;
-        ].
-map:Depression a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/Depression";
-            rr:class ncit:Depression;
-        ].
-map:AntitromboticDrugUse a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/AntitromboticDrugUse";
-            rr:class ncit:AntitromboticDrugUse;
-        ].
-map:DecubitisUlcers a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/comorbidit/DecubitisUlcers";
-            rr:class ncit:DecubitisUlcers;
-        ].
 map:CharlsonComorbidityIndex a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
@@ -946,16 +493,23 @@ map:CharlsonComorbidityIndex a rr:TriplesMap;
             rr:class ncit:CharlsonComorbidityIndex;
         ].
     
-map:diagnosis a rr:TriplesMap;
+map:neoplasm a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/diagnosis";
-            rr:class ncit:C15220;
+            rr:template "patient/neoplasm";
+            rr:class ncit:C3262;
         ];
     rr:predicateObjectMap [
         rr:predicate roo:P100251;
         rr:objectMap [
             rr:parentTriplesMap map:dateOfDiagnosis;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "tumorType"; 
+            rr:datatype xsd:string;
         ];
     ].
 
@@ -966,207 +520,16 @@ map:dateOfDiagnosis a rr:TriplesMap;
             rr:class ncit:C25164;
         ].
 
-map:tumor a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor";
-            rr:class ncit:tumor;
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_type;
-        rr:objectMap [
-            rr:parentTriplesMap map:tumorType;
-        ];
-    ].
-
-map:tumorType a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/type";
-            rr:class roo:tumorType;
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:prostateCancer;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:CnsCancer;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:breastCancer;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:lungCancer;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:esophagealCancer;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:sarcoma;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:lymphoma;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:pediatricCancer;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:eyeMelanoma;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100042;
-        rr:objectMap [
-            rr:parentTriplesMap map:otherTumors;
-        ];
-    ].
-
-map:prostateCancer a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/prostateCancer";
-            rr:class ncit:prostateCancer;
-        ].
-map:CnsCancer a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/CnsCancer";
-            rr:class ncit:CnsCancer;
-        ].
-
-map:breastCancer a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/breastCancer";
-            rr:class ncit:breastCancer;
-        ].
-map:lungCancer a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/lungCancer";
-            rr:class ncit:lungCancer;
-        ].
-map:esophagealCancer a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/esophagealCancer";
-            rr:class ncit:esophagealCancer;
-        ].
-map:sarcoma a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/sarcoma";
-            rr:class ncit:sarcoma;
-        ].
-map:lymphoma a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/lymphoma";
-            rr:class ncit:lymphoma;
-        ].
-map:pediatricCancer a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/pediatricCancer";
-            rr:class ncit:pediatricCancer;
-        ].
-map:eyeMelanoma a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/eyeMelanoma";
-            rr:class ncit:eyeMelanoma;
-        ].
-map:otherTumors a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/otherTumors";
-            rr:class ncit:otherTumors;
-        ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_location;
-        rr:objectMap [
-            rr:parentTriplesMap map:bodyLocation;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_date;
-        rr:objectMap [
-            rr:parentTriplesMap map:dateOfDiagnosis;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_treatment;
-        rr:objectMap [
-            rr:parentTriplesMap map:radiotherapy;
-        ];
-    ].
-
 map:surgery a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
             rr:template "patient/treatment/surgery";
             rr:class ncit:C17173;
-        ].
-
-map:treatment a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/treatment";
-            rr:class ncit:treatment;
         ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_type;
+        rr:predicate roo:P100402;
         rr:objectMap [
-            rr:parentTriplesMap map:surgery;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_type;
-        rr:objectMap [
-            rr:parentTriplesMap map:radiotherapy;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_type;
-        rr:objectMap [
-            rr:parentTriplesMap map:chemotherapy;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_type;
-        rr:objectMap [
-            rr:parentTriplesMap map:immunotherapy;
-        ];   
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_type;
-        rr:objectMap [
-            rr:parentTriplesMap map:hormoneTherapy;
+            rr:parentTriplesMap map:neoplasm;
         ];
     ].
 
@@ -1176,6 +539,12 @@ map:radiotherapy a rr:TriplesMap;
             rr:template "patient/treatment/radiotherapy";
             rr:class ncit:C15313;
         ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100402;
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+        ];
+    ];    
     rr:predicateObjectMap [
         rr:predicate roo:has_type;
         rr:objectMap [
@@ -1207,6 +576,12 @@ map:protonTherapy a rr:TriplesMap;
                 rr:column "reasonForNoProtonTherapy";
                 rr:datatype xsd:string;
             ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_created;
+        rr:objectMap [
+            rr:parentTriplesMap map:registration;
+        ];
     ].
 
 map:photonTherapy a rr:TriplesMap;
@@ -1221,6 +596,12 @@ map:chemotherapy a rr:TriplesMap;
     rr:subjectMap [
             rr:template "patient/treatment/chemotherapy";
             rr:class ncit:C15632;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100402;
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+        ];
     ].
 
 map:immunotherapy a rr:TriplesMap;
@@ -1228,19 +609,24 @@ map:immunotherapy a rr:TriplesMap;
     rr:subjectMap [
             rr:template "patient/treatment/immunotherapy";
             rr:class ncit:C15262;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100402;
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+        ];
     ].
 map:hormoneTherapy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
             rr:template "patient/treatment/hormoneTherapy";
             rr:class ncit:C15445;
-    ].
-
-map:bodyLocation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/tumor/tumortype/otherTumors/bodyLocation";
-            rr:class sty:T029;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100402;
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+        ];
     ].
 
 map:planningComparison a rr:TriplesMap;
@@ -1264,41 +650,34 @@ map:planningComparison a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_outcome;
-        rr:objectMap [
-            rr:parentTriplesMap map:planningComparisonOutcome;
-        ];
-    ].
-
-map:planningComparisonOutcome a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/treatment/radiotherapy/planningComparison/outcome";
-            rr:class ncit:C20200;
-    ];
-    rr:predicateObjectMap [
         rr:predicate roo:P100042;
         rr:objectMap [
-            rr:parentTriplesMap map:indicationForProtonTherapy;
+            rr:column "PlanningComparisonYesNo"; 
+            rr:datatype xsd:boolean;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;
+        rr:predicate roo:has_reason;
         rr:objectMap [
-            rr:parentTriplesMap map:noIndicationForProtonTherapy;
+            rr:column "PlanningComparisonYesNo"; 
+            rr:datatype skos:note;
         ];
-    ].
-
-map:indicationForProtonTherapy a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/treatment/radiotherapy/planningComparison/outcome/indicationForProtonTherapy";
-            rr:class roo:positiveIndication;
-    ].
-
-map:noIndicationForProtonTherapy a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/treatment/radiotherapy/planningComparison/outcome/noIndicationForProtonTherapy";
-            rr:class roo:negativeIndication;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100397;
+        rr:objectMap [
+            rr:parentTriplesMap map:protonTherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100397;
+        rr:objectMap [
+            rr:parentTriplesMap map:photonTherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_registration;
+        rr:objectMap [
+            rr:parentTriplesMap map:registration;
+        ];
     ].
