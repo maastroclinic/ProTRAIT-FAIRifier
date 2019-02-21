@@ -1,0 +1,86 @@
+
+map:patient a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/";
+        rr:class ncit:C16960;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100022;
+        rr:objectMap [
+            rr:parentTriplesMap map:weightLoss3months;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100020;
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:radiotherapy;
+        ];
+    ].
+
+map:weightLoss3months a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/weightLoss3MonthsBeforeRt";
+        rr:class ncit:C138908;
+    ].
+
+map:radiotherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/radiotherapy";
+            rr:class ncit:C15313;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:reirradiation;
+        ];
+    ].
+
+map:reirradiation a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/";
+        rr:class roo:reirradiation;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100223;
+        rr:objectMap [
+            rr:column "reirradiationNumber"; 
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:neoplasm a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/neoplasm";
+            rr:class ncit:C3262;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100258;
+        rr:objectMap [
+            rr:parentTriplesMap map:recurrence;
+        ];
+    ].
+
+map:recurrence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/neoplasm/recurrence";
+        rr:class ncit:C3352;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100202;
+        rr:objectMap [
+            rr:column "localOrRegionalRecurrence"; 
+            rr:datatype xsd:string;
+        ];
+    ].
