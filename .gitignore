@@ -5,5 +5,4 @@ clinical-data-workflow/workflows/d2r_output.ttl
 .ipynb_checkpoints
 *.svg
 *.png
-*.png
-*.svg
+notebooks/output-figure
