@@ -146,6 +146,12 @@ map:neoplasm a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:primaryTumor;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100021;
+        rr:objectMap [
+            rr:parentTriplesMap map:histology;
+        ];
     ].
 
 map:recurrence a rr:TriplesMap;
@@ -287,6 +293,25 @@ map:tumorSite a rr:TriplesMap;
                 rr:column "tumorSite";
                 rr:datatype xsd:string;
             ];
-        ].
+    ].
 
-        
+map:histology a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/neoplasm/histology";
+            rr:class ncit:C19790;
+        ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "histology";
+                rr:datatype xsd:string;
+            ];
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:has_date;
+            rr:objectMap [
+                rr:column "histologyDate";
+                rr:datatype xsd:date;
+            ];
+    ].       
