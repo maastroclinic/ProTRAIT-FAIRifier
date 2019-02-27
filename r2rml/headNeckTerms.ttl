@@ -140,6 +140,12 @@ map:neoplasm a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:tumorBoardReview;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_type;
+        rr:objectMap [
+            rr:parentTriplesMap map:primaryTumor;
+        ];
     ].
 
 map:recurrence a rr:TriplesMap;
@@ -255,3 +261,32 @@ map:sentinelNodeBiopsy a rr:TriplesMap;
             rr:template "patient/sentinelNodeProcedure";
             rr:class ncit:C15667;
     ].
+
+map:primaryTumor a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/neoplasm/primaryTumor";
+            rr:class ncit:C8509;
+        ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100202;
+        rr:objectMap [
+            rr:parentTriplesMap map:tumorSite;
+        ];
+    ].
+
+map:tumorSite a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/neoplasm/tumorSite";
+            rr:class sty:T029;
+        ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "tumorSite";
+                rr:datatype xsd:string;
+            ];
+        ].
+
+        
