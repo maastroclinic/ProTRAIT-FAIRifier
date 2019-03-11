@@ -87,7 +87,49 @@ map:patient a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:sentinelNodeBiopsy;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100291;
+        rr:objectMap [
+            rr:parentTriplesMap map:hpvStatus;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100291;
+        rr:objectMap [
+            rr:parentTriplesMap map:ebvStatus;
+        ];
     ].
+
+
+map:hpvStatus a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/hpvStatus/";
+        rr:class roo:hpv_status;
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "hpvStatus";
+                rr:datatype xsd:string;
+            ];
+    ].
+
+map:ebvStatus a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/ebvStatus/";
+        rr:class ncit:C157444;
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "ebvStatus";
+                rr:datatype xsd:string;
+            ];
+    ].
+    
 
 map:weightLoss3months a rr:TriplesMap;
     rr:logicalTable map:basicQuery; 
@@ -154,27 +196,56 @@ map:neoplasm a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
+        rr:predicate roo:P100452;
+        rr:objectMap [
+            rr:parentTriplesMap map:TNM_Staging;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_p16Status;
+        rr:objectMap [
+            rr:parentTriplesMap map:p16Status;
+        ];
+    ].
+
+map:TNM_Staging a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "TNMStaging";
+            rr:class ncit:C38027;
+     ];
+    rr:predicateObjectMap [
         rr:predicate roo:P100244;
         rr:objectMap [
-            rr:parentTriplesMap map:clinicalTstage;
+            rr:column "T_stage"; 
+            rr:datatype xsd:string;
         ];
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100242;
         rr:objectMap [
-            rr:parentTriplesMap map:clinicalNstage;
+            rr:column "N_stage"; 
+            rr:datatype xsd:string;
         ];
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100241;
         rr:objectMap [
-            rr:parentTriplesMap map:clinicalMstage;
+            rr:column "M_stage"; 
+            rr:datatype xsd:string;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_addition_t_stage;
+        rr:predicate roo:has_additional_t_stage;
         rr:objectMap [
-            rr:parentTriplesMap map:additionTStage;
+            rr:column "additional_t_stage"; 
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_version;
+        rr:objectMap [
+            rr:parentTriplesMap map:clinicalStageVersion;
         ];
     ].
 
@@ -338,58 +409,6 @@ map:histology a rr:TriplesMap;
                 rr:column "histologyDate";
                 rr:datatype xsd:date;
             ];
-    ].
-
-map:clinicalTstage a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/neoplasm/clinicalTstage";
-            rr:class ncit:C25728;
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_version;
-        rr:objectMap [
-            rr:parentTriplesMap map:clinicalStageVersion;
-        ];
-    ].
-
-map:clinicalNstage a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/neoplasm/clinicalNstage";
-            rr:class ncit:C25580;
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_version;
-        rr:objectMap [
-            rr:parentTriplesMap map:clinicalStageVersion;
-        ];
-    ].
-    
-map:clinicalMstage a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/neoplasm/clinicalMstage";
-            rr:class ncit:C25727;
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_version;
-        rr:objectMap [
-            rr:parentTriplesMap map:clinicalStageVersion;
-        ];
-    ].
-
-map:additionTStage a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/neoplasm/additionTStage";
-            rr:class roo:additionTStage;
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_version;
-        rr:objectMap [
-            rr:parentTriplesMap map:clinicalStageVersion;
-        ];
     ].
 
 map:clinicalStageVersion a rr:TriplesMap;
