@@ -1,0 +1,3 @@
+﻿Patient Identification Number,Planning comparison performed?,Date planning comparison performed,Version planning comparison tool,"If YES, outcome",Proton radiotherapy,"If no, reason"
+P1001,YES,01/02/2019,1.6,Indication for proton therapy,YES,
+P1002,YES,15/01/2019,1.5,No indication for proton therapy,NO,Tumor progression

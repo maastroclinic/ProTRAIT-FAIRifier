@@ -1,0 +1,3 @@
+﻿Patient Identification Number,Surgery,Radiotherapy photons,Radiotherapy protons,Chemotherapy,Targeted therapy,Immunotherapy,Hormonal therapy
+P1001,YES,YES,NO,NO,NO,YES,NO
+P1002,NO,NO,YES,YES,YES,NO,YES

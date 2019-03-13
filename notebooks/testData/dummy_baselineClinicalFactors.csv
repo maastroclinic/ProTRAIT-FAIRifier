@@ -1,0 +1,3 @@
+﻿Patient Identification Number,Weight,Height,Charlson comorbidity index (CCI),Myocardial infarction,Congestive heart failure requiring hospitilization,Perpheral vascular disease,CVA,Hemiplegia,COPD,Diabetes mellitus ,Moderate to severe chronic kidney disease,Liver disease,Peptic ulcer disease,Solid tumor,Leukemia,Malignant lymphoma,HIV or aids,Dementia,Connective issue disease,Hypertension,Depression,Antitrombotic drug use,Decubitis ulcers
+P1001,68,178,12,1,0,0,0,0,0,2,0,2,0,0,0,0,6,1,0,0,0,0,0
+P1002,84,165,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
