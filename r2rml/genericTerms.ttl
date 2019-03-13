@@ -16,26 +16,26 @@
 @prefix time: <http://www.w3.org/2006/time#>.
 
 
-map:basicQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT PatientID as id,  ROUND(CAST(Age as decimal),0) as age, Gender as sex, Clinical_T_Stage as clinical_t, Clinical_N_Stage as clinical_n,
-SurvivalTime as survival_time,DeadStatus as vital_status, 
-(CASE WHEN (CAST(SurvivalTime as decimal)>730) THEN 1 WHEN (CAST(SurvivalTime as decimal)<=730 AND DeadStatus='1') THEN 0 ELSE NULL END) AS survival_2y 
-FROM PBDWHackathon2018;""";
-    rdfs:label """Every row in this table should correspond to a unique patient.<br/>
-The target variables have the following name and specific meaning:
-The table should contain a unique patient identifier, age, sex, t-stage, n-stage, survival time in days and vital status at this time.<br/>
-<ul>
-<li>id: unique identifier of the patient</li>
-<li>age:  patient's age at diagnosis</li>
-<li>sex:  patient's biological sex</li>
-<li>clinical_t: clinical <strong>tumor</strong> stage</li>
-<li>clinical_n: clinical <strong>nodal</strong> stage</li>
-<li>survival_2y: two year survival </li>
-</ul>""";
-    skos:definition "id,age,sex,clinical_t,clinical_n,survival_2y".
+map:patientQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id,
+    gender,
+    treating_clinic, 
+    referring_clinic, 
+    registration_date, 
+    age_diagnosis, 
+    birth_year, 
+    educational_level, 
+    relationship_status,
+    smoking_status,
+    pack_years,
+    time_stopped_smoking,
+    FROM patient""";
+    rdfs:label """
+    """;
+    skos:definition "id,gender,treating_clinic,referring_clinic,registration_date,age_diagnosis,birth_year,educational_level,relationship_status".
 
 map:patient a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
+    rr:logicalTable map:patientQuery;
     rr:subjectMap [
         rr:template "patient/{id}";
         rr:class ncit:C16960;
@@ -167,6 +167,12 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
+        rr:predicate roo:P100391;
+        rr:objectMap [
+            rr:parentTriplesMap map:registration;
+        ];
+    ].
+    rr:predicateObjectMap [
         rr:predicate roo:P100022;
         rr:objectMap [
             rr:parentTriplesMap map:CharlsonComorbidityIndex;
@@ -175,24 +181,24 @@ map:patient a rr:TriplesMap;
     
 
 map:biologicalSex a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
+    rr:logicalTable map:patientQuery;
         rr:subjectMap [
-            rr:template "patient/biologicalSex/{sex}";
+            rr:template "biologicalSex/{gender}";
             rr:class ncit:C28421;
     ];
     rr:predicateObjectMap [
             rr:predicate roo:P100042;
             rr:objectMap [
-                rr:column "sex";
+                rr:column "gender";
                 rr:datatype xsd:string;
             ];
     ].
     
     
 map:identifier a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
+    rr:logicalTable map:patientQuery;
         rr:subjectMap [
-            rr:template "patient/identifier/{id}";
+            rr:template "patient/{id}/identifier";
             rr:class ncit:C25364;
     ];
     rr:predicateObjectMap [
@@ -204,9 +210,9 @@ map:identifier a rr:TriplesMap;
     ].
 
 map:treatingClinic a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
+    rr:logicalTable map:patientQuery;
         rr:subjectMap [
-            rr:template "patient/treatingClinic/{treatingClinic}";
+            rr:template "clinic/{treating_clinic}";
             rr:class ncit:C19326;
     ];
     rr:predicateObjectMap [
@@ -215,23 +221,12 @@ map:treatingClinic a rr:TriplesMap;
             rr:column "treatingClinic"; 
             rr:datatype xsd:string;
         ];
-    ];
-    # rr:predicateObjectMap [
-    #     rr:predicate roo:has_contact_person;
-    #     rr:objectMap [
-    #         rr:column "contactPerson"; 
-    #         rr:datatype xsd:string;
-    #     ];
-    # ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_created;
-            
     ].
 
 map:referringClinic a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
+    rr:logicalTable map:patientQuery;
         rr:subjectMap [
-            rr:template "patient/referringClinic/{referringClinic}";
+            rr:template "clinic/{referring_clinic}";
             rr:class ncit:C19326;
         ];
     rr:predicateObjectMap [
@@ -243,15 +238,15 @@ map:referringClinic a rr:TriplesMap;
     ].
 
 map:registration a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
+    rr:logicalTable map:patientQuery;
         rr:subjectMap [
-            rr:template "patient/registration/{date}";
+            rr:template "patient/{id}/registration";
             rr:class ncit:C25646;
         ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042;
         rr:objectMap [
-            rr:column "date"; 
+            rr:column "registration_date"; 
             rr:datatype xsd:date;
         ];
     ];
@@ -259,77 +254,80 @@ map:registration a rr:TriplesMap;
         rr:predicate roo:at_hospital;
         rr:objectMap [
             rr:parentTriplesMap map:treatingClinic;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
         ];
     ].
 
 map:ageAtDiagnosis a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
+    rr:logicalTable map:patientQuery;
         rr:subjectMap [
-            rr:template "patient/ageAtDiagnosis/{age}";
+            rr:template "patient/{id}/ageAtDiagnosis";
             rr:class roo:C100002;
         ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042;
         rr:objectMap [
-            rr:column "age"; 
+            rr:column "age_diagnosis"; 
             rr:datatype xsd:integer;
         ];
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100038;
         rr:objectMap [
-            rr:column "age"; 
             rr:parentTriplesMap map:neoplasm;
         ];
     ].   
 
 map:birth a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
+    rr:logicalTable map:patientQuery;
         rr:subjectMap [
-            rr:template "patient/birth";
+            rr:template "patient/{id}/birth";
             rr:class ncit:C25155;
         ];
         rr:predicateObjectMap [
             rr:predicate roo:P100027;
             rr:objectMap [
-                rr:column "birthYear";
+                rr:column "birth_year";
                 rr:datatype xsd:gYear;
             ];
         ].
         
 map:educationLevel a rr:TriplesMap;
-     rr:logicalTable map:basicQuery;
+     rr:logicalTable map:patientQuery;
      rr:subjectMap [
-            rr:template "patient/educationLevel/{educationLevel}";
+            rr:template "educationLevel/{education_level}";
             rr:class ncit:C17953;
         ];
         rr:predicateObjectMap [
             rr:predicate roo:local_value;
             rr:objectMap [
-                rr:column "educationalLevel";
+                rr:column "educational_level";
                 rr:datatype xsd:string;
             ];
         ].
         
 
 map:relationshipStatus a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
+    rr:logicalTable map:patientQuery;    
     rr:subjectMap [
-            rr:template "patient/relationshipStatus";
+            rr:template "relationshipStatus/{relationship_status}";
             rr:class ncit:C25188;
         ];
     rr:predicateObjectMap [
             rr:predicate roo:local_value;
             rr:objectMap [
-                rr:column "relationshipStatus";
+                rr:column "relationship_status";
                 rr:datatype xsd:string;
             ];
         ].
 
 map:smokingStatus a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
+    rr:logicalTable map:patientQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/{smokingStatus}";
+            rr:template "patient/{id}/smokingStatus/{smoking_status}";
             rr:class ncit:C19796;
         ];
     rr:predicateObjectMap [
@@ -352,16 +350,16 @@ map:smokingStatus a rr:TriplesMap;
     ].
 
 map:neverSmoker a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
+    rr:logicalTable map:patientQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/neverSmoker/{smokingStatus}";
+            rr:template "patient/{id}/smokingStatus/{smoking_status}";
             rr:class ncit:C65108;
         ].
 
 map:formerSmoker a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
+    rr:logicalTable map:patientQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/formerSmoker/{smokingStatus}";
+            rr:template "patient/{id}/smokingStatus/{smoking_status}";
             rr:class ncit:C67148;
         ];
     rr:predicateObjectMap [
@@ -378,9 +376,9 @@ map:formerSmoker a rr:TriplesMap;
     ].
 
 map:currentSmoker a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
+    rr:logicalTable map:patientQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/currentSmoker/{smokingStatus}";
+            rr:template "patient/{id}/smokingStatus/{smoking_status}";
             rr:class ncit:C67147;
         ];
     rr:predicateObjectMap [
@@ -391,16 +389,16 @@ map:currentSmoker a rr:TriplesMap;
     ].
 
 map:packYears a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
+    rr:logicalTable map:patientQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/packYears/{packYears}";
+            rr:template "patient/{id}/smokingStatus/packYears/{pack_years}";
             rr:class ncit:C73993;
         ].
 
 map:timeStoppedSmoking a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
+    rr:logicalTable map:patientQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/formerSmoker/timeStoppedSmoking/{time}";
+            rr:template "patient/{id}/smokingStatus/formerSmoker/timeStoppedSmoking";
             rr:class ncit:timeStoppedSmoking;
         ];
     rr:predicateObjectMap [
@@ -411,10 +409,17 @@ map:timeStoppedSmoking a rr:TriplesMap;
     ].
 
 map:Month a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
+    rr:logicalTable map:patientQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/formerSmoker/timeStoppedSmoking/{time}";
+            rr:template "patient/{id}/smokingStatus/formerSmoker/timeStoppedSmoking/months";
             rr:class uo:0000035;
+        ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "time_stopped_smoking";
+                rr:datatype xsd:string;
+            ];
         ].
 
 map:alcoholUseHistory a rr:TriplesMap;
