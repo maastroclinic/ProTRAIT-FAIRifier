@@ -1381,12 +1381,116 @@ map:prophylacticTargetRT a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "prophylacticTargetRT";
-        rr:class ncit:C25625; #preparation                                                          
+        rr:class ncit:prophylacticTargetRT; #preparation                                  ?? no fitting ontology                       
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100300 ;  #has RT start date
         rr:objectMap [
             rr:parentTriplesMap map:dateOfStartProphylacticTargetRT; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100299; #has RT end date
+        rr:objectMap [
+            rr:parentTriplesMap map:lastDayOfProphylacticTargetRT; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:totalDose; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:fractionDose; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfFractions; 
+        ];
+    ].
+
+map:dateOfStartProphylacticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dateOfStartProphylacticTargetRT";
+        rr:class ncit:C80454; #Date of therapeutic procedure                                                ???? correct ontology 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfStartProphylacticTargetRT"; 
+            rr:datatype xsd:date; 
+        ];
+    ].
+map:lastDayOfProphylacticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "lastDayOfProphylacticTargetRT";
+        rr:class ncit:C156814; #Date of Last Radiation Treatment                                            ???? correct ontology 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "lastDayOfProphylacticTargetRT"; 
+            rr:datatype xsd:date; 
+        ];
+    ].
+map:totalDose a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "totalDose";
+        rr:class ncit:C94394; #cumulative dose                                             
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "totalDose"; 
+            rr:datatype xsd:double; 
+        ];
+    ].
+map:fractionDose a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "fractionDose";
+        rr:class roo:C100353; #radiotherapy fraction dose                                             
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "fractionDose"; 
+            rr:datatype xsd:double; 
+        ];
+    ].
+
+map:numberOfFractions a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "numberOfFractions";
+        rr:class ncit:C25514; #fraction                                            ???? correct ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "numberOfFractions"; 
+            rr:datatype xsd:double; 
+        ];
+    ].
+
+map:therapeuticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "therapeuticTargetRT";
+        rr:class ncit:therapeuticTargetRT;                                                            # no fitting ontology                                                          
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100300 ;  #has RT start date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfStartTherapeuticTargetRT; 
         ];
     ];
      rr:predicateObjectMap [
@@ -1414,16 +1518,16 @@ map:prophylacticTargetRT a rr:TriplesMap;
         ];
     ].
 
-map:dateOfStartProphylacticTargetRT a rr:TriplesMap;
+map:dateOfStartTherapeuticTargetRT a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "dateOfStartProphylacticTargetRT";
+        rr:template "dateOfStartTherapeuticTargetRT";
         rr:class ncit:C80454; #Date of therapeutic procedure                                                ???? correct ontology 
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has value
         rr:objectMap [
-            rr:column "dateOfStartProphylacticTargetRT"; 
+            rr:column "dateOfStartTherapeuticTargetRT"; 
             rr:datatype xsd:date; 
         ];
     ].
