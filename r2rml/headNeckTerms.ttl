@@ -141,6 +141,12 @@ map:patient a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:radiationInducedSideEffects;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100214  ; # has measurement                                                                                           # reports?
+        rr:objectMap [
+            rr:parentTriplesMap map:patientReportedOutcomeMeasures;
+        ];
     ].
 
 
@@ -1773,4 +1779,71 @@ map:kilogram a rr:TriplesMap;
     rr:subjectMap [
         rr:template "kilogram";
         rr:class uo:0000009; #kilogram
+    ].
+
+map:patientReportedOutcomeMeasures a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patientReportedOutcomeMeasures";
+        rr:class ncit:C102988; #Patient Reported Outcomes Measurement Information System                    #promis ipv prom??                                                          
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:EORTCQLQ_HAndN35;                                                       #no "&" possible                                                     
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:EORTCQLQ_C30;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:EUROQOL_5D;                                                         
+        ];
+    ].
+
+map:EORTCQLQ_HAndN35 a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "EORTCQLQ_HAndN35";
+        rr:class ncit:C17048; #questionnaire 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "EORTCQLQ_HAndN35"; 
+            rr:datatype xsd:integer;                                                                    #??? list?
+        ];
+    ].
+
+map:EORTCQLQ_C30 a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "EORTCQLQ_C30";
+        rr:class ncit:C17048; #questionnaire 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "EORTCQLQ_C30"; 
+            rr:datatype xsd:integer;                                                                    #??? list?
+        ];
+    ].
+
+map:EUROQOL_5D a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "EUROQOL_5D";
+        rr:class ncit:C17048; #questionnaire 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "EUROQOL_5D"; 
+            rr:datatype xsd:integer;                                                                    #??? list?
+        ];
     ].
