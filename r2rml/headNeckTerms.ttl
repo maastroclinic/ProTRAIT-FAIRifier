@@ -12,7 +12,7 @@
 @prefix icd: <http://purl.bioontology.org/ontology/ICD10/>.
 @prefix skos: <http://www.w3.org/2008/05/skos#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix uo: <http://purl.obolibrary.org/obo/UO_>.
+@prefix uo: <http://purl.obolibrary.org/obo/uo_>.
 @prefix time: <http://www.w3.org/2006/time#>.
 
 
@@ -104,6 +104,12 @@ map:patient a rr:TriplesMap;
         rr:predicate roo:P100024; # has procedure
         rr:objectMap [
             rr:parentTriplesMap map:systemicTreatment;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212 ; # has property
+        rr:objectMap [
+            rr:parentTriplesMap map:postOperativeSettingPrimarySite;
         ];
     ].
 
@@ -560,3 +566,219 @@ map:doseReduction a rr:TriplesMap;
             rr:datatype xsd:boolean; 
         ];
     ].
+
+map:postOperativeSettingPrimarySite a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "postOperativeSettingPrimarySite";
+        rr:class ncit:C8509; # Primary neoplasm
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100310 ;  #has surgical procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:surgeryPrimaryTumour; 
+        ];
+    ];
+    
+    # if yes?                                                                                   ?specific comment in code
+
+     rr:predicateObjectMap [
+        rr:predicate roo:P100288 ;  #has pathological T stage
+        rr:objectMap [
+            rr:parentTriplesMap map:pathologicalTStage; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100214; #has measurement 
+        rr:objectMap [
+            rr:parentTriplesMap map:surgicalMargins; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:maximumTumourDiameter;                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                      
+        rr:objectMap [
+            rr:parentTriplesMap map:depthOfInfiltration;                     
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:angioinvasion;                                   
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:periNeuralGrowth;                                    
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:infiltrativeGrowth;                                 
+        ];
+    ].
+
+map:surgeryPrimaryTumour a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "surgeryPrimaryTumour";
+        rr:class 	ncit:C157740 ;  #cancer surgery
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "surgeryPrimaryTumour"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ];
+        rr:predicateObjectMap [                                         #here of at primary tumor? concerning if yes
+        rr:predicate roo:P100295;  #has procedure date                    
+        rr:objectMap [
+             rr:parentTriplesMap map:procedureDate;   
+        ];
+    ].
+map:procedureDate a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "procedureDate";
+        rr:class ncit:C117538 ;  #Procedure Date Time of Reference Timepoint
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value                           #date has value of has date??
+        rr:objectMap [
+            rr:column "procedureDate"; 
+            rr:datatype xsd:date; 
+        ];
+    ].
+map:pathologicalTStage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "pathologicalTstage";
+        rr:class ncit:C25728 ;  #T Category (T Stage)
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "pathologicalTstage"; 
+            rr:datatype xsd:string; 
+        ];
+     ].
+map:surgicalMargins a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "surgicalMargins";
+        rr:class  ncit:C41227 ;  #surgical margins
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "surgicalMargins"; 
+            rr:datatype xsd:string; 
+        ];
+     ].
+map:maximumTumourDiameter a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "maximumTumourDiameter";
+        rr:class  ncit:C96684 ;  #longest diameter
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:millimeter;
+            ];       
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "maximumTumourDiameter"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+map:depthOfInfiltration a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "depthOfInfiltration";
+        rr:class  	ncit:C28491 ;  #cellular infiltration
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:millimeter;
+            ];       
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "depthOfInfiltration"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+map:angioinvasion a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "angioinvasion";
+        rr:class  	ncit:C39589 ;  #angioinvasion
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "angioinvasion"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+map:periNeuralGrowth a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "periNeuralGrowth";
+        rr:class  	ncit:C48260 ;  #perineural invasion                                                     ? correct ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "periNeuralGrowth"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+map:angioinvasion a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "angioinvasion";
+        rr:class  	ncit:C39589 ;  #angioinvasion
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "angioinvasion"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+map:infiltrativeGrowth a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "angioinvasion";
+        rr:class  	ncit:C41453 ;  #infiltrative growth pattern                                                   #? correct ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "angioinvasion"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+
+
+map:millimeter a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "millimeter";
+            rr:class uo:0000016;
+        ].  
+    
