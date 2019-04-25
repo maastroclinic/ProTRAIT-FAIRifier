@@ -961,6 +961,12 @@ map:radiotherapyTechnique a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:planAdapted;
         ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100278; #has modality                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:protonTherapyFactors;
+        ];
     ].
 
 
@@ -996,7 +1002,7 @@ map:planAdapted a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "planAdapted";
-        rr:class ncit:C25446; #change                                                   #correct ontology? change 
+        rr:class ncit:C25446; #change                                                    #fitting ontology? change 
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has value                                       
@@ -1005,3 +1011,170 @@ map:planAdapted a rr:TriplesMap;
             rr:datatype xsd:boulean; 
         ];
     ].
+
+map:protonTherapyFactors a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "protonTherapyFactors";
+        rr:class ncit:C66897; # proton beam radiation therapy
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfScenariosForRobustEvaluation;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfBeams;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:robustTreatmentPlanningRangeUncertainty;         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationSetup;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:layerRepainting;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                         
+        rr:objectMap [
+           rr:parentTriplesMap map:treatmentType;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                         
+        rr:objectMap [
+           rr:parentTriplesMap map:typeOfBeamAbsorber;
+        ];
+        ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                         
+        rr:objectMap [
+           rr:parentTriplesMap map:doseEngine;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:MCUncertainty;   
+
+        ];
+    ].
+
+map:robustTreatmentPlanningRangeUncertainty a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "robustTreatmentPlanningRangeUncertainty";
+        rr:class  	ncit:C71478;  #uncertainty                                                      ???? correct ontology
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:percentage;
+            ];       
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value                                       
+        rr:objectMap [
+            rr:column "robustTreatmentPlanningRangeUncertainty"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationSetup a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "robustnessEvaluationSetup";
+        rr:class  	ncit:C134245 ;  #analytical procedure robustness                                    ???? correct ontology
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:millimeter;
+            ];       
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationSetup"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:layerRepainting a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "layerRepainting";
+        rr:class  	ncit:C66831 ;  #layer                                                           ???? correct ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value                                       
+        rr:objectMap [
+            rr:column "layerRepainting"; 
+            rr:datatype xsd:integer;                                                               #???? double of integer
+        ];
+    ].
+
+map:treatmentType a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "treatment type";
+        rr:class  	ncit:C114461 ;  #categorical description type                                    ????correct ontology
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "treatment type"; 
+            rr:datatype xsd:string; 
+            ];       
+    ].
+
+map:typeOfBeamAbsorber a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "treatment type";
+        rr:class  	ncit:C50372;  #absorber device                                                    ????correct ontology
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "type of beam absorber"; 
+            rr:datatype xsd:string; 
+            ];       
+    ].
+
+map:doseEngine a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dose engine";
+        rr:class ncit:C16275; #algorithm                                                             ????? correct ontology
+# ncit:C94936 monte carlo method #ncit:C155822 Linear Energy Transfer (LET)-Optimized Intensity Modulated Proton Therapy (IMPT)
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "dose engine"; 
+            rr:datatype xsd:string; 
+            ];       
+    ].
+
+map:percentage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "percentage";
+        rr:class uo:0000187; #percent                                                     
+    ].
+
