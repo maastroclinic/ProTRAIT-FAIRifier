@@ -262,6 +262,12 @@ map:neoplasm a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:p16Status;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_p16Status;
+        rr:objectMap [
+            rr:parentTriplesMap map:tumourFollowUp;
+        ];
     ].
 
 map:TNM_Staging a rr:TriplesMap;
@@ -1845,5 +1851,219 @@ map:EUROQOL_5D a rr:TriplesMap;
         rr:objectMap [
             rr:column "EUROQOL_5D"; 
             rr:datatype xsd:integer;                                                                    #??? list?
+        ];
+    ].
+
+map:tumourFollowUp a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "tumourFollowUp";
+        rr:class ncit:C156846; #follow-up information                                            #information vs tumor??                                                          
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:localRecurrence;                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:regionalRecurrence;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:distantMetastasis;                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:newMalignancy;                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100228   ;  #has date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfLastFollowUp;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:statusAtLastFollowUp;                                                         
+        ];
+    ].
+
+map:localRecurrence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "localRecurrence";
+        rr:class ncit:C94796; #Locally Recurrent Malignant Neoplasm 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "localRecurrence"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100228;  #has date or roo:P100251 has date of diagnosis                    ???? date vs diagnosis date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfLocalRecurrence;                                                         
+        ];
+    ].
+
+map:regionalRecurrence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "regionalRecurrence";
+        rr:class ncit:C4813; #Recurrent Malignant Neoplasm                                              ?? not regional
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "regionalRecurrence"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100228;  #has date or roo:P100251 has date of diagnosis                    ???? date vs diagnosis date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfRegionalRecurrence;                                                         
+        ];
+    ].
+
+map:distantMetastasis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "distantMetastasis";
+        rr:class ncit:C18206; #distant metastasis 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "distantMetastasis"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100228;  #has date or roo:P100251 has date of diagnosis                    ???? date vs diagnosis date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfDistantMetastasis;                                                         
+        ];
+    ].
+
+map:newMalignancy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "newMalignancy";
+        rr:class ncit:C4968; #secondary malignent neoplasm                                          ??? secondary vs new 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "newMalignancy"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100202 ;  #has location
+        rr:objectMap [
+            rr:parentTriplesMap map:locationOfNewMalignancy;                                                         
+        ];
+    ].
+
+map:dateOfLastFollowUp a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "regionalRecurrence";
+        rr:class ncit:C156916; #date of last contact
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "regionalRecurrence"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212  ;  #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:statusAtLastFollowUp;                                                         
+        ];
+    ].
+
+map:dateOfLocalRecurrence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dateOfLocalRecurrence";
+        rr:class ncit:C156855; #date of new tumour event
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfLocalRecurrence"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ].
+
+map:dateOfRegionalRecurrence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dateOfRegionalRecurrence";
+        rr:class ncit:C156855; #date of new tumour event                                            ??? same ncit
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfRegionalRecurrence"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ].
+
+map:dateOfDistantMetastasis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dateOfDistantMetastasis";
+        rr:class ncit:C156855; #date of new tumour event                                              ??? same ncit
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfDistantMetastasis"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ].
+
+map:locationOfNewMalignancy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "locationOfNewMalignancy";
+        rr:class ncit:C54590; #Location of Event Occurrence ICSR Terminology                                              ??? same ncit
+# ncit:C117884 Location of Disease Onset
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfDistantMetastasis"; 
+            rr:datatype xsd:string;                                                                 
+        ];
+    ].
+
+map:statusAtLastFollowUp a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "statusAtLastFollowUp";
+        rr:class ncit:C16033; #follow up                                                                     ??? no fitting ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "statusAtLastFollowUp"; 
+            rr:datatype xsd:string;                                                                 
         ];
     ].
