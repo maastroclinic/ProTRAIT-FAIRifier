@@ -135,7 +135,14 @@ map:patient a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:preparationProcedure;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100258 ; # has disease finding
+        rr:objectMap [
+            rr:parentTriplesMap map:radiationInducedSideEffects;
+        ];
     ].
+
 
 
 map:hpvStatus a rr:TriplesMap;
@@ -1586,4 +1593,184 @@ map:doseToOARsTreatmentPlanning a rr:TriplesMap;
             rr:column "doseToOARsTreatmentPlanning"; 
             rr:datatype xsd:double; 
         ];
+    ].
+
+map:radiationInducedSideEffects a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "radiationInducedSideEffects";
+        rr:class ncit:C2861; #side effect                                                          
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:weight;                                                         #?? weightLoss
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:xerostomia;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:dysphagia;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:dysphagiaUMCG;                                                         # same ncit?
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:oralMucositis;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:dermatitisRadiation;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:osteoRadioNecrosis;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:softTissueNecrosis;                                                         
+        ];
+    ].
+
+map:weight a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "weight";
+        rr:class ncit:C25208; #weight  ncit:C3445 weightloss                                            ???? weightloss
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:kilogram; 
+        ]; 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfStartProphylacticTargetRT"; 
+            rr:datatype xsd:double; 
+        ];
+    ].
+
+map:xerostomia a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "xerostomia";
+        rr:class ncit:C26917; #xerostomia 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "xerostomia"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:dysphagia a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dysphagia";
+        rr:class ncit:C2980; #dysphagia 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dysphagia"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:dysphagiaUMCG a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dysphagiaUMCG";                                                                    
+        rr:class ncit:C2980; #dysphagia                                                                #same ncit as before?
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dysphagiaUMCG"; 
+            rr:datatype xsd:integer;                                                                    #??? umcg grades?
+        ];
+    ].
+
+map:oralMucositis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "oralMucositis";
+        rr:class ncit:C26887; #stomatitis 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "oralMucositis"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:dermatitisRadiation a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dermatitisRadiation";
+        rr:class ncit:C26887; #dermatitis radiation CTCAE
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dermatitisRadiation"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:osteoRadioNecrosis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "osteoRadioNecrosis";
+        rr:class ncit:C63707; #osteoRadioNecrosis
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "osteoRadioNecrosis"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:softTissueNecrosis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "softTissueNecrosis";
+        rr:class ncit:C53841; #soft tissue necrosis CTCAE
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "softTissueNecrosis"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:kilogram a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "kilogram";
+        rr:class uo:0000009; #kilogram
     ].
