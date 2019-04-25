@@ -59,36 +59,6 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100278;
-        rr:objectMap [
-            rr:parentTriplesMap map:ctscan;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100278;
-        rr:objectMap [
-            rr:parentTriplesMap map:petscan;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100278;
-        rr:objectMap [
-            rr:parentTriplesMap map:mriscan;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100278;
-        rr:objectMap [
-            rr:parentTriplesMap map:ultrasound;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100024;
-        rr:objectMap [
-            rr:parentTriplesMap map:sentinelNodeBiopsy;
-        ];
-    ];
-    rr:predicateObjectMap [
         rr:predicate roo:P100291;
         rr:objectMap [
             rr:parentTriplesMap map:hpvStatus;
@@ -115,25 +85,7 @@ map:patient a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:P100258; # has diasease finding
         rr:objectMap [
-            rr:parentTriplesMap map:postoperativeSettingNeck;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100258; # has diasease finding
-        rr:objectMap [
             rr:parentTriplesMap map:numberOfLymphNodeMetastases;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100024; # has procedure
-        rr:objectMap [
-            rr:parentTriplesMap map:radiotherapyTechnique;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100024; # has procedure
-        rr:objectMap [
-            rr:parentTriplesMap map:preparationProcedure;
         ];
     ];
     rr:predicateObjectMap [
@@ -204,6 +156,36 @@ map:radiotherapy a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:prophylacticTargetRT;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:is_before;
+        rr:objectMap [
+            rr:parentTriplesMap map:preparationProcedure;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100278; #has modality                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:IGRT;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100278; #has modality                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:ART;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100082; #has occurence                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:planAdapted;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100278; #has modality                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:protonTherapyFactors;
+        ];
     ].
 
 
@@ -267,6 +249,24 @@ map:neoplasm a rr:TriplesMap;
         rr:predicate roo:has_p16Status;
         rr:objectMap [
             rr:parentTriplesMap map:tumourFollowUp;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_subtype;
+        rr:objectMap [
+            rr:parentTriplesMap map:postoperativeSettingNeck;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_measurement;
+        rr:objectMap [
+            rr:parentTriplesMap map:CTVVolume;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_measurement;
+        rr:objectMap [
+            rr:parentTriplesMap map:GTVVolume;
         ];
     ].
 
@@ -365,43 +365,8 @@ map:treatmentRegimen a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:P100448;
         rr:objectMap [
-            rr:parentTriplesMap map:chemotherapy;
+            rr:parentTriplesMap map:systemicTreatment;
         ];
-    ].
-
-map:surgery a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/treatment/surgery";
-            rr:class ncit:C17173;
-    ].
-
-map:chemotherapy a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/treatment/chemotherapy";
-            rr:class ncit:C15632;
-    ].
-
-map:ctscan a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/ctscan";
-            rr:class ncit:C17204;
-    ].
-
-map:petscan a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/petscan";
-            rr:class ncit:C17007;
-    ].
-
-map:mriscan a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/mriscan";
-            rr:class ncit:C16809;
     ].
 
 map:ultrasound a rr:TriplesMap;
@@ -435,6 +400,57 @@ map:primaryTumor a rr:TriplesMap;
         rr:predicate roo:P100202;
         rr:objectMap [
             rr:parentTriplesMap map:tumorSite;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100310 ;  #has surgical procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:surgery; 
+        ];
+    ];
+    
+    # if yes?                                                                                   ?specific comment in code
+
+     rr:predicateObjectMap [
+        rr:predicate roo:P100288 ;  #has pathological T stage
+        rr:objectMap [
+            rr:parentTriplesMap map:pathologicalTStage; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100214; #has measurement 
+        rr:objectMap [
+            rr:parentTriplesMap map:surgicalMargins; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:maximumTumourDiameter;                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                      
+        rr:objectMap [
+            rr:parentTriplesMap map:depthOfInfiltration;                     
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:angioinvasion;                                   
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:periNeuralGrowth;                                    
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:infiltrativeGrowth;                                 
         ];
     ].
 
@@ -500,14 +516,19 @@ map:p16Status a rr:TriplesMap;
             ];
     ].
 
-
 map:systemicTreatment a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "systemic treatment";
         rr:class ncit:C15632; #chemotherapy
     ];
-   rr:predicateObjectMap [
+    rr:predicateObjectMap [
+        rr:predicate roo:has_before;
+        rr:objectMap [
+            rr:parentTriplesMap map:preparationProcedure;
+        ];
+    ];
+    rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has value
         rr:objectMap [
             rr:column "systemic treatment"; 
@@ -589,20 +610,6 @@ map:treatmentCycles a rr:TriplesMap;
         ];
     ].
 
-map:totalDose a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "total dose";
-        rr:class ncit:C94394; #cumulative dose
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "total dose"; 
-            rr:datatype xsd:double;
-        ];
-    ].
-
 map:doseReduction a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
@@ -617,68 +624,10 @@ map:doseReduction a rr:TriplesMap;
         ];
     ].
 
-map:postOperativeSettingPrimarySite a rr:TriplesMap;
+map:surgery a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "postOperativeSettingPrimarySite";
-        rr:class ncit:C8509; # Primary neoplasm
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100310 ;  #has surgical procedure
-        rr:objectMap [
-            rr:parentTriplesMap map:surgeryPrimaryTumour; 
-        ];
-    ];
-    
-    # if yes?                                                                                   ?specific comment in code
-
-     rr:predicateObjectMap [
-        rr:predicate roo:P100288 ;  #has pathological T stage
-        rr:objectMap [
-            rr:parentTriplesMap map:pathologicalTStage; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100214; #has measurement 
-        rr:objectMap [
-            rr:parentTriplesMap map:surgicalMargins; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property                                        
-        rr:objectMap [
-            rr:parentTriplesMap map:maximumTumourDiameter;                                 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property                                      
-        rr:objectMap [
-            rr:parentTriplesMap map:depthOfInfiltration;                     
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property                                        
-        rr:objectMap [
-             rr:parentTriplesMap map:angioinvasion;                                   
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property                                        
-        rr:objectMap [
-             rr:parentTriplesMap map:periNeuralGrowth;                                    
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property                                        
-        rr:objectMap [
-             rr:parentTriplesMap map:infiltrativeGrowth;                                 
-        ];
-    ].
-
-map:surgeryPrimaryTumour a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "surgeryPrimaryTumour";
+        rr:template "surgery";
         rr:class 	ncit:C157740 ;  #cancer surgery
     ];
      rr:predicateObjectMap [
@@ -693,7 +642,14 @@ map:surgeryPrimaryTumour a rr:TriplesMap;
         rr:objectMap [
              rr:parentTriplesMap map:procedureDate;   
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_before;
+        rr:objectMap [
+            rr:parentTriplesMap map:preparationProcedure;
+        ];
     ].
+
 map:procedureDate a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
@@ -794,19 +750,6 @@ map:periNeuralGrowth a rr:TriplesMap;
         rr:predicate roo:P100042;  #has value
         rr:objectMap [
             rr:column "periNeuralGrowth"; 
-            rr:datatype xsd:boolean; 
-        ];
-    ].
-map:angioinvasion a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "angioinvasion";
-        rr:class  	ncit:C39589 ;  #angioinvasion
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "angioinvasion"; 
             rr:datatype xsd:boolean; 
         ];
     ].
@@ -962,45 +905,6 @@ map:numberOfLymphNodeMetastasesWithECS a rr:TriplesMap;
             rr:datatype xsd:integer; 
         ];
     ].
-
-map:radiotherapyTechnique a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "radiotherapyTechnique";
-        rr:class ncit:C15313; # radiation therapy
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:localvalue;                                         
-        rr:objectMap [
-            rr:column "radiotherapyTechnique";  
-            rr:datatype xsd:string; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100278; #has modality                                        
-        rr:objectMap [
-            rr:parentTriplesMap map:IGRT;
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100278; #has modality                                        
-        rr:objectMap [
-            rr:parentTriplesMap map:ART;
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100082; #has occurence                                        
-        rr:objectMap [
-            rr:parentTriplesMap map:planAdapted;
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100278; #has modality                                        
-        rr:objectMap [
-            rr:parentTriplesMap map:protonTherapyFactors;
-        ];
-    ].
-
 
 map:IGRT a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
@@ -1249,19 +1153,25 @@ map:preparationProcedure a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100212; #has property
         rr:objectMap [
-            rr:parentTriplesMap map:CTV1Volume; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property
-        rr:objectMap [
-            rr:parentTriplesMap map:CTV2Volume; 
+            rr:parentTriplesMap map:CTVVolume; 
         ];
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100024;  #has procedure
         rr:objectMap [
             rr:parentTriplesMap map:boostTechnique; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100278;
+        rr:objectMap [
+            rr:parentTriplesMap map:ultrasound;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:sentinelNodeBiopsy;
         ];
     ].       
 
@@ -1283,7 +1193,7 @@ map:planningPETCT a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "planningPETCT";
-        rr:class ncit:C121378; #Positron Emission Tomography and Computed Tomography Scan
+        rr:class ncit:petct; #Positron Emission Tomography and Computed Tomography Scan
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value;  #has value
@@ -1292,6 +1202,7 @@ map:planningPETCT a rr:TriplesMap;
             rr:datatype xsd:string; 
         ];
     ].
+
 map:planningMRI a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
@@ -1337,10 +1248,10 @@ map:GTVVolume a rr:TriplesMap;
             rr:datatype xsd:integer; 
         ];
     ].
-map:CTV1Volume a rr:TriplesMap;
+map:CTVVolume a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "CTV1Volume";
+        rr:template "CTVVolume";
         rr:class ncit:C112912; #clinical target volume                                                     
     ];
      rr:predicateObjectMap [
@@ -1352,26 +1263,7 @@ map:CTV1Volume a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has value
         rr:objectMap [
-            rr:column "CTV1Volume"; 
-            rr:datatype xsd:integer; 
-        ];
-    ].
-map:CTV2Volume a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "CTV2Volume";
-        rr:class ncit:C112912; #clinical target tumor volume                                                     
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100027;  #has unit
-        rr:objectMap [
-            rr:parentTriplesMap map:CC; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "CTV2Volume"; 
+            rr:column "CTVVolume"; 
             rr:datatype xsd:integer; 
         ];
     ].
@@ -1562,34 +1454,6 @@ map:lastDayOfTherapeuticTargetRT a rr:TriplesMap;
         rr:objectMap [
             rr:column "lastDayOfTherapeuticTargetRT"; 
             rr:datatype xsd:date; 
-        ];
-    ].
-
-map:fractionDose a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "fractionDose";
-        rr:class roo:C100353; #radiotherapy fraction dose                                             
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "fractionDose"; 
-            rr:datatype xsd:double; 
-        ];
-    ].
-
-map:numberOfFractions a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "numberOfFractions";
-        rr:class ncit:C25514; #fraction                                            ???? correct ontology
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "numberOfFractions"; 
-            rr:datatype xsd:double; 
         ];
     ].
 
