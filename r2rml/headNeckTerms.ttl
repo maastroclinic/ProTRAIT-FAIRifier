@@ -185,7 +185,14 @@ map:radiotherapy a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:reirradiation;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:prophylacticTargetRT;
+        ];
     ].
+
 
 map:reirradiation a rr:TriplesMap;
     rr:logicalTable map:basicQuery; 
@@ -1368,4 +1375,111 @@ map:CC a rr:TriplesMap;
     rr:subjectMap [
         rr:template "CC";
         rr:class uo:0000097; #cubic centimeter                                                     
+    ].
+
+map:prophylacticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "prophylacticTargetRT";
+        rr:class ncit:C25625; #preparation                                                          
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100300 ;  #has RT start date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfStartProphylacticTargetRT; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100299; #has RT end date
+        rr:objectMap [
+            rr:parentTriplesMap map:lastDayOfTherapeuticTargetRT; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:fractionDose; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfFractions; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:doseToOARsTreatmentPlanning; 
+        ];
+    ].
+
+map:dateOfStartProphylacticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dateOfStartProphylacticTargetRT";
+        rr:class ncit:C80454; #Date of therapeutic procedure                                                ???? correct ontology 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfStartProphylacticTargetRT"; 
+            rr:datatype xsd:date; 
+        ];
+    ].
+
+map:lastDayOfTherapeuticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "lastDayOfTherapeuticTargetRT";
+        rr:class ncit:C156814; #Date of Last Radiation Treatment                                            ???? correct ontology 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "lastDayOfTherapeuticTargetRT"; 
+            rr:datatype xsd:date; 
+        ];
+    ].
+
+map:fractionDose a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "fractionDose";
+        rr:class roo:C100353; #radiotherapy fraction dose                                             
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "fractionDose"; 
+            rr:datatype xsd:double; 
+        ];
+    ].
+
+map:numberOfFractions a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "numberOfFractions";
+        rr:class ncit:C25514; #fraction                                            ???? correct ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "numberOfFractions"; 
+            rr:datatype xsd:double; 
+        ];
+    ].
+
+map:doseToOARsTreatmentPlanning a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "doseToOARsTreatmentPlanning";
+        rr:class ncit:C25488; #dose                                                 ???? correct ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "doseToOARsTreatmentPlanning"; 
+            rr:datatype xsd:double; 
+        ];
     ].
