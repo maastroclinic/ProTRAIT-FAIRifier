@@ -99,6 +99,12 @@ map:patient a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:ebvStatus;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; # has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:systemicTreatment;
+        ];
     ].
 
 
@@ -438,4 +444,119 @@ map:p16Status a rr:TriplesMap;
             ];
     ].
 
-    
+
+map:systemicTreatment a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "systemic treatment";
+        rr:class ncit:C15632; #chemotherapy
+    ];
+   rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "systemic treatment"; 
+            rr:datatype xsd:integer;
+        ];
+    ];
+   rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists of
+        rr:objectMap [
+            rr:parentTriplesMap map:whichDrugs;
+        ];
+    ];
+   rr:predicateObjectMap [
+        rr:predicate roo:P100239; #has_chemo_start_date
+        rr:objectMap [
+            rr:column "startdate"; 
+            rr:datatype xsd:date;
+        ];
+    ];
+   rr:predicateObjectMap [
+        rr:predicate roo:P100337; #has_chemo_end_date
+        rr:objectMap [
+            rr:column "enddate"; 
+            rr:datatype xsd:date;
+        ];
+    ];
+   rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists of
+        rr:objectMap [
+            rr:parentTriplesMap map:treatmentCycles;
+        ];
+    ];
+   rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists of
+        rr:objectMap [
+            rr:parentTriplesMap map:totalDose;
+        ];
+     ];
+   rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists of
+        rr:objectMap [
+            rr:parentTriplesMap map:doseReduction;
+        ];
+     ];
+   rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists of
+        rr:objectMap [
+            rr:parentTriplesMap map:includedInTrial;
+        ];
+    ].
+
+
+
+map:whichDrugs a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "which drugs";
+        rr:class ncit:C459 #medication
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "which drugs"; 
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:treatmentCycles a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "treatment cycles";
+        rr:class ncit:C25472; #cycle
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "treatment cycles"; 
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:totalDose a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "total dose";
+        rr:class ncit:C94394; #cumulative dose
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "total dose"; 
+            rr:datatype xsd:double;
+        ];
+    ].
+
+map:doseReduction a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dose reduction";
+        rr:class ncit:C49505; #dose reduced is best fitting ontology? 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dose reduction"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
