@@ -129,6 +129,12 @@ map:patient a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:radiotherapyTechnique;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; # has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:preparationProcedure;
+        ];
     ].
 
 
@@ -1178,3 +1184,188 @@ map:percentage a rr:TriplesMap;
         rr:class uo:0000187; #percent                                                     
     ].
 
+map:preparationProcedure a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "preparationProcedure";
+        rr:class ncit:C25625; #preparation                                                          
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024;  #has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:dualEnergyPlanningCTScan; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024;  #has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:planningPETCT; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024;  #has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:planningMRI; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:targetVolume; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:GTVVolume; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:CTV1Volume; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:CTV2Volume; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024;  #has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:boostTechnique; 
+        ];
+    ].       
+
+
+map:dualEnergyPlanningCTScan a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dualEnergyPlanningCTScan";
+        rr:class ncit:C121378; #Dual-Energy Computed Tomography
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dualEnergyPlanningCTScan"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+map:planningPETCT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "planningPETCT";
+        rr:class ncit:C121378; #Positron Emission Tomography and Computed Tomography Scan
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  #has value
+        rr:objectMap [
+            rr:column "planningPETCT"; 
+            rr:datatype xsd:string; 
+        ];
+    ].
+map:planningMRI a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "planningMRI";
+        rr:class ncit:C16809; #Magnetic Resonance Imaging
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "planningMRI"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+map:targetVolume a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "targetVolume";
+        rr:class ncit:C82606; #Planning Target Volume                                          ?? taget volume = planning target volume
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "targetVolume"; 
+            rr:datatype xsd:string; 
+        ];
+    ].
+map:GTVVolume a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "GTVVolume";
+        rr:class ncit:C94515; #tumor volume                                                     ??? tumor volume = GTV?
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:CC; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "GTVVolume"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+map:CTV1Volume a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "CTV1Volume";
+        rr:class ncit:C112912; #clinical target volume                                                     
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:CC; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "CTV1Volume"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+map:CTV2Volume a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "CTV2Volume";
+        rr:class ncit:C112912; #clinical target tumor volume                                                     
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:CC; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "CTV2Volume"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+map:boostTechnique a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "boostTechnique";
+        rr:class ncit:C137908; #boost radiation therapy                                     ? boost technique = boost radiation therapy                                                     
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "boostTechnique"; 
+            rr:datatype xsd:string; 
+        ];
+    ].
+
+map:CC a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "CC";
+        rr:class uo:0000097; #cubic centimeter                                                     
+    ].
