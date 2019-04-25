@@ -123,6 +123,12 @@ map:patient a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:numberOfLymphNodeMetastases;
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; # has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:radiotherapyTechnique;
+        ];
     ].
 
 
@@ -922,5 +928,80 @@ map:numberOfLymphNodeMetastasesWithECS a rr:TriplesMap;
         rr:objectMap [
             rr:column "numberOfLymphNodeMetastasesWithECS"; 
             rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:radiotherapyTechnique a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "radiotherapyTechnique";
+        rr:class ncit:C15313; # radiation therapy
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:localvalue;                                         
+        rr:objectMap [
+            rr:column "radiotherapyTechnique";  
+            rr:datatype xsd:string; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100278; #has modality                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:IGRT;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100278; #has modality                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:ART;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100082; #has occurence                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:planAdapted;
+        ];
+    ].
+
+
+map:IGRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "IGRT";
+        rr:class ncit:C62727; # image guided radiation therapy
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;                                         
+        rr:objectMap [
+            rr:column "IGRT"; 
+            rr:datatype xsd:string; 
+        ];
+    ].
+
+map:ART a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "ART";
+        rr:class ncit:C116432; # image guided adaptive radiation therapy                    # correct ontology? is it the same as ART
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;                                         
+        rr:objectMap [
+            rr:column "ART"; 
+            rr:datatype xsd:string; 
+        ];
+    ].
+
+map:planAdapted a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "planAdapted";
+        rr:class ncit:C25446; #change                                                   #correct ontology? change 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value                                       
+        rr:objectMap [
+            rr:column "planAdapted"; 
+            rr:datatype xsd:boulean; 
         ];
     ].
