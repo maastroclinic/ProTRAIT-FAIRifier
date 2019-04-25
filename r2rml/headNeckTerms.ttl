@@ -107,9 +107,21 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100212 ; # has property
+        rr:predicate roo:P100212; # has property
         rr:objectMap [
             rr:parentTriplesMap map:postOperativeSettingPrimarySite;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100258; # has diasease finding
+        rr:objectMap [
+            rr:parentTriplesMap map:postoperativeSettingNeck;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100258; # has diasease finding
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfLymphNodeMetastases;
         ];
     ].
 
@@ -638,7 +650,7 @@ map:surgeryPrimaryTumour a rr:TriplesMap;
             rr:datatype xsd:boolean; 
         ];
     ];
-        rr:predicateObjectMap [                                         #here of at primary tumor? concerning if yes
+        rr:predicateObjectMap [                                                     #here of at primary tumor? concerning if yes
         rr:predicate roo:P100295;  #has procedure date                    
         rr:objectMap [
              rr:parentTriplesMap map:procedureDate;   
@@ -651,7 +663,7 @@ map:procedureDate a rr:TriplesMap;
         rr:class ncit:C117538 ;  #Procedure Date Time of Reference Timepoint
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value                           #date has value of has date??
+        rr:predicate roo:P100042;  #has value                           
         rr:objectMap [
             rr:column "procedureDate"; 
             rr:datatype xsd:date; 
@@ -781,4 +793,134 @@ map:millimeter a rr:TriplesMap;
             rr:template "millimeter";
             rr:class uo:0000016;
         ].  
+
+map:postoperativeSettingNeck a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "Postoperative setting neck";
+        rr:class ncit:C3077; #head and neck neoplasm 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100310 ;  #has surgical procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:surgeryOfTheNeck; 
+        ];
+    ];
     
+    # if yes?                                                                                   ?specific comment in code
+
+     rr:predicateObjectMap [
+        rr:predicate roo:P100295;  #has procedure date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfSurgeryOfTheNeck; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100286 ;  #has pathological n stage
+        rr:objectMap [
+            rr:parentTriplesMap map:pathologicalNStage; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfLymphNodeMetastases; 
+        ];
+     ].
+
+
+map:surgeryOfTheNeck a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "surgeryOfTheNeck";
+        rr:class 	ncit:C157871 ;  #head and neck cancer surgery
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "surgeryOfTheNeck"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+
+map:dateOfSurgeryOfTheNeck a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "surgeryOfTheNeck";
+        rr:class 	ncit:C80454 ;  #date of therapeutic procedure                   ?or does the surgery have a date?
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "surgeryOfTheNeck"; 
+            rr:datatype xsd:date; 
+        ];
+    ].
+
+map:pathologicalNStage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "PathologicalNStage";
+        rr:class roo:P100286 ;  #has pathological N-stage
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;                                                       
+        rr:objectMap [
+            rr:column "PathologicalNStage"; 
+            rr:datatype xsd:string; 
+        ];
+     ].
+
+map:numberOfLymphNodeMetastases a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "numberOfLymphNodeMetastases";
+        rr:class ncit:C4904;  #Metastatic malignent neoplasm in lymph node                                  ?correct ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "numberOfLymphNodeMetastases"; 
+            rr:datatype xsd:integer; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfLymphNodeMetastasesCheckedAtPathology; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfLymphNodeMetastasesWithECS; 
+        ];
+    ].
+
+map:numberOfLymphNodeMetastasesCheckedAtPathology a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "numberOfLymphNodeMetastasesCheckedAtPathology";
+        rr:class ncit:numberOfLymphNodeMetastasesCheckedAtPathology;                                            # ?no fitting ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "numberOfLymphNodeMetastasesCheckedAtPathology"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:numberOfLymphNodeMetastasesWithECS a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "numberOfLymphNodeMetastasesWithECS";
+        rr:class ncit:numberOfLymphNodeMetastasesWithECS;                                                        # ?no fitting ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "numberOfLymphNodeMetastasesWithECS"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
