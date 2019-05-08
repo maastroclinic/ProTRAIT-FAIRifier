@@ -1,0 +1,885 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix ex: <http://example.com/ns#>.
+@prefix map: <http://mapping.local/>.
+@prefix sty: <http://purl.bioontology.org/ontology/STY/>.
+@prefix sio: <http://semanticscience.org/resource/SIO_>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
+@prefix roo: <http://www.cancerdata.org/roo/>.
+@prefix icd: <http://purl.bioontology.org/ontology/ICD10/>.
+@prefix skos: <http://www.w3.org/2008/05/skos#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix uo: <http://purl.obolibrary.org/obo/uo_>.
+@prefix time: <http://www.w3.org/2006/time#>.
+
+
+map:basicQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT PatientID as id,  ROUND(CAST(Age as decimal),0) as age, Gender as sex, Clinical_T_Stage as clinical_t, Clinical_N_Stage as clinical_n,
+SurvivalTime as survival_time,DeadStatus as vital_status, 
+(CASE WHEN (CAST(SurvivalTime as decimal)>730) THEN 1 WHEN (CAST(SurvivalTime as decimal)<=730 AND DeadStatus='1') THEN 0 ELSE NULL END) AS survival_2y 
+FROM PBDWHackathon2018;""";
+    rdfs:label """Every row in this table should correspond to a unique patient.<br/>
+The target variables have the following name and specific meaning:
+The table should contain a unique patient identifier, age, sex, t-stage, n-stage, survival time in days and vital status at this time.<br/>
+<ul>
+<li>id: unique identifier of the patient</li>
+<li>age:  patient's age at diagnosis</li>
+<li>sex:  patient's biological sex</li>
+<li>clinical_t: clinical <strong>tumor</strong> stage</li>
+<li>clinical_n: clinical <strong>nodal</strong> stage</li>
+<li>survival_2y: two year survival </li>
+</ul>""";
+    skos:definition "id,age,sex,clinical_t,clinical_n,survival_2y".
+
+map:patient a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/";
+        rr:class ncit:C16960; #patient
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100020; #has_disease
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100258 ; # has_disease_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:radiationInducedSideEffects;
+        ];
+    ].   
+
+map:neoplasm a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/neoplasm";
+            rr:class ncit:C3262; #neoplasm
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100403; #treated_by
+        rr:objectMap [
+            rr:parentTriplesMap map:tumorBoardReview;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_type;                                                                      #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:primaryTumor;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100021; #has_histology
+        rr:objectMap [
+            rr:parentTriplesMap map:histology;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_classification;                                                            #new roo predicate                                                          
+        rr:objectMap [
+            rr:parentTriplesMap map:TNM_Staging;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_follow_up;                                                                  #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:tumourFollowUp;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100214; #has_measurement
+        rr:objectMap [
+            rr:parentTriplesMap map:CTVVolume;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100214; #has_measurement
+        rr:objectMap [
+            rr:parentTriplesMap map:GTVVolume;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100202; #has_location
+        rr:objectMap [
+            rr:parentTriplesMap map:tumorSite;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100310 ;  #has_surgical_procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:surgery; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property 
+        rr:objectMap [
+            rr:parentTriplesMap map:surgicalMargins; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:maximumTumourDiameter;                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                      
+        rr:objectMap [
+            rr:parentTriplesMap map:depthOfInfiltration;                     
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:angioinvasion;                                   
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:periNeuralGrowth;                                    
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:infiltrativeGrowth;                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfLymphNodeMetastases; 
+        ];
+     ].
+
+map:TNM_Staging a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "TNMStaging";
+            rr:class ncit:C38027; #stage grouping (TNM stage grouping)                                                     
+     ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100244; #has_clinical_T_stage
+        rr:objectMap [
+            rr:column "T_stage"; 
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100242;  #has_clinical_N_stage
+        rr:objectMap [
+            rr:column "N_stage"; 
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100241;  #has_clinical_M_stage
+        rr:objectMap [
+            rr:column "M_stage"; 
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_additional_t_stage;                                                    #new roo predicate
+        rr:objectMap [
+            rr:column "additional_t_stage"; 
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_version;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:clinicalStageVersion;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100288 ;  #has_pathological_T_stage
+        rr:objectMap [
+            rr:parentTriplesMap map:pathologicalTStage; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100286 ;  #has_pathological_n_stage
+        rr:objectMap [
+            rr:parentTriplesMap map:pathologicalNStage; 
+        ];
+    ].
+
+map:tumorBoardReview a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/neoplasm/tumorBoardReview";
+        rr:class ncit:C93304; #tumor board review
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100228; #has_date
+        rr:objectMap [
+            rr:column "tumorBoardReviewDate"; 
+            rr:datatype xsd:date;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:decides;                                                                       #new roo
+        rr:objectMap [
+            rr:parentTriplesMap map:treatmentRegimen;
+        ];
+    ].
+
+map:primaryTumor a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/neoplasm/primaryTumor";
+            rr:class ncit:C8509; #primary neoplasm
+        ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "patient/neoplasm/primaryTumor";
+                rr:datatype xsd:boulean;
+            ];
+    ].
+
+map:tumorSite a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/neoplasm/tumorSite";
+            rr:class ncit:C3263; #neoplasm by site
+        ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "tumorSite";
+                rr:datatype xsd:string;
+            ];
+    ].
+
+map:histology a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/neoplasm/histology";
+            rr:class ncit:C16681 #histology
+        ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "histology";
+                rr:datatype xsd:string;
+            ];
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:P100228; #has_date
+            rr:objectMap [
+                rr:column "histologyDate";
+                rr:datatype xsd:date;
+            ];
+    ].
+
+map:clinicalStageVersion a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/neoplasm/clinicalStageVersion";
+            rr:class roo:UICC_version;                                                              #new roo class
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "UICCVersion";
+                rr:datatype xsd:integer;
+            ];
+    ].
+
+map:pathologicalTStage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "pathologicalTstage";
+        rr:class ncit:C25728 ;  #T Category (T Stage)
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "pathologicalTstage"; 
+            rr:datatype xsd:string; 
+        ];
+     ].
+
+map:pathologicalNStage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "PathologicalNStage";
+        rr:class ncit:C25580 ;  #N Category (N Stage)
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;                                                       
+        rr:objectMap [
+            rr:column "PathologicalNStage"; 
+            rr:datatype xsd:string; 
+        ];
+     ].
+
+map:surgicalMargins a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "surgicalMargins";
+        rr:class  ncit:C41227 ;  #surgical margins
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "surgicalMargins"; 
+            rr:datatype xsd:string; 
+        ];
+     ].
+
+map:maximumTumourDiameter a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "maximumTumourDiameter";
+        rr:class  ncit:C96684 ;  #longest diameter
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "maximumTumourDiameter"; 
+            rr:datatype xsd:integer; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:millimeter;
+            ];       
+    ].
+
+map:depthOfInfiltration a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "depthOfInfiltration";
+        rr:class  	ncit:C28491 ;  #cellular infiltration
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "depthOfInfiltration"; 
+            rr:datatype xsd:integer; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:millimeter;
+            ];       
+
+    ].
+
+map:angioinvasion a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "angioinvasion";
+        rr:class  	ncit:C39589 ;  #angioinvasion
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "angioinvasion"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+
+map:periNeuralGrowth a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "periNeuralGrowth";
+        rr:class  	ncit:C48260 ;  #perineural invasion  
+    ];                                                   
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "periNeuralGrowth"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+
+map:infiltrativeGrowth a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "infiltrativeGrowth";
+        rr:class  	ncit:C41453 ;  #infiltrative growth pattern                                       
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "infiltrativeGrowth"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+
+map:millimeter a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "millimeter";
+            rr:class uo:0000016;
+        ].  
+
+map:numberOfLymphNodeMetastases a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "numberOfLymphNodeMetastases";
+        rr:class ncit:C4904;  #Metastatic malignent neoplasm in lymph node                      
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "numberOfLymphNodeMetastases"; 
+            rr:datatype xsd:integer; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfLymphNodeMetastasesCheckedAtPathology; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfLymphNodeMetastasesWithECS; 
+        ];
+    ].
+
+map:numberOfLymphNodeMetastasesCheckedAtPathology a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "numberOfLymphNodeMetastasesCheckedAtPathology";
+        rr:class ncit:numberOfLymphNodeMetastasesCheckedAtPathology;                                            # ?no fitting ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "numberOfLymphNodeMetastasesCheckedAtPathology"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:numberOfLymphNodeMetastasesWithECS a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "numberOfLymphNodeMetastasesWithECS";
+        rr:class ncit:numberOfLymphNodeMetastasesWithECS;                                                        # ?no fitting ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "numberOfLymphNodeMetastasesWithECS"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:radiationInducedSideEffects a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "radiationInducedSideEffects";
+        rr:class ncit:C2861; #side effect                                                          
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100199;  #caused_by
+        rr:objectMap [
+            rr:parentTriplesMap map:radiotherapy;           
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:weight;                                                         #?? weightLoss
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:xerostomia;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:dysphagia;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:dysphagiaUMCG;                                                     
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:oralMucositis;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:dermatitisRadiation;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:osteoRadioNecrosis;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:softTissueNecrosis;                                                         
+        ];
+    ].
+
+map:weight a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "weight";
+        rr:class ncit:C25208; #weight  ncit:C3445 weightloss                                            ???? weightloss
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:kilogram; 
+        ]; 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "weight"; 
+            rr:datatype xsd:double; 
+        ];
+    ].
+
+map:xerostomia a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "xerostomia";
+        rr:class ncit:C26917; #xerostomia 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "xerostomia"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:dysphagia a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dysphagia";
+        rr:class ncit:C2980; #dysphagia 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "dysphagia"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:dysphagiaUMCG a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dysphagiaUMCG";                                                                    
+        rr:class ncit:C2980; #dysphagia                                                                #same ncit as before?
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "dysphagiaUMCG"; 
+            rr:datatype xsd:integer;                                                                    #??? umcg grades?
+        ];
+    ].
+
+map:oralMucositis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "oralMucositis";
+        rr:class ncit:C26887; #stomatitis 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "oralMucositis"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:dermatitisRadiation a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dermatitisRadiation";
+        rr:class ncit:C26887; #dermatitis radiation CTCAE
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "dermatitisRadiation"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:osteoRadioNecrosis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "osteoRadioNecrosis";
+        rr:class ncit:C63707; #osteoRadioNecrosis
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "osteoRadioNecrosis"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:softTissueNecrosis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "softTissueNecrosis";
+        rr:class ncit:C53841; #soft tissue necrosis CTCAE
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "softTissueNecrosis"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:kilogram a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "kilogram";
+        rr:class uo:0000009; #kilogram
+    ].
+
+map:tumourFollowUp a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "tumourFollowUp";
+        rr:class roo:tumourFollowUp;                                                                   #new roo class     
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:localRecurrence;                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:regionalRecurrence;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:distantMetastasis;                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:newMalignancy;                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100228   ;  #has date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfLastFollowUp;                                                         
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:statusAtLastFollowUp;                                                         
+        ];
+    ].
+
+map:localRecurrence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "localRecurrence";
+        rr:class ncit:C94796; #Locally Recurrent Malignant Neoplasm 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "localRecurrence"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100251;  #has date of diagnosis                   
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfLocalRecurrence;                                                         
+        ];
+    ].
+
+map:regionalRecurrence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "regionalRecurrence";
+        rr:class roo:regionalRecurrence;                                                                # new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "regionalRecurrence"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100251;  #has date of diagnosis
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfRegionalRecurrence;                                                         
+        ];
+    ].
+
+map:distantMetastasis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "distantMetastasis";
+        rr:class ncit:C18206; #distant metastasis 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "distantMetastasis"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100251;  #has date of diagnosis
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfDistantMetastasis;                                                         
+        ];
+    ].
+
+map:newMalignancy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "newMalignancy";
+        rr:class ncit:C4968; #secondary malignant neoplasm                                         ??? secondary vs new 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "newMalignancy"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100202 ;  #has location
+        rr:objectMap [
+            rr:parentTriplesMap map:locationOfNewMalignancy;                                                         
+        ];
+    ].
+
+map:dateOfLastFollowUp a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dateOfLastFollowUp";
+        rr:class ncit:C156916; #date of last contact
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfLastFollowUp"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212  ;  #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:statusAtLastFollowUp;                                                         
+        ];
+    ].
+
+map:dateOfLocalRecurrence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dateOfLocalRecurrence";
+        rr:class ncit:C156855; #date of new tumour event
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfLocalRecurrence"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ].
+
+map:dateOfRegionalRecurrence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dateOfRegionalRecurrence";
+        rr:class ncit:C156855; #date of new tumour event                                           
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfRegionalRecurrence"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ].
+
+map:dateOfDistantMetastasis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "dateOfDistantMetastasis";
+        rr:class ncit:C156855; #date of new tumour event                                              
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "dateOfDistantMetastasis"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ].
+
+map:locationOfNewMalignancy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "locationOfNewMalignancy";
+        rr:class roo:locationOfNewMalignancy;                                                             #new roo class                                              ??? same ncit
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "locationOfNewMalignancy"; 
+            rr:datatype xsd:string;                                                                 
+        ];
+    ].
+
+map:statusAtLastFollowUp a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "statusAtLastFollowUp";
+        rr:class ncit:C16033; #follow up                                                                     ??? no fitting ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "statusAtLastFollowUp"; 
+            rr:datatype xsd:string;                                                                 
+        ];
+    ].
+
+map:radiotherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/radiotherapy";
+            rr:class ncit:C15313;
+    ].
