@@ -38,7 +38,7 @@ map:patient a rr:TriplesMap;
     rr:logicalTable map:basicQuery; 
     rr:subjectMap [
         rr:template "patient/";
-        rr:class ncit:C16960;
+        rr:class ncit:C16960; #patient
     ];
         rr:predicateObjectMap [
         rr:predicate roo:P100024; # has procedure
@@ -49,7 +49,25 @@ map:patient a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:P100024; # has procedure
         rr:objectMap [
-            rr:parentTriplesMap map:systemicTreatment;
+            rr:parentTriplesMap map:chemotherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:surgery;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:immunotherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:hormoneTherapy;
         ];
     ];
     rr:predicateObjectMap [
@@ -59,23 +77,247 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:decides;
+        rr:predicate roo:decides;                                                             # new roo predicate 
         rr:objectMap [
             rr:parentTriplesMap map:treatmentRegimen;
         ];
-    ];    
+    ].
+
+map:radiotherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/radiotherapy";
+            rr:class ncit:C15313; #radiation therapy
+    ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_subtype;
+        rr:predicate roo:has_subtype; #                                                            new roo predicate  
         rr:objectMap [
-            rr:parentTriplesMap map:treatment;
+            rr:parentTriplesMap map:reirradiation;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100004 ; #has_intent
+        rr:objectMap [
+            rr:parentTriplesMap map:IntentOfRT;
+        ];
+    ];   
+    rr:predicateObjectMap [
+        rr:predicate roo:has_treatmentTechnique; #                                            new roo predicate                                 
+        rr:objectMap [
+            rr:parentTriplesMap map:IGRT;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_treatmentTechnique; #                                             new roo predicate 
+        rr:objectMap [
+            rr:parentTriplesMap map:ART;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100082; #has occurence                                        
+        rr:objectMap [
+            rr:parentTriplesMap map:planAdaptation;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_treatmentTechnique; #                                         new roo predicate 
+        rr:objectMap [
+            rr:parentTriplesMap map:protonTherapy;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100300 ;  #has RT start date
+        rr:objectMap [
+            rr:parentTriplesMap map:startDateOfRT; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100299; #has RT end date
+        rr:objectMap [
+            rr:parentTriplesMap map:endDateOfRT; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:totalDose; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:fractionDose; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:fraction; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:doseToOAR; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_type;                                                           #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:photonTherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_planning_comparison;                                            #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:planningComparison;
         ];
     ].
 
-map:treatment a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
+map:reirradiation a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
     rr:subjectMap [
-            rr:template "treatment";
-            rr:class ncit:C49236; #Therapeutic Procedure
+        rr:template "patient/";
+        rr:class roo:reirradiation;                                                         #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100223; #has_count
+        rr:objectMap [
+            rr:column "reirradiationNumber"; 
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:IntentOfRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "prophylacticTargetRT or therapeuticTargetRT"; #how do I make this distinction
+        rr:class roo:IntentOfRT;                        
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_type;                                                         #new roo predicate
+        rr:objectMap [
+            rr:column "?"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:startDateOfRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "prophylacticTargetRT or therapeuticTargetRT"; #how do I make this distinction
+        rr:class roo:startDateOfRT; #                                               new roo class 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "prophylacticTargetRT or therapeuticTargetRT"; #how do I make this distinction 
+            rr:datatype xsd:date; 
+        ];
+    ].
+map:endDateOfRT a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "prophylacticTargetRT or therapeuticTargetRT"; #how do I make this distinction 
+        rr:class ncit:C156814; #Date of Last Radiation Treatment                                            of nieuwe roo endDateOfRT?
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "prophylacticTargetRT or therapeuticTargetRT"; #how do I make this distinction 
+            rr:datatype xsd:date; 
+        ];
+    ].
+map:totalDose a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "totalDose";
+        rr:class ncit:C94394; #cumulative dose                                             
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "totalDose"; 
+            rr:datatype xsd:float; 
+        ];
+    ].
+map:fractionDose a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "fractionDose";
+        rr:class roo:C100353; #radiotherapy fraction dose                                             
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "fractionDose"; 
+            rr:datatype xsd:float; 
+        ];
+    ].
+
+map:fraction a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "numberOfFractions";
+        rr:class ncit:C25514; #fraction                                            ???? correct ontology
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "numberOfFractions"; 
+            rr:datatype xsd:float; 
+        ];
+    ].
+
+map:doseToOAR a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "doseToOARsTreatmentPlanning";
+        rr:class roo:doseToOAR;                                                                      #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "doseToOARsTreatmentPlanning"; 
+            rr:datatype xsd:float; 
+        ];
+    ].
+
+map:treatmentRegimen a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/treatmentRegimen";
+        rr:class ncit:C15697; #Treatment Regimen
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:radiotherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:surgery;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:chemotherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:immunotherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;
+        rr:objectMap [
+            rr:parentTriplesMap map:hormoneTherapy;
+        ];
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100402 ; #treats
@@ -118,163 +360,88 @@ map:regionalRecurrence a rr:TriplesMap;
         ];
     ].
 
-map:radiotherapy a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/radiotherapy";
-            rr:class ncit:C15313;
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:has_subtype; #                                                            new roo predicate  
-        rr:objectMap [
-            rr:parentTriplesMap map:reirradiation;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100024; #has_property
-        rr:objectMap [
-            rr:parentTriplesMap map:prophylacticTargetRT;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100024; #has_property
-        rr:objectMap [
-            rr:parentTriplesMap map:therapeuticTargetRT;
-        ];
-    ];    
-    rr:predicateObjectMap [
-        rr:predicate roo:has_treatmentTechnique; #                                            new roo predicate                                 
-        rr:objectMap [
-            rr:parentTriplesMap map:IGRT;
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:has_treatmentTechnique; #                                             new roo predicate 
-        rr:objectMap [
-            rr:parentTriplesMap map:ART;
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100082; #has occurence                                        
-        rr:objectMap [
-            rr:parentTriplesMap map:planAdapted;
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:has_treatmentTechnique; #                                         new roo predicate 
-        rr:objectMap [
-            rr:parentTriplesMap map:protonTherapyFactors;
-        ];
-    ].
-
-map:reirradiation a rr:TriplesMap;
-    rr:logicalTable map:basicQuery; 
-    rr:subjectMap [
-        rr:template "patient/";
-        rr:class roo:reirradiation;                                                         #new roo class
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100223; #has_count
-        rr:objectMap [
-            rr:column "reirradiationNumber"; 
-            rr:datatype xsd:integer;
-        ];
-    ].
-
-map:treatmentRegimen a rr:TriplesMap;
-    rr:logicalTable map:basicQuery; 
-    rr:subjectMap [
-        rr:template "patient/treatmentRegimen";
-        rr:class ncit:C15697; #Treatment Regimen
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100423; #consists_of
-        rr:objectMap [
-            rr:parentTriplesMap map:radiotherapy;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100423; #consists_of
-        rr:objectMap [
-            rr:parentTriplesMap map:surgery;
-        ];
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100423; #consists_of
-        rr:objectMap [
-            rr:parentTriplesMap map:systemicTreatment;
-        ];
-    ].
-
-map:systemicTreatment a rr:TriplesMap;
+map:chemotherapy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "systemic treatment";
         rr:class ncit:C15632; #chemotherapy
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
+        rr:predicate roo:has_subtype;                                                               #new roo predicate
         rr:objectMap [
-            rr:column "systemic treatment"; 
-            rr:datatype xsd:integer;
+            rr:parentTriplesMap map:systemicTreatment;
         ];
     ];
-   rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100423; #consists of
         rr:objectMap [
-            rr:parentTriplesMap map:whichDrugs;
+            rr:parentTriplesMap map:chemotherapeuticAgent;
         ];
     ];
-   rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100239; #has_chemo_start_date
         rr:objectMap [
             rr:column "startdate"; 
             rr:datatype xsd:date;
         ];
     ];
-   rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100337; #has_chemo_end_date
         rr:objectMap [
             rr:column "enddate"; 
             rr:datatype xsd:date;
         ];
     ];
-   rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100423; #consists of
         rr:objectMap [
             rr:parentTriplesMap map:treatmentCycles;
         ];
     ];
-   rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100423; #consists of
         rr:objectMap [
             rr:parentTriplesMap map:totalDose;
         ];
      ];
-   rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100423; #consists of
         rr:objectMap [
             rr:parentTriplesMap map:doseReduction;
         ];
      ];
-   rr:predicateObjectMap [
+     rr:predicateObjectMap [
         rr:predicate roo:P100423; #consists of
         rr:objectMap [
             rr:parentTriplesMap map:includedInTrial;
         ];
     ].
 
-map:whichDrugs a rr:TriplesMap;
+map:systemicTreatment a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "systemicTreatment";
+        rr:class roo:systemicTreatment;                                                         #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "systemic treatment"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:chemotherapeuticAgent a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "which drugs";
-        rr:class ncit:C459 #medication
+        rr:class roo:chemotherapeuticAgent #medication
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has value
         rr:objectMap [
             rr:column "which drugs"; 
-            rr:datatype xsd:integer;
+            rr:datatype xsd:string;
         ];
     ].
 
@@ -296,7 +463,7 @@ map:doseReduction a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "dose reduction";
-        rr:class ncit:C49505; #dose reduced is best fitting ontology? 
+        rr:class ncit:C49505; #dose reduced 
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has value
@@ -313,18 +480,25 @@ map:surgery a rr:TriplesMap;
         rr:class 	ncit:C157740 ;  #cancer surgery
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
+        rr:predicate roo:P100042;  #has_value
         rr:objectMap [
             rr:column "surgeryPrimaryTumour"; 
             rr:datatype xsd:boolean; 
         ];
     ];
-        rr:predicateObjectMap [                                                     #here of at primary tumor? concerning if yes
-        rr:predicate roo:P100295;  #has procedure date                    
+        rr:predicateObjectMap [                                                     
+        rr:predicate roo:P100295;  #has_procedure_date                    
         rr:objectMap [
              rr:parentTriplesMap map:procedureDate;   
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100402; #treats
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+        ];
     ].
+
 
 map:procedureDate a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
@@ -358,7 +532,7 @@ map:ART a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "ART";
-        rr:class ncit:C116432; # image guided adaptive radiation therapy                    # correct ontology? is it the same as ART
+        rr:class ncit:C116432; # image guided adaptive radiation therapy                    
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value;                                         
@@ -368,7 +542,7 @@ map:ART a rr:TriplesMap;
         ];
     ].
 
-map:planAdapted a rr:TriplesMap;
+map:planAdaptation a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "planAdapted";
@@ -382,7 +556,7 @@ map:planAdapted a rr:TriplesMap;
         ];
     ].
 
-map:protonTherapyFactors a rr:TriplesMap;
+map:protonTherapy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "protonTherapyFactors";
@@ -421,7 +595,7 @@ map:protonTherapyFactors a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100212; #has property                                         
         rr:objectMap [
-           rr:parentTriplesMap map:treatmentType;
+           rr:parentTriplesMap map:optimalFieldPlan;
         ];
     ];
      rr:predicateObjectMap [
@@ -433,7 +607,7 @@ map:protonTherapyFactors a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100212; #has property                                         
         rr:objectMap [
-           rr:parentTriplesMap map:doseEngine;
+           rr:parentTriplesMap map:doseCalculationEngine;
         ];
     ];
      rr:predicateObjectMap [
@@ -442,7 +616,29 @@ map:protonTherapyFactors a rr:TriplesMap;
             rr:parentTriplesMap map:MCUncertainty;   
 
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_reason;                                                        #new roo predicate
+            rr:objectMap [
+                rr:column "reasonForNoProtonTherapy";
+                rr:datatype xsd:string;
+            ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_created;                                                       #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:registration;
+        ];
     ].
+
+map:photonTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/treatment/radiotherapy/photonTherapy";
+            rr:class ncit:C104914;
+    ].
+	
+
 map:numberOfScenariosForRobustEvaluation a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
@@ -475,7 +671,7 @@ map:robustTreatmentPlanningRangeUncertainty a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "robustTreatmentPlanningRangeUncertainty";
-        rr:class  	ncit:C71478;  #uncertainty                                                      ???? correct ontology
+        rr:class  	roo:robustTreatmentPlanningRangeUncertainty;                                                  #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100027; #has unit
@@ -495,7 +691,7 @@ map:robustnessEvaluationSetup a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "robustnessEvaluationSetup";
-        rr:class  	ncit:C134245 ;  #analytical procedure robustness                                    ???? correct ontology
+        rr:class  	roo:robustnessEvaluationSetup ;                                                         #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100027; #has unit
@@ -515,21 +711,21 @@ map:layerRepainting a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "layerRepainting";
-        rr:class  	ncit:C66831 ;  #layer                                                           ???? correct ontology
+        rr:class  	roo:layerRepainting ;                                                   #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has value                                       
         rr:objectMap [
             rr:column "layerRepainting"; 
-            rr:datatype xsd:integer;                                                               #???? double of integer
+            rr:datatype xsd:integer;                                                               #???? float of integer
         ];
     ].
 
-map:treatmentType a rr:TriplesMap;
+map:optimalFieldPlan a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "treatment type";
-        rr:class  	ncit:C114461 ;  #categorical description type                                    ????correct ontology
+        rr:class  	roo:optimalFieldPlan ;  #                                                    new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
@@ -553,12 +749,11 @@ map:typeOfBeamAbsorber a rr:TriplesMap;
             ];       
     ].
 
-map:doseEngine a rr:TriplesMap;
+map:doseCalculationEngine a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "dose engine";
-        rr:class ncit:C16275; #algorithm                                                             ????? correct ontology
-# ncit:C94936 monte carlo method #ncit:C155822 Linear Energy Transfer (LET)-Optimized Intensity Modulated Proton Therapy (IMPT)
+        rr:class roo:doseCalculationEngine;                                                     # new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
@@ -650,7 +845,7 @@ map:preparationProcedure a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:precedes;
         rr:objectMap [
-            rr:parentTriplesMap map:systemicTreatment;
+            rr:parentTriplesMap map:chemotherapy;
         ];
     ].    
 
@@ -787,194 +982,11 @@ map:CC a rr:TriplesMap;
         rr:class uo:0000097; #cubic centimeter                                                     
     ].
 
-map:prophylacticTargetRT a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "prophylacticTargetRT";
-        rr:class ncit:prophylacticTargetRT; #preparation                                  ?? no fitting ontology                       
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100300 ;  #has RT start date
-        rr:objectMap [
-            rr:parentTriplesMap map:dateOfStartProphylacticTargetRT; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100299; #has RT end date
-        rr:objectMap [
-            rr:parentTriplesMap map:lastDayOfProphylacticTargetRT; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property
-        rr:objectMap [
-            rr:parentTriplesMap map:totalDose; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property
-        rr:objectMap [
-            rr:parentTriplesMap map:fractionDose; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property
-        rr:objectMap [
-            rr:parentTriplesMap map:numberOfFractions; 
-        ];
-    ].
-
-map:dateOfStartProphylacticTargetRT a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "dateOfStartProphylacticTargetRT";
-        rr:class ncit:C80454; #Date of therapeutic procedure                                                ???? correct ontology 
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "dateOfStartProphylacticTargetRT"; 
-            rr:datatype xsd:date; 
-        ];
-    ].
-map:lastDayOfProphylacticTargetRT a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "lastDayOfProphylacticTargetRT";
-        rr:class ncit:C156814; #Date of Last Radiation Treatment                                            ???? correct ontology 
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "lastDayOfProphylacticTargetRT"; 
-            rr:datatype xsd:date; 
-        ];
-    ].
-map:totalDose a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "totalDose";
-        rr:class ncit:C94394; #cumulative dose                                             
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "totalDose"; 
-            rr:datatype xsd:double; 
-        ];
-    ].
-map:fractionDose a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "fractionDose";
-        rr:class roo:C100353; #radiotherapy fraction dose                                             
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "fractionDose"; 
-            rr:datatype xsd:double; 
-        ];
-    ].
-
-map:numberOfFractions a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "numberOfFractions";
-        rr:class ncit:C25514; #fraction                                            ???? correct ontology
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "numberOfFractions"; 
-            rr:datatype xsd:double; 
-        ];
-    ].
-
-map:therapeuticTargetRT a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "therapeuticTargetRT";
-        rr:class ncit:therapeuticTargetRT;                                                            # no fitting ontology                                                          
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100300 ;  #has RT start date
-        rr:objectMap [
-            rr:parentTriplesMap map:dateOfStartTherapeuticTargetRT; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100299; #has RT end date
-        rr:objectMap [
-            rr:parentTriplesMap map:lastDayOfTherapeuticTargetRT; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property
-        rr:objectMap [
-            rr:parentTriplesMap map:fractionDose; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property
-        rr:objectMap [
-            rr:parentTriplesMap map:numberOfFractions; 
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100212; #has property
-        rr:objectMap [
-            rr:parentTriplesMap map:doseToOAR; 
-        ];
-    ].
-
-map:dateOfStartTherapeuticTargetRT a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "dateOfStartTherapeuticTargetRT";
-        rr:class ncit:C80454; #Date of therapeutic procedure                                                ???? correct ontology 
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "dateOfStartTherapeuticTargetRT"; 
-            rr:datatype xsd:date; 
-        ];
-    ].
-
-map:lastDayOfTherapeuticTargetRT a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "lastDayOfTherapeuticTargetRT";
-        rr:class ncit:C156814; #Date of Last Radiation Treatment                                            ???? correct ontology 
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has value
-        rr:objectMap [
-            rr:column "lastDayOfTherapeuticTargetRT"; 
-            rr:datatype xsd:date; 
-        ];
-    ].
-
-map:doseToOAR a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;
-    rr:subjectMap [
-        rr:template "doseToOARsTreatmentPlanning";
-        rr:class roo:doseToOAR;                                                                      #new roo class
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:local_value;  
-        rr:objectMap [
-            rr:column "doseToOARsTreatmentPlanning"; 
-            rr:datatype xsd:double; 
-        ];
-    ].
-
 map:patientReportedOutcomeMeasures a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patientReportedOutcomeMeasures";
-        rr:class ncit:C102988; #Patient Reported Outcomes Measurement Information System                    #promis ipv prom??                                                          
+        rr:class roo:patientReportedOutcomeMeasures;                              #new roo class                                                        
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100423  ;  #consistsOf
@@ -1034,5 +1046,83 @@ map:EUROQOL_5D a rr:TriplesMap;
         rr:objectMap [
             rr:column "EUROQOL_5D"; 
             rr:datatype xsd:integer;                                                                    #??? list?
+        ];
+    ].
+
+map:immunotherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/treatment/immunotherapy";
+            rr:class ncit:C15262;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100402; #treats
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+        ];
+    ].
+map:hormoneTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/treatment/hormoneTherapy";
+            rr:class ncit:C15445;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100402; #treats
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+        ];
+    ].
+
+map:planningComparison a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/treatment/radiotherapy/planningComparison";
+            rr:class roo:planningComparison;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_date;
+        rr:objectMap [
+            rr:column "PlanningComparisonDate"; 
+            rr:datatype xsd:date;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100267;
+        rr:objectMap [
+            rr:column "PlanningComparisonVersion"; 
+            rr:datatype xsd:float;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042;
+        rr:objectMap [
+            rr:column "PlanningComparisonYesNo"; 
+            rr:datatype xsd:boolean;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_reason;
+        rr:objectMap [
+            rr:column "PlanningComparisonYesNo"; 
+            rr:datatype skos:note;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100397;
+        rr:objectMap [
+            rr:parentTriplesMap map:protonTherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100397;
+        rr:objectMap [
+            rr:parentTriplesMap map:photonTherapy;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_registration;
+        rr:objectMap [
+            rr:parentTriplesMap map:registration;
         ];
     ].

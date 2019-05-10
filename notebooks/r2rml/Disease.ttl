@@ -149,12 +149,32 @@ map:neoplasm a rr:TriplesMap;
              rr:parentTriplesMap map:infiltrativeGrowth;                                 
         ];
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
+        rr:predicate roo:P100251;
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfDiagnosis;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "tumorType"; 
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
         rr:predicate roo:P100212; #has_property
         rr:objectMap [
             rr:parentTriplesMap map:numberOfLymphNodeMetastases; 
         ];
-     ].
+    ].
+
+map:dateOfDiagnosis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/diagnosis/dateOfDiagnosis/{dateOfDiagnosis}";
+            rr:class ncit:C25164;
+        ].
 
 map:TNM_Staging a rr:TriplesMap;
     rr:subjectMap map:basicQuery;    
@@ -555,7 +575,7 @@ map:weight a rr:TriplesMap;
         rr:predicate roo:P100042;  #has value
         rr:objectMap [
             rr:column "weight"; 
-            rr:datatype xsd:double; 
+            rr:datatype xsd:float; 
         ];
     ].
 
