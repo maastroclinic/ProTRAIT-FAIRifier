@@ -195,7 +195,7 @@ map:patient a rr:TriplesMap;
 map:biologicalSex a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
         rr:subjectMap [
-            rr:template "patient/biologicalSex/{sex}";
+            rr:template "patient/{id}/biologicalSex/{sex}";
             rr:class ncit:C28421;  #sex
     ];
     rr:predicateObjectMap [
@@ -223,7 +223,7 @@ map:identifier a rr:TriplesMap;
 map:treatingClinic a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
         rr:subjectMap [
-            rr:template "patient/treatingClinic/{treatingClinic}";
+            rr:template "patient/{id}/treatingClinic/{treatingClinic}";
             rr:class ncit:C19326;  #clinics and hospitals
     ];
     rr:predicateObjectMap [
@@ -236,7 +236,7 @@ map:treatingClinic a rr:TriplesMap;
     rr:predicateObjectMap [                                                                          
         rr:predicate roo:has_contact_person;
         rr:objectMap [
-            rr:column "patient/treatingClinic/contactPersonForParticleCentre/{contactPersonForParticleCentre}";  #correct uri or seperate subject?
+            rr:column "patient/{id}/treatingClinic/contactPersonForParticleCentre/{contactPersonForParticleCentre}";  #correct uri or seperate subject?
             rr:datatype xsd:string;
             rr:joinCondition [
                 rr:child "id";                                                                      #join condition neccessary?
@@ -248,7 +248,7 @@ map:treatingClinic a rr:TriplesMap;
 map:referringClinic a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
         rr:subjectMap [
-            rr:template "patient/referringClinic/{referringClinic}";
+            rr:template "patient/{id}/referringClinic/{referringClinic}";
             rr:class ncit:C19326;   #clinics and hospitals 
         ];
     rr:predicateObjectMap [
@@ -262,7 +262,7 @@ map:referringClinic a rr:TriplesMap;
 map:registration a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
         rr:subjectMap [
-            rr:template "patient/registration/{date}";
+            rr:template "patient/{id}/registration/{date}";
             rr:class ncit:C25646; #registration
         ];
     rr:predicateObjectMap [
@@ -286,7 +286,7 @@ map:registration a rr:TriplesMap;
 map:ageAtDiagnosis a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
         rr:subjectMap [
-            rr:template "patient/ageAtDiagnosis/{age}";
+            rr:template "patient/{id}/ageAtDiagnosis/{age}";
             rr:class roo:C100002; #age_at_diagnosis
         ];
      rr:predicateObjectMap [
@@ -311,7 +311,7 @@ map:ageAtDiagnosis a rr:TriplesMap;
 map:birth a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
         rr:subjectMap [
-            rr:template "patient/birth/{birthyear}";
+            rr:template "patient/{id}/birth/{birthyear}";
             rr:class ncit:C25155; #birth
         ];
         rr:predicateObjectMap [
@@ -325,7 +325,7 @@ map:birth a rr:TriplesMap;
 map:educationLevel a rr:TriplesMap;
      rr:logicalTable map:basicQuery;
      rr:subjectMap [
-            rr:template "patient/educationLevel/{educationLevel}";
+            rr:template "patient/{id}/educationLevel/{educationLevel}";
             rr:class ncit:C17953; #education level
         ];
         rr:predicateObjectMap [
@@ -340,7 +340,7 @@ map:educationLevel a rr:TriplesMap;
 map:relationshipStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/relationshipStatus/{relationshipStatus}";
+            rr:template "patient/{id}/relationshipStatus/{relationshipStatus}";
             rr:class ncit:C25188; #marital status
         ];
     rr:predicateObjectMap [
@@ -354,7 +354,7 @@ map:relationshipStatus a rr:TriplesMap;
 map:smokingStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/{smokingStatus}";
+            rr:template "patient/{id}/smokingStatus/{smokingStatus}";
             rr:class ncit:C19796; #smoking status
         ];
     rr:predicateObjectMap [
@@ -388,9 +388,16 @@ map:smokingStatus a rr:TriplesMap;
 map:formerSmoker a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/formerSmoker/{smokingStatus}";
+            rr:template "patient/{id}/smokingStatus/formerSmoker/{smokingStatus}";
             rr:class ncit:C67148; #former smoker
         ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value; 
+            rr:objectMap [
+                rr:column "smokingStatus";
+                rr:datatype xsd:string;
+            ];
+    ];
     rr:predicateObjectMap [
         rr:predicate roo:P100027; #has_unit
         rr:objectMap [
@@ -415,14 +422,14 @@ map:formerSmoker a rr:TriplesMap;
 map:packYears a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/packYears/";
+            rr:template "patient/{id}/smokingStatus/packYears/";                            #path correct?
             rr:class ncit:C73993; #pack year
         ].
 
 map:timeStoppedSmoking a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/formerSmoker/timeStoppedSmoking/{timeStoppedSmoking}";
+            rr:template "patient/{id}/smokingStatus/formerSmoker/timeStoppedSmoking/{timeStoppedSmoking}";
             rr:class roo:timeStoppedSmoking;
         ];
     rr:predicateObjectMap [
@@ -439,16 +446,23 @@ map:timeStoppedSmoking a rr:TriplesMap;
 map:month a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/formerSmoker/timeStoppedSmoking/month";                 #weird uri for month?
+            rr:template "patient/{id}/smokingStatus/formerSmoker/timeStoppedSmoking/month";                 #weird uri for month?
             rr:class uo:0000035; #month
         ].
 
 map:currentSmoker a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/smokingStatus/currentSmoker/{smokingStatus}";
+            rr:template "patient/{id}/smokingStatus/currentSmoker/{smokingStatus}";
             rr:class ncit:C67147;
         ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value; 
+            rr:objectMap [
+                rr:column "smokingStatus";
+                rr:datatype xsd:string;
+            ];
+    ];
     rr:predicateObjectMap [
         rr:predicate roo:P100027; #has_unit
         rr:objectMap [
@@ -463,7 +477,7 @@ map:currentSmoker a rr:TriplesMap;
 map:alcoholUseHistory a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/personalHistory/alcoholUseHistory/{alcoholUseHistory}";
+            rr:template "patient/{id}/personalHistory/alcoholUseHistory/{alcoholUseHistory}";
             rr:class ncit:C81229; #alcohol use history
     ];
     rr:predicateObjectMap [
@@ -478,7 +492,7 @@ map:alcoholUseHistory a rr:TriplesMap;
 map:bodyWeight a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/bodyWeight/{bodyWeight}";
+            rr:template "patient/{id}/bodyWeight/{bodyWeight}";
             rr:class ncit:C81328; #bodyweight
         ];
     rr:predicateObjectMap [
@@ -495,14 +509,14 @@ map:bodyWeight a rr:TriplesMap;
 map:kilogram a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/bodyWeight/kilogram";
+            rr:template "patient/{id}/bodyWeight/kilogram";
             rr:class uo:0000009; #kilogram
         ].   
 
 map:bodyHeight a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/bodyHeight/{bodyHeight}";
+            rr:template "patient/{id}/bodyHeight/{bodyHeight}";
             rr:class ncit:C94488; #stature
     ];
     rr:predicateObjectMap [
@@ -519,14 +533,14 @@ map:bodyHeight a rr:TriplesMap;
 map:centimeter a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/bodyHeight/centimeter";
+            rr:template "patient/{id}/bodyHeight/centimeter";
             rr:class uo:0000015; #centimeter
         ].   
 
 map:comorbidity a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/comorbidityIndex/{comorbidity}";
+            rr:template "patient/{id}/comorbidityIndex/{comorbidity}";
             rr:class ncit:C2991; #disease or disorder
     ];
     rr:predicateObjectMap [
@@ -537,11 +551,11 @@ map:comorbidity a rr:TriplesMap;
         ];
     ].
 
-map:CharlsonComorbidityIndex a rr:TriplesMap;
+map:charlsonComorbidityIndex a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/comorbidit/CharlsonComorbidityIndex/{CharlsonComorbidityIndex}";
-            rr:class ncit:CharlsonComorbidityIndex;                                                         #new  roo class
+            rr:template "patient/{id}/comorbidit/CharlsonComorbidityIndex/{CharlsonComorbidityIndex}";
+            rr:class roo:charlsonComorbidityIndex;                                                         #new  roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
@@ -554,7 +568,7 @@ map:CharlsonComorbidityIndex a rr:TriplesMap;
 map:weightLoss3months a rr:TriplesMap;
     rr:logicalTable map:basicQuery; 
     rr:subjectMap [
-        rr:template "patient/weightLoss3MonthsBeforeRt/{weightLoss3MonthsBeforeRt}";
+        rr:template "patient/{id}/weightLoss3MonthsBeforeRt/{weightLoss3MonthsBeforeRt}";
         rr:class ncit:C138908; #weightloss over past 3 months
     ];
     rr:predicateObjectMap [

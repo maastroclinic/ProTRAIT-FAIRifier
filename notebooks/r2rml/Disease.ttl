@@ -88,7 +88,7 @@ map:identifier a rr:TriplesMap;
 map:neoplasm a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/neoplasm/{tumourType}";
+            rr:template "patient/{id}/neoplasm/{tumourType}";
             rr:class ncit:C3262; #neoplasm
     ];
     rr:predicateObjectMap [
@@ -272,7 +272,7 @@ map:neoplasm a rr:TriplesMap;
 map:dateOfDiagnosis a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/neoplasm/dateOfDiagnosis/{dateOfDiagnosis}";
+            rr:template "patient/{id}/neoplasm/dateOfDiagnosis/{dateOfDiagnosis}";
             rr:class roo:dateOfDiagnosis;                                                               #new roo predicate?
     ];
     rr:predicateObjectMap [
@@ -286,34 +286,34 @@ map:dateOfDiagnosis a rr:TriplesMap;
 map:TNM_Staging a rr:TriplesMap;
     rr:subjectMap map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/neoplasm/TNMStaging";
+            rr:template "patient/{id}/neoplasm/TNMStaging";
             rr:class ncit:C38027; #stage grouping (TNM stage grouping)                                                     
      ];
     rr:predicateObjectMap [
         rr:predicate roo:P100244; #has_clinical_T_stage
         rr:objectMap [
-            rr:column "patient/neoplasm/TNMStaging/T_stage/{T_stage}"; 
+            rr:column "patient/{id}/neoplasm/TNMStaging/T_stage/{T_stage}"; 
             rr:datatype xsd:string;
         ];
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100242;  #has_clinical_N_stage
         rr:objectMap [
-            rr:column "patient/neoplasm/TNMStaging/N_stage/{N_stage}"; 
+            rr:column "patient/{id}/neoplasm/TNMStaging/N_stage/{N_stage}"; 
             rr:datatype xsd:string;
         ];
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100241;  #has_clinical_M_stage
         rr:objectMap [
-            rr:column "patient/neoplasm/TNMStaging/M_stage/{M_stage}"; 
+            rr:column "patient/{id}/neoplasm/TNMStaging/M_stage/{M_stage}"; 
             rr:datatype xsd:string;
         ];
     ];
     rr:predicateObjectMap [
         rr:predicate roo:has_additional_T_stage;                                                    #new roo predicate
         rr:objectMap [
-            rr:column "patient/neoplasm/TNMStaging/T_stage/{additional_T_stage}"; 
+            rr:column "patient/{id}/neoplasm/TNMStaging/T_stage/{additional_T_stage}"; 
             rr:datatype xsd:string;
         ];
     ];
@@ -350,7 +350,7 @@ map:TNM_Staging a rr:TriplesMap;
 map:tumourBoardReview a rr:TriplesMap;
     rr:logicalTable map:basicQuery; 
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourBoardReview/{tumourBoardReviewDate}";
+        rr:template "patient/{id}/neoplasm/tumourBoardReview/{tumourBoardReviewDate}";
         rr:class ncit:C93304; #tumour board review
     ];
     rr:predicateObjectMap [
@@ -374,7 +374,7 @@ map:tumourBoardReview a rr:TriplesMap;
 map:primaryTumour a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/neoplasm/primarytumour/{primaryTumour}";
+            rr:template "patient/{id}/neoplasm/primarytumour/{primaryTumour}";
             rr:class ncit:C8509; #primary neoplasm
         ];
     rr:predicateObjectMap [
@@ -388,7 +388,7 @@ map:primaryTumour a rr:TriplesMap;
 map:tumourSite a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/neoplasm/tumourSite/{tumourSite}";
+            rr:template "patient/{id}/neoplasm/tumourSite/{tumourSite}";
             rr:class ncit:C3263; #neoplasm by site
         ];
     rr:predicateObjectMap [
@@ -402,20 +402,20 @@ map:tumourSite a rr:TriplesMap;
 map:histology a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/neoplasm/histology";                                       # 2 different tables after histology? 
+            rr:template "patient/{id}/neoplasm/histology";                                       # 2 different tables after histology? 
             rr:class ncit:C16681 #histology
         ];
     rr:predicateObjectMap [
             rr:predicate roo:local_value;
             rr:objectMap [
-                rr:column "patient/neoplasm/histology/{histology}";
+                rr:column "patient/{id}/neoplasm/histology/{histology}";
                 rr:datatype xsd:string;
             ];
     ];
     rr:predicateObjectMap [
             rr:predicate roo:P100228; #has_date
             rr:objectMap [
-                rr:column "patient/neoplasm/histology/{histologyDate}";
+                rr:column "patient/{id}/neoplasm/histology/{histologyDate}";
                 rr:datatype xsd:date;
                 
             ];
@@ -424,7 +424,7 @@ map:histology a rr:TriplesMap;
 map:clinicalStageVersion a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/neoplasm/clinicalStageVersion/{UICCVersion";
+            rr:template "patient/{id}/neoplasm/clinicalStageVersion/{UICCVersion";
             rr:class roo:UICC_version;                                                              #new roo class
     ];
     rr:predicateObjectMap [
@@ -438,7 +438,7 @@ map:clinicalStageVersion a rr:TriplesMap;
 map:pathologicalTStage a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/pathologicalTStage/{pathologicalTstage";
+        rr:template "patient/{id}/neoplasm/pathologicalTStage/{pathologicalTstage";
         rr:class ncit:C25728 ;  #T Category (T Stage)
     ];
      rr:predicateObjectMap [
@@ -452,7 +452,7 @@ map:pathologicalTStage a rr:TriplesMap;
 map:pathologicalNStage a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/pathologicalNStage/{PathologicalNStage";
+        rr:template "patient/{id}/neoplasm/pathologicalNStage/{PathologicalNStage";
         rr:class ncit:C25580 ;  #N Category (N Stage)
     ];
      rr:predicateObjectMap [
@@ -466,7 +466,7 @@ map:pathologicalNStage a rr:TriplesMap;
 map:surgicalMargins a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/surgicalMargins/{surgicalMargins}";
+        rr:template "patient/{id}/neoplasm/surgicalMargins/{surgicalMargins}";
         rr:class  ncit:C41227 ;  #surgical margins
     ];
      rr:predicateObjectMap [
@@ -480,7 +480,7 @@ map:surgicalMargins a rr:TriplesMap;
 map:maximumTumourDiameter a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/maximumTumourDiameter/{maximumTumourDiameter}";
+        rr:template "patient/{id}/neoplasm/maximumTumourDiameter/{maximumTumourDiameter}";
         rr:class  ncit:C96684 ;  #longest diameter
     ];
      rr:predicateObjectMap [
@@ -504,7 +504,7 @@ map:maximumTumourDiameter a rr:TriplesMap;
 map:depthOfInfiltration a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/depthOfInfiltration/{depthOfInfiltration}";
+        rr:template "patient/{id}/neoplasm/depthOfInfiltration/{depthOfInfiltration}";
         rr:class  	ncit:C28491 ;  #cellular infiltration
     ];
      rr:predicateObjectMap [
@@ -529,7 +529,7 @@ map:depthOfInfiltration a rr:TriplesMap;
 map:angioinvasion a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/angioinvasion/{angioinvasion}";
+        rr:template "patient/{id}/neoplasm/angioinvasion/{angioinvasion}";
         rr:class  	ncit:C39589 ;  #angioinvasion
     ];
      rr:predicateObjectMap [
@@ -543,7 +543,7 @@ map:angioinvasion a rr:TriplesMap;
 map:periNeuralGrowth a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/periNeuralGrowth/{periNeuralGrowth}";
+        rr:template "patient/{id}/neoplasm/periNeuralGrowth/{periNeuralGrowth}";
         rr:class  	ncit:C48260 ;  #perineural invasion  
     ];                                                   
      rr:predicateObjectMap [
@@ -557,7 +557,7 @@ map:periNeuralGrowth a rr:TriplesMap;
 map:infiltrativeGrowth a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/infiltrativeGrowth/{infiltrativeGrowth}";
+        rr:template "patient/{id}/neoplasm/infiltrativeGrowth/{infiltrativeGrowth}";
         rr:class  	ncit:C41453 ;  #infiltrative growth pattern                                       
     ];
      rr:predicateObjectMap [
@@ -578,7 +578,7 @@ map:millimetre a rr:TriplesMap;
 map:numberOfLymphNodeMetastases a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/numberOfLymphNodeMetastases/{numberOfLymphNodeMetastases}";
+        rr:template "patient/{id}/neoplasm/numberOfLymphNodeMetastases/{numberOfLymphNodeMetastases}";
         rr:class ncit:C4904;  #Metastatic malignent neoplasm in lymph node                      
     ];
      rr:predicateObjectMap [
@@ -612,7 +612,7 @@ map:numberOfLymphNodeMetastases a rr:TriplesMap;
 map:numberOfLymphNodeMetastasesCheckedAtPathology a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/numberOfLymphNodeMetastases/numberOfLymphNodeMetastasesCheckedAtPathology/{numberOfLymphNodeMetastasesCheckedAtPathology}";
+        rr:template "patient/{id}/neoplasm/numberOfLymphNodeMetastases/numberOfLymphNodeMetastasesCheckedAtPathology/{numberOfLymphNodeMetastasesCheckedAtPathology}";
         rr:class ncit:numberOfLymphNodeMetastasesCheckedAtPathology;                                            # ?no fitting ontology
     ];
      rr:predicateObjectMap [
@@ -626,7 +626,7 @@ map:numberOfLymphNodeMetastasesCheckedAtPathology a rr:TriplesMap;
 map:numberOfLymphNodeMetastasesWithECS a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/numberOfLymphNodeMetastases/numberOfLymphNodeMetastasesWithECS/{numberOfLymphNodeMetastasesWithECS";
+        rr:template "patient/{id}/neoplasm/numberOfLymphNodeMetastases/numberOfLymphNodeMetastasesWithECS/{numberOfLymphNodeMetastasesWithECS";
         rr:class ncit:numberOfLymphNodeMetastasesWithECS;                                                        # ?no fitting ontology
     ];
      rr:predicateObjectMap [
@@ -640,7 +640,7 @@ map:numberOfLymphNodeMetastasesWithECS a rr:TriplesMap;
 map:radiationInducedSideEffects a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/radiationInducedSideEffects";
+        rr:template "patient/{id}/radiationInducedSideEffects";
         rr:class ncit:C2861; #side effect                                                          
     ];
      rr:predicateObjectMap [
@@ -656,7 +656,7 @@ map:radiationInducedSideEffects a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100423  ;  #consistsOf
         rr:objectMap [
-            rr:parentTriplesMap map:weight; #?? weightLoss
+            rr:parentTriplesMap map:weightloss; #?? weightlossLoss
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -734,11 +734,11 @@ map:radiationInducedSideEffects a rr:TriplesMap;
         ];
     ].
 
-map:weight a rr:TriplesMap;
+map:weightloss a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/radiationInducedSideEffects/weight/{weight}";
-        rr:class ncit:C25208; #weight  ncit:C3445 weightloss                                            ???? weightloss
+        rr:template "patient/{id}/radiationInducedSideEffects/weightloss/{weight}";
+        rr:class ncit:C3445; #weightlossloss 
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has value
@@ -761,7 +761,7 @@ map:weight a rr:TriplesMap;
 map:xerostomia a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/radiationInducedSideEffects/xerostomia/{xerostomia}";
+        rr:template "patient/{id}/radiationInducedSideEffects/xerostomia/{xerostomia}";
         rr:class ncit:C26917; #xerostomia 
     ];
      rr:predicateObjectMap [
@@ -775,7 +775,7 @@ map:xerostomia a rr:TriplesMap;
 map:dysphagia a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/radiationInducedSideEffects/dysphagia/{dysphagia}";
+        rr:template "patient/{id}/radiationInducedSideEffects/dysphagia/{dysphagia}";
         rr:class ncit:C2980; #dysphagia 
     ];
      rr:predicateObjectMap [
@@ -789,7 +789,7 @@ map:dysphagia a rr:TriplesMap;
 map:dysphagiaUMCG a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/radiationInducedSideEffects/dysphagiaUMCG/{dysphagiaUMCG}";                                                                    
+        rr:template "patient/{id}/radiationInducedSideEffects/dysphagiaUMCG/{dysphagiaUMCG}";                                                                    
         rr:class ncit:C2980; #dysphagia                                                                #same ncit as before?
     ];
      rr:predicateObjectMap [
@@ -803,7 +803,7 @@ map:dysphagiaUMCG a rr:TriplesMap;
 map:oralMucositis a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/radiationInducedSideEffects/oralMucositis/{oralMucositis}";
+        rr:template "patient/{id}/radiationInducedSideEffects/oralMucositis/{oralMucositis}";
         rr:class ncit:C26887; #stomatitis 
     ];
      rr:predicateObjectMap [
@@ -817,7 +817,7 @@ map:oralMucositis a rr:TriplesMap;
 map:dermatitisRadiation a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/radiationInducedSideEffects/dermatitisRadiation/{dermatitisRadiation}";
+        rr:template "patient/{id}/radiationInducedSideEffects/dermatitisRadiation/{dermatitisRadiation}";
         rr:class ncit:C26887; #dermatitis radiation CTCAE
     ];
      rr:predicateObjectMap [
@@ -831,7 +831,7 @@ map:dermatitisRadiation a rr:TriplesMap;
 map:osteoRadioNecrosis a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/radiationInducedSideEffects/osteoRadioNecrosis/{osteoRadioNecrosis}";
+        rr:template "patient/{id}/radiationInducedSideEffects/osteoRadioNecrosis/{osteoRadioNecrosis}";
         rr:class ncit:C63707; #osteoRadioNecrosis
     ];
      rr:predicateObjectMap [
@@ -845,7 +845,7 @@ map:osteoRadioNecrosis a rr:TriplesMap;
 map:softTissueNecrosis a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-            rr:template "patient/radiationInducedSideEffects/softTissueNecrosis/{softTissueNecrosis}";
+        rr:template "patient/{id}/radiationInducedSideEffects/softTissueNecrosis/{softTissueNecrosis}";
         rr:class ncit:C53841; #soft tissue necrosis CTCAE
     ];
      rr:predicateObjectMap [
@@ -859,14 +859,14 @@ map:softTissueNecrosis a rr:TriplesMap;
 map:kilogram a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/radiationInducedSideEffects/weight/kilogram";
+        rr:template "patient/{id}/radiationInducedSideEffects/weightloss/kilogram";
         rr:class uo:0000009; #kilogram
     ].
 
 map:tumourFollowUp a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp";
         rr:class roo:tumourFollowUp;                                                                   #new roo class     
     ];
      rr:predicateObjectMap [
@@ -910,7 +910,7 @@ map:tumourFollowUp a rr:TriplesMap;
         ];
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100228   ;  #has date
+        rr:predicate roo:P100228;  #has_date
         rr:objectMap [
             rr:parentTriplesMap map:dateOfLastFollowUp;  
             rr:joinCondition [
@@ -933,7 +933,7 @@ map:tumourFollowUp a rr:TriplesMap;
 map:localRecurrence a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/localRecurrence{localRecurrence}";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/localRecurrence{localRecurrence}";
         rr:class ncit:C94796; #Locally Recurrent Malignant Neoplasm 
     ];
      rr:predicateObjectMap [
@@ -957,7 +957,7 @@ map:localRecurrence a rr:TriplesMap;
 map:regionalRecurrence a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/regionalRecurrence/{regionalRecurrence}";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/regionalRecurrence/{regionalRecurrence}";
         rr:class roo:regionalRecurrence;                                                                # new roo class
     ];
      rr:predicateObjectMap [
@@ -981,7 +981,7 @@ map:regionalRecurrence a rr:TriplesMap;
 map:distantMetastasis a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/distantMetastasis/{distantMetastasis}";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/distantMetastasis/{distantMetastasis}";
         rr:class ncit:C18206; #distant metastasis 
     ];
      rr:predicateObjectMap [
@@ -1005,7 +1005,7 @@ map:distantMetastasis a rr:TriplesMap;
 map:newMalignancy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/newMalignancy/{newMalignancy}";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/newMalignancy/{newMalignancy}";
         rr:class ncit:C4968; #secondary malignant neoplasm                                         ??? secondary vs new 
     ];
      rr:predicateObjectMap [
@@ -1029,7 +1029,7 @@ map:newMalignancy a rr:TriplesMap;
 map:dateOfLastFollowUp a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/dateOfLastFollowUp";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/dateOfLastFollowUp";
         rr:class ncit:C156916; #date of last contact
     ];
      rr:predicateObjectMap [
@@ -1053,7 +1053,7 @@ map:dateOfLastFollowUp a rr:TriplesMap;
 map:dateOfLocalRecurrence a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/localRecurrence/dateOfLocalRecurrence/{dateOfLocalRecurrence}";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/localRecurrence/dateOfLocalRecurrence/{dateOfLocalRecurrence}";
         rr:class ncit:C156855; #date of new tumour event
     ];
      rr:predicateObjectMap [
@@ -1067,7 +1067,7 @@ map:dateOfLocalRecurrence a rr:TriplesMap;
 map:dateOfRegionalRecurrence a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/regionalRecurrence/dateOfRegionalRecurrence{dateOfRegionalRecurrence}";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/regionalRecurrence/dateOfRegionalRecurrence{dateOfRegionalRecurrence}";
         rr:class ncit:C156855; #date of new tumour event                                           
     ];
      rr:predicateObjectMap [
@@ -1081,7 +1081,7 @@ map:dateOfRegionalRecurrence a rr:TriplesMap;
 map:dateOfDistantMetastasis a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/distantMetastasis/dateOfDistantMetastasis/{dateOfDistantMetastasis}";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/distantMetastasis/dateOfDistantMetastasis/{dateOfDistantMetastasis}";
         rr:class ncit:C156855; #date of new tumour event                                              
     ];
      rr:predicateObjectMap [
@@ -1095,7 +1095,7 @@ map:dateOfDistantMetastasis a rr:TriplesMap;
 map:locationOfNewMalignancy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/newMalignancy/locationOfNewMalignancy/{locationOfNewMalignancy}";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/newMalignancy/locationOfNewMalignancy/{locationOfNewMalignancy}";
         rr:class roo:locationOfNewMalignancy;                                                             #new roo class                                              ??? same ncit
     ];
      rr:predicateObjectMap [
@@ -1109,7 +1109,7 @@ map:locationOfNewMalignancy a rr:TriplesMap;
 map:statusAtLastFollowUp a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/neoplasm/tumourFollowUp/statusAtLastFollowUp/{statusAtLastFollowUp}";
+        rr:template "patient/{id}/neoplasm/tumourFollowUp/statusAtLastFollowUp/{statusAtLastFollowUp}";
         rr:class ncit:C16033; #follow up                                                                     ??? no fitting ontology
     ];
      rr:predicateObjectMap [
@@ -1123,6 +1123,6 @@ map:statusAtLastFollowUp a rr:TriplesMap;
 map:radiotherapy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/radiotherapy";
+            rr:template "patient/{id}/radiotherapy";
             rr:class ncit:C15313;
     ].
