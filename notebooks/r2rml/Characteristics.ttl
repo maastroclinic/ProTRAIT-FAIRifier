@@ -54,7 +54,7 @@ map:patient a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:P100039; #is_treated_in
         rr:objectMap [
-            rr:parentTriplesMap map:treatingClinic;
+            rr:parentTriplesMap map:treatingCentre;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -64,7 +64,7 @@ map:patient a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:referred_by;                                                               #new roo predicate
         rr:objectMap [
-            rr:parentTriplesMap map:referringClinic;
+            rr:parentTriplesMap map:referringCentre;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -220,41 +220,40 @@ map:identifier a rr:TriplesMap;
         ];
     ].
 
-map:treatingClinic a rr:TriplesMap;
+map:treatingCentre a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
         rr:subjectMap [
-            rr:template "patient/{id}/treatingClinic/{treatingClinic}";
+            rr:template "patient/{id}/treatingCentre/{treatingCentre}";
             rr:class ncit:C19326;  #clinics and hospitals
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "treatingClinic"; 
+            rr:column "treatingCentre"; 
             rr:datatype xsd:string;
         ];
     ];
-    rr:predicateObjectMap [                                                                          
-        rr:predicate roo:has_contact_person;
+    rr:predicateObjectMap [
+        rr:predicate roo:has_contact_person;                                                    # new roo predicate
         rr:objectMap [
-            rr:column "patient/{id}/treatingClinic/contactPersonForParticleCentre/{contactPersonForParticleCentre}";  #correct uri or seperate subject?
-            rr:datatype xsd:string;
+            rr:parentTriplesMap map:contactPersonForParticleCentre;
             rr:joinCondition [
-                rr:child "id";                                                                      #join condition neccessary?
+                rr:child "id";
                 rr:parent "id";
             ];
-        ];   
+        ];
     ].
 
-map:referringClinic a rr:TriplesMap;
+map:referringCentre a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
         rr:subjectMap [
-            rr:template "patient/{id}/referringClinic/{referringClinic}";
+            rr:template "patient/{id}/referringCentre/{referringCentre}";
             rr:class ncit:C19326;   #clinics and hospitals 
         ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has_value
         rr:objectMap [
-            rr:column "referringClinic"; 
+            rr:column "referringCentre"; 
             rr:datatype xsd:string;
         ];
     ].
@@ -275,7 +274,7 @@ map:registration a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:at_hospital;                                                               #new roo predicate
         rr:objectMap [
-            rr:parentTriplesMap map:treatingClinic;                                                 #join condition neccessary?
+            rr:parentTriplesMap map:treatingCentre;                                                 #join condition neccessary?
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -554,13 +553,13 @@ map:comorbidity a rr:TriplesMap;
 map:charlsonComorbidityIndex a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/{id}/comorbidit/CharlsonComorbidityIndex/{CharlsonComorbidityIndex}";
+            rr:template "patient/{id}/comorbidit/charlsonComorbidityIndex/{charlsonComorbidityIndex}";
             rr:class roo:charlsonComorbidityIndex;                                                         #new  roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "CharlsonComorbidityIndex"; 
+            rr:column "charlsonComorbidityIndex"; 
             rr:datatype xsd:string;
         ];
     ].
@@ -568,13 +567,28 @@ map:charlsonComorbidityIndex a rr:TriplesMap;
 map:weightLoss3months a rr:TriplesMap;
     rr:logicalTable map:basicQuery; 
     rr:subjectMap [
-        rr:template "patient/{id}/weightLoss3MonthsBeforeRt/{weightLoss3MonthsBeforeRt}";
+        rr:template "patient/{id}/weightLoss3MonthsBeforeRt/{weightLoss3MonthsBeforeRT}";
         rr:class ncit:C138908; #weightloss over past 3 months
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "weightLoss3MonthsBeforeRt"; 
+            rr:column "weightLoss3MonthsBeforeRT"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+
+map:contactPersonForParticleCentre a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+        rr:subjectMap [
+            rr:template "patient/{id}/treatingCentre/contactPersonForParticleCentre/{contactPersonForParticleCentre}";
+            rr:class ncit:C25461;   #contact person 
+        ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value
+        rr:objectMap [
+            rr:column "contactPersonForParticleCentre"; 
             rr:datatype xsd:string;
         ];
     ].
