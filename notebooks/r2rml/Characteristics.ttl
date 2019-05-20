@@ -15,24 +15,21 @@
 @prefix uo: <http://purl.obolibrary.org/obo/UO_>.
 @prefix time: <http://www.w3.org/2006/time#>.
 
-
 map:basicQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT PatientID as id,  ROUND(CAST(Age as decimal),0) as age, Gender as sex, Clinical_T_Stage as clinical_t, Clinical_N_Stage as clinical_n,
-SurvivalTime as survival_time,DeadStatus as vital_status, 
-(CASE WHEN (CAST(SurvivalTime as decimal)>730) THEN 1 WHEN (CAST(SurvivalTime as decimal)<=730 AND DeadStatus='1') THEN 0 ELSE NULL END) AS survival_2y 
+    rr:SqlQuery """SELECT id as id, treatingCentre as treatingCentre, contactPersonForParticleCentre as contactPersonForParticleCentre, referringCentre as referringCentre, registrationDate as registrationDate, sex as sex, age as age, birthYear as birthYear, educationLevel as educationLevel, relationshipStatus as relationshipStatus, smokingStatus as smokingStatus, packYears as packYears, timeStoppedSmoking as timeStoppedSmoking, alcoholUseHistory as alcoholUseHistory, bodyWeight as bodyWeight, bodyHeight as bodyHeight, charlsonComorbidityIndex as charlsonComorbidityIndex, weightLoss3MonthsBeforeRT as weightLoss3MonthsBeforeRT
 FROM PBDWHackathon2018;""";
-    rdfs:label """Every row in this table should correspond to a unique patient.<br/>
-The target variables have the following name and specific meaning:
-The table should contain a unique patient identifier, age, sex, t-stage, n-stage, survival time in days and vital status at this time.<br/>
-<ul>
-<li>id: unique identifier of the patient</li>
-<li>age:  patient's age at diagnosis</li>
-<li>sex:  patient's biological sex</li>
-<li>clinical_t: clinical <strong>tumour</strong> stage</li>
-<li>clinical_n: clinical <strong>nodal</strong> stage</li>
-<li>survival_2y: two year survival </li>
-</ul>""";
-    skos:definition "id,age,sex,clinical_t,clinical_n,survival_2y".
+#     rdfs:label """Every row in this table should correspond to a unique patient.<br/>
+# The target variables have the following name and specific meaning:
+# The table should contain a unique patient identifier, age, sex, t-stage, n-stage, survival time in days and vital status at this time.<br/>
+# <ul>
+# <li>id: unique identifier of the patient</li>
+# <li>age:  patient's age at diagnosis</li>
+# <li>sex:  patient's biological sex</li>
+# <li>clinical_t: clinical <strong>tumor</strong> stage</li>
+# <li>clinical_n: clinical <strong>nodal</strong> stage</li>
+# <li>survival_2y: two year survival </li>
+# </ul>""";
+    skos:definition "id,treatingCentre,contactPersonForParticleCentre,referringCentre,registrationDate,sex,age,birthYear,educationLevel,relationshipStatus,smokingStatus,packYears,timeStoppedSmoking,alcoholUseHistory,bodyWeight,bodyHeight,charlsonComorbidityIndex,weightLoss3MonthsBeforeRT".
 
 
 map:patient a rr:TriplesMap;
@@ -151,16 +148,16 @@ map:patient a rr:TriplesMap;
             ];
         ];
     ];
-    rr:predicateObjectMap [
-        rr:predicate roo:P100255; #has_comorbidity
-        rr:objectMap [
-            rr:parentTriplesMap map:comorbidity;
-            rr:joinCondition [
-                rr:child "id";
-                rr:parent "id";
-            ];
-        ];
-    ];
+    # rr:predicateObjectMap [                                                               #Why is this triple created?
+    #     rr:predicate roo:P100255; #has_comorbidity
+    #     rr:objectMap [
+    #         rr:parentTriplesMap map:comorbidity;
+    #         rr:joinCondition [
+    #             rr:child "id";
+    #             rr:parent "id";
+    #         ];
+    #     ];
+    # ];
     rr:predicateObjectMap [
         rr:predicate roo:P100248; #has_body_height
         rr:objectMap [
@@ -209,7 +206,7 @@ map:biologicalSex a rr:TriplesMap;
 map:identifier a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
         rr:subjectMap [
-            rr:template "patient/identifier/{id}";
+            rr:template "patient/{id}";
             rr:class ncit:C25364; #identifier
     ];
     rr:predicateObjectMap [
@@ -536,24 +533,24 @@ map:centimeter a rr:TriplesMap;
             rr:class uo:0000015; #centimeter
         ].   
 
-map:comorbidity a rr:TriplesMap;
-    rr:logicalTable map:basicQuery;    
-    rr:subjectMap [
-            rr:template "patient/{id}/comorbidityIndex/{comorbidity}";
-            rr:class ncit:C2991; #disease or disorder
-    ];
-    rr:predicateObjectMap [
-        rr:predicate roo:local_value;
-        rr:objectMap [
-            rr:column "comorbidity"; 
-            rr:datatype xsd:string;
-        ];
-    ].
+# map:comorbidity a rr:TriplesMap;
+#     rr:logicalTable map:basicQuery;    
+#     rr:subjectMap [
+#             rr:template "patient/{id}/comorbidityIndex/{comorbidity}";
+#             rr:class ncit:C2991; #disease or disorder
+#     ];
+#     rr:predicateObjectMap [
+#         rr:predicate roo:local_value;
+#         rr:objectMap [
+#             rr:column "comorbidity"; 
+#             rr:datatype xsd:string;
+#         ];
+#     ].
 
 map:charlsonComorbidityIndex a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/{id}/comorbidit/charlsonComorbidityIndex/{charlsonComorbidityIndex}";
+            rr:template "patient/{id}/comorbidity/charlsonComorbidityIndex/{charlsonComorbidityIndex}";
             rr:class roo:charlsonComorbidityIndex;                                                         #new  roo class
     ];
     rr:predicateObjectMap [
