@@ -16,20 +16,33 @@
 @prefix time: <http://www.w3.org/2006/time#>.
 
 map:basicQuery a rr:LogicalTable;
-    rr:SqlQuery """SELECT id as id, treatingCentre as treatingCentre, contactPersonForParticleCentre as contactPersonForParticleCentre, referringCentre as referringCentre, registrationDate as registrationDate, sex as sex, age as age, birthYear as birthYear, educationLevel as educationLevel, relationshipStatus as relationshipStatus, smokingStatus as smokingStatus, packYears as packYears, timeStoppedSmoking as timeStoppedSmoking, alcoholUseHistory as alcoholUseHistory, bodyWeight as bodyWeight, bodyHeight as bodyHeight, charlsonComorbidityIndex as charlsonComorbidityIndex, weightLoss3MonthsBeforeRT as weightLoss3MonthsBeforeRT
+    rr:sqlQuery """SELECT id, treatingcentre, contactpersonforparticlecentre, referringcentre, registrationdate, sex, age, birthyear, educationlevel, relationshipstatus, smokingstatus, packyears, timestoppedsmoking, alcoholusehistory, bodyweight, bodyheight, charlsoncomorbidityindex, weightloss3monthsbeforert
 FROM PBDWHackathon2018;""";
+    rdfs:label """Every row in this table should correspond to a unique patient.<br/>
+The target variables have the following name and specific meaning:
+The table should contain a unique patient identifier,treatingCentre,contactPersonForParticleCentre,referringCentre,registrationDate,sex,age,birthYear,educationLevel,relationshipStatus,smokingStatus,packYears,timeStoppedSmoking,alcoholUseHistory,bodyWeight,bodyHeight,charlsonComorbidityIndex,weightLoss3MonthsBeforeRT.<br/>
+<ul>
+<li>id: unique identifier of the patient</li>
+<li>age:  patient's age at diagnosis</li>
+<li>sex:  patient's biological sex</li>
+</ul>""";
+     skos:definition "id,treatingcentre,contactpersonforparticlecentre,referringcentre,registrationdate,sex,age,birthyear,educationlevel,relationshipstatus,smokingstatus,packyears,timestoppedsmoking,alcoholusehistory,bodyweight,bodyheight,charlsoncomorbidityindex,weightloss3monthsbeforert".
+# no caps in skos definition!
+
+
+
+# map:basicQuery a rr:LogicalTable;
+#     rr:sqlQuery """SELECT id as id, treatingCentre as treatingCentre, contactPersonForParticleCentre as contactPersonForParticleCentre, referringCentre as referringCentre, registrationDate as registrationDate, sex as sex, age as age, birthYear as birthYear, educationLevel as educationLevel, relationshipStatus as relationshipStatus, smokingStatus as smokingStatus, packYears as packYears, timeStoppedSmoking as timeStoppedSmoking, alcoholUseHistory as alcoholUseHistory, bodyWeight as bodyWeight, bodyHeight as bodyHeight, charlsonComorbidityIndex as charlsonComorbidityIndex, weightLoss3MonthsBeforeRT as weightLoss3MonthsBeforeRT
+# FROM PBDWHackathon2018;""";
 #     rdfs:label """Every row in this table should correspond to a unique patient.<br/>
 # The target variables have the following name and specific meaning:
-# The table should contain a unique patient identifier, age, sex, t-stage, n-stage, survival time in days and vital status at this time.<br/>
+# The table should contain a unique patient identifier,treatingCentre,contactPersonForParticleCentre,referringCentre,registrationDate,sex,age,birthYear,educationLevel,relationshipStatus,smokingStatus,packYears,timeStoppedSmoking,alcoholUseHistory,bodyWeight,bodyHeight,charlsonComorbidityIndex,weightLoss3MonthsBeforeRT.<br/>
 # <ul>
 # <li>id: unique identifier of the patient</li>
 # <li>age:  patient's age at diagnosis</li>
 # <li>sex:  patient's biological sex</li>
-# <li>clinical_t: clinical <strong>tumor</strong> stage</li>
-# <li>clinical_n: clinical <strong>nodal</strong> stage</li>
-# <li>survival_2y: two year survival </li>
 # </ul>""";
-    skos:definition "id,treatingCentre,contactPersonForParticleCentre,referringCentre,registrationDate,sex,age,birthYear,educationLevel,relationshipStatus,smokingStatus,packYears,timeStoppedSmoking,alcoholUseHistory,bodyWeight,bodyHeight,charlsonComorbidityIndex,weightLoss3MonthsBeforeRT".
+#     skos:definition "id,treatingcentre,contactpersonforparticlecentre,referringCentre,registrationDate,sex,age,birthYear,educationLevel,relationshipStatus,smokingStatus,packYears,timeStoppedSmoking,alcoholUseHistory,bodyWeight,bodyHeight,charlsonComorbidityIndex,weightLoss3MonthsBeforeRT".
 
 
 map:patient a rr:TriplesMap;
