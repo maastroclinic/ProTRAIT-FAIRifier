@@ -224,6 +224,16 @@ map:neoplasm a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100212; #has_property                                        
         rr:objectMap [
+             rr:parentTriplesMap map:lymphaticInvasion; 
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                  
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                        
+        rr:objectMap [
              rr:parentTriplesMap map:periNeuralGrowth;  
              rr:joinCondition [
                 rr:child "id";
@@ -255,6 +265,16 @@ map:neoplasm a rr:TriplesMap;
         rr:predicate roo:P100212; #has_property
         rr:objectMap [
             rr:parentTriplesMap map:numberOfLymphNodeMetastases; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property
+        rr:objectMap [
+            rr:parentTriplesMap map:laterality; 
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -536,6 +556,21 @@ map:angioinvasion a rr:TriplesMap;
         rr:predicate roo:P100042;  #has value
         rr:objectMap [
             rr:column "angioinvasion"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+
+
+map:lymphaticInvasion a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/lymphaticInvasion/{lymphaticInvasion}";
+        rr:class  	ncit:C47850 ;  #lymphatic invasion
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has value
+        rr:objectMap [
+            rr:column "lymphaticInvasion"; 
             rr:datatype xsd:boolean; 
         ];
     ].
@@ -1125,4 +1160,19 @@ map:radiotherapy a rr:TriplesMap;
     rr:subjectMap [
             rr:template "patient/{id}/radiotherapy";
             rr:class ncit:C15313;
+    ].
+
+
+map:laterality a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/laterality/{laterality}";
+            rr:class ncit:C8509; #primary neoplasm
+        ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "laterality";
+                rr:datatype xsd:boulean;
+            ];
     ].
