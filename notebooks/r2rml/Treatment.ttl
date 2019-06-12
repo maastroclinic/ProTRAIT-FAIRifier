@@ -1985,6 +1985,26 @@ map:targetedTherapy a rr:TriplesMap;
                 rr:parent "id";
             ];
         ];
+    ];   
+     rr:predicateObjectMap [
+        rr:predicate roo:has_targeted_therapy_start_date ;                                                   #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:startDateOfTargetedTherapy; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];   
+     rr:predicateObjectMap [
+        rr:predicate roo:has_targeted_therapy_end_date ;                                                   #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:endDateOfTargetedTherapy; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
     ].
     
 map:hormoneTherapy a rr:TriplesMap;
@@ -2012,6 +2032,36 @@ map:hormoneTherapy a rr:TriplesMap;
                 rr:parent "id";
             ];
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_hormone_therapy_status;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:hormoneTherapyStatus;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];   
+     rr:predicateObjectMap [
+        rr:predicate roo:has_hormone_therapy_start_date ;  #has RT start date
+        rr:objectMap [
+            rr:parentTriplesMap map:startDateOfHormoneTherapy; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_hormone_therapy_duration; #has RT end date
+        rr:objectMap [
+            rr:parentTriplesMap map:plannedDurationOfHormoneTherapy; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
     ].
 
 map:chemotherapyGoal a rr:TriplesMap;
@@ -2031,7 +2081,7 @@ map:chemotherapyGoal a rr:TriplesMap;
 map:targetedTherapyGoal a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/{id}/chemotherapy/targetedTherapyGoal/{targetedTherapyGoal}";
+            rr:template "patient/{id}/targetedTherapy/targetedTherapyGoal/{targetedTherapyGoal}";
             rr:class roo:targetedTherapyGoal;                                                        # new roo class
     ];
     rr:predicateObjectMap [
@@ -2042,10 +2092,39 @@ map:targetedTherapyGoal a rr:TriplesMap;
         ];
     ].
 
+map:startDateOfTargetedTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/targetedTherapy/startDateOfTargetedTherapy/{startDateOfTargetedTherapy}";
+            rr:class roo:startDateOfTargetedTherapy;                                                        # new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value; 
+        rr:objectMap [
+            rr:column "startDateOfTargetedTherapy"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:endDateOfTargetedTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/targetedTherapy/endDateOfTargetedTherapy/{endDateOfTargetedTherapy}";
+            rr:class roo:endDateOfTargetedTherapy;                                                        # new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value; 
+        rr:objectMap [
+            rr:column "endDateOfTargetedTherapy"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+
 map:immunotherapyGoal a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/{id}/chemotherapy/immunotherapyGoal/{immunotherapyGoal}";
+            rr:template "patient/{id}/immunoTherapy/immunotherapyGoal/{immunotherapyGoal}";
             rr:class roo:immunotherapyGoal;                                                        # new roo class
     ];
     rr:predicateObjectMap [
@@ -2067,6 +2146,48 @@ map:hormoneTherapyGoal a rr:TriplesMap;
         rr:objectMap [
             rr:column "hormoneTherapyGoal"; 
             rr:datatype xsd:string;
+        ];
+    ].
+
+map:hormoneTherapyStatus a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/chemotherapy/hormoneTherapyStatus/{hormoneTherapyStatus}";
+            rr:class roo:hormoneTherapyStatus;                                                        # new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value; 
+        rr:objectMap [
+            rr:column "hormoneTherapyStatus"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:startDateOfHormoneTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/chemotherapy/startDateOfHormoneTherapy/{startDateOfHormoneTherapy}";
+            rr:class roo:startDateOfHormoneTherapy;                                                                # new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_HT_start_date;                                                            # new roo class
+        rr:objectMap [
+            rr:column "startDateOfHormoneTherapy"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:plannedDurationOfHormoneTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/chemotherapy/plannedDurationOfHormoneTherapy/{plannedDurationOfHormoneTherapy}";
+            rr:class roo:plannedDurationOfHormoneTherapy;                                                                # new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100261;# has_duration
+        rr:objectMap [
+            rr:column "plannedDurationOfHormoneTherapy"; 
+            rr:datatype xsd:date;
         ];
     ].
 

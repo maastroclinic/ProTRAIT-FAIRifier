@@ -126,6 +126,16 @@ map:patient a rr:TriplesMap;
                 rr:parent "id";
             ];
         ];
+    ];    
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; # has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:chemotherapy;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
     ].
 
 #to characteristics
@@ -1478,7 +1488,7 @@ map:radiotherapy a rr:TriplesMap;
     rr:predicateObjectMap [
         rr:predicate roo:has_target; #                                                            new roo predicate  
         rr:objectMap [
-            rr:parentTriplesMap map:interPecoralNodesTarget;
+            rr:parentTriplesMap map:interPectoralNodesTarget;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1493,5 +1503,360 @@ map:radiotherapy a rr:TriplesMap;
                 rr:child "id";
                 rr:parent "id";
             ];
+        ];
+    ].
+
+map:breastTarget  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/breastTarget/{breastTarget}";
+        rr:class ncit:C12971;  #breast
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:objectMap [
+            rr:column "breastTarget"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:chestWallTarget  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/chestWallTarget/{chestWallTarget}";
+        rr:class ncit:C62484;  #chest wall
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:objectMap [
+            rr:column "chestWallTarget"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:level1and2Target  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/level1and2Target/{level1and2Target}";
+        rr:class roo:level1and2;                                                                        #rew roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:objectMap [
+            rr:column "level1and2Target"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:level3and4Target  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/level3and4Target/{level3and4Target}";
+        rr:class roo:level3and4;                                                                        #rew roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:objectMap [
+            rr:column "level3and4Target"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:interPectoralNodesTarget  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/interPectoralNodesTarget/{interPectoralNodesTarget}";
+        rr:class ncit:ncit:C120322;  #pecotral lymph node                                               #pectoral lymph node = interpectoral lymph nodecorrect?
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:objectMap [
+            rr:column "interPectoralNodesTarget"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:interMammaryNodesTarget  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/interMammaryNodesTarget/{interMammaryNodesTarget}";
+        rr:class ncit:C32853;  #internal mammary lymph node
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:objectMap [
+            rr:column "interMammaryNodesTarget"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:chemotherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/chemotherapy";
+        rr:class ncit:C15632; #chemotherapy
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:fECOrCEF;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:aC;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:cMF;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:docetaxal;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:paclitaxel;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:fECOrCEF  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/chemotherapy/fECOrCEF/{fECOrCEF}";
+        rr:class ncit:C9595;  #FEC Regimen
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  # has_value                        
+        rr:objectMap [
+            rr:column "fECOrCEF"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:aC  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/chemotherapy/aC/{aC}";
+        rr:class ncit:C63415;  #AC Regimen
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "aC"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:cMF  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/chemotherapy/cMF/{cMF}";
+        rr:class ncit:C9874;  #CMF Regimen
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "cMF"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:docetaxal  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/chemotherapy/docetaxal/{docetaxal}";
+        rr:class ncit:C1526;  #docetaxel
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "docetaxal"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+
+map:paclitaxel  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/chemotherapy/paclitaxel/{paclitaxel}";
+        rr:class ncit:C1411;  #paclitaxel
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "paclitaxel"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+    
+map:hormoneTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/hormoneTherapy";
+            rr:class ncit:C15445; #hormone therapy
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:tamoxifen;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:aromataseInhibitor;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:otherHormoneTherapy;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:tamoxifen  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/hormoneTherapy/tamoxifen/{tamoxifen}";
+        rr:class ncit:C62078;  #tamoxifen
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "tamoxifen"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+    
+map:aromataseInhibitor  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/hormoneTherapy/aromataseInhibitor/{aromataseInhibitor}";
+        rr:class ncit:C1740;  #Aromatase Inhibitor
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "aromataseInhibitor"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+     
+map:otherHormoneTherapy  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/hormoneTherapy/otherHormoneTherapy/{otherHormoneTherapy}";
+        rr:class ncit:C147908;  #Hormone Therapy Agent
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "otherHormoneTherapy"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+    
+map:targetedTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/targetedTherapy";
+            rr:class ncit:C93352; #targeted therapy
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:trastuzumab;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:pertuzumab;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:otherTargetedTherapy;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+     
+map:trastuzumab  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/targetedTherapy/trastuzumab/{trastuzumab}";
+        rr:class ncit:C1647;  #Trastuzumab
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "Trastuzumab"; 
+            rr:datatype xsd:boulean; 
+        ];
+    ].
+     
+map:pertuzumab  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/targetedTherapy/pertuzumab/{pertuzumab}";
+        rr:class ncit:C38692;  #pertuzumab
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "pertuzumab"; 
+            rr:datatype xsd:boulean; 
         ];
     ].

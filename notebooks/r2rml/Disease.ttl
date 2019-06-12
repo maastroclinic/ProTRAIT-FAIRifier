@@ -691,7 +691,7 @@ map:radiationInducedSideEffects a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100423  ;  #consistsOf
         rr:objectMap [
-            rr:parentTriplesMap map:weightloss; #?? weightlossLoss
+            rr:parentTriplesMap map:weightloss; 
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -767,7 +767,18 @@ map:radiationInducedSideEffects a rr:TriplesMap;
                 rr:parent "id";
             ];                                                      
         ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:chestPain;   
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                      
+        ];
     ].
+
 
 map:weightloss a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
@@ -878,6 +889,20 @@ map:osteoRadioNecrosis a rr:TriplesMap;
     ].
 
 map:softTissueNecrosis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/softTissueNecrosis/{softTissueNecrosis}";
+        rr:class ncit:C53841; #soft tissue necrosis CTCAE
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "softTissueNecrosis"; 
+            rr:datatype xsd:integer;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:chestPain a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/radiationInducedSideEffects/softTissueNecrosis/{softTissueNecrosis}";
