@@ -21,6 +21,16 @@ map:patient a rr:TriplesMap;
         rr:objectMap [
             rr:parentTriplesMap map:ebvStatus;
         ];    
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_reported;                                                             # new roo predicate                                                                                           # reports?
+        rr:objectMap [
+            rr:parentTriplesMap map:patientReportedOutcomeMeasures;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
     ].
 
 map:neoplasm a rr:TriplesMap;
@@ -130,3 +140,19 @@ map:ebvStatus a rr:TriplesMap;
             ];
     ].
 
+map:patientReportedOutcomeMeasures a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/patientReportedOutcomeMeasures";
+        rr:class roo:patientReportedOutcomeMeasures;                              #new roo class                                                        
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:EORTCQLQ_HAndN35; #no "&" possible  
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ].
