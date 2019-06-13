@@ -1797,3 +1797,115 @@ map:cardiacArrest a rr:TriplesMap;
             rr:datatype xsd:date;
         ];
     ].
+
+map:cardiacDeath a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/comorbidity/cardiacDeath/{cardiacDeath}";
+            rr:class ncit:C54196; #cardiac death
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100250 ;# has_date_of_death
+        rr:objectMap [
+            rr:column "cardiacDeath"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:myocardialInfarction a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/comorbidity/myocardialInfarction/{myocardialInfarction}";
+            rr:class ncit:C27996; #myocardial infarction
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_date_of_first_occurence;                                           # new roo predicate
+        rr:objectMap [
+            rr:column "myocardialInfarction"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:conductionDisorder a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/comorbidity/conductionDisorder/{conductionDisorder}";
+            rr:class ncit:C78245; #cardiac conduction disorder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_date_of_first_occurence;                                           # new roo predicate
+        rr:objectMap [
+            rr:column "conductionDisorder"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:arrhythmia a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/comorbidity/arrhythmia/{arrhythmia}";
+            rr:class ncit:C2881; #arrhythmia
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_date_of_first_occurence;                                           # new roo predicate
+        rr:objectMap [
+            rr:column "arrhythmia"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:heartFailure a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/comorbidity/heartFailure/{heartFailure}";
+            rr:class ncit:C50577; #heart failure
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_date_of_first_occurence;                                           # new roo predicate
+        rr:objectMap [
+            rr:column "heartFailure"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:cardiomyopathy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/comorbidity/cardiomyopathy/{cardiomyopathy}";
+            rr:class ncit:C34830; #cardiomyopathy
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_date_of_first_occurence;                                           # new roo predicate
+        rr:objectMap [
+            rr:column "cardiomyopathy"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:cardiacValveDisorder a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/comorbidity/cardiacValveDisorder/{cardiacValveDisorder}";
+            rr:class roo:cardiacValveDisorder;                                                      #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_date_of_first_occurence;                                           # new roo predicate
+        rr:objectMap [
+            rr:column "cardiacValveDisorder"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:hypothereoidism a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/comorbidity/hypothereoidism/{hypothereoidism}";
+            rr:class ncit:C26800; #hypothereoidism
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_date_of_first_occurence;                                           # new roo predicate
+        rr:objectMap [
+            rr:column "hypothereoidism"; 
+            rr:datatype xsd:date;
+        ];
+    ].

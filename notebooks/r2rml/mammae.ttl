@@ -1907,3 +1907,47 @@ map:patientReportedOutcomeMeasures a rr:TriplesMap;
             ];                                                      
         ];
     ].
+     
+map:EORTCQLQ_BR23  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/patientReportedOutcomeMeasures/EORTCQLQ_BR23/{EORTCQLQ_BR23}";
+        rr:class ncit:C148236;  #Quality of Life Questionnaire BR-23
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "EORTCQLQ_BR23"; 
+            rr:datatype xsd:string; 
+        ];
+    ].
+     
+map:sneeuwQuestionnaire  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/patientReportedOutcomeMeasures/sneeuwQuestionnaire/{sneeuwQuestionnaire}";
+        rr:class roo:sneeuwQuestionnaire;                                                                                   #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "sneeuwQuestionnaire"; 
+            rr:datatype xsd:string; 
+        ];
+    ].
+     
+map:cardiovascularRiskQuestionnaire  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/patientReportedOutcomeMeasures/cardiovascularRiskQuestionnaire/{cardiovascularRiskQuestionnaire}";
+        rr:class roo:cardiovascularRiskQuestionnaire;                                                                     #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value                         
+        rr:objectMap [
+            rr:column "cardiovascularRiskQuestionnaire"; 
+            rr:datatype xsd:string; 
+        ];
+    ].
+
+
