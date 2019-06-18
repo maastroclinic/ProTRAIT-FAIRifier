@@ -318,39 +318,52 @@ map:TNM_Staging a rr:TriplesMap;
     rr:subjectMap [
             rr:template "patient/{id}/neoplasm/TNMStaging";
             rr:class ncit:C38027; #stage grouping (TNM stage grouping)                                                     
-     ];
+    ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100244; #has_clinical_T_stage
+        rr:predicate roo:P100244; #has_clinical_T_stage             
         rr:objectMap [
-            rr:column "patient/{id}/neoplasm/TNMStaging/T_stage/{T_stage}"; 
-            rr:datatype xsd:string;
+            rr:parentTriplesMap map:clinicalTStage;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100242;  #has_clinical_N_stage
+        rr:predicate roo:P100242;  #has_clinical_N_stage           
         rr:objectMap [
-            rr:column "patient/{id}/neoplasm/TNMStaging/N_stage/{N_stage}"; 
-            rr:datatype xsd:string;
+            rr:parentTriplesMap map:clinicalNStage;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100241;  #has_clinical_M_stage
+        rr:predicate roo:P100241;  #has_clinical_M_stage 
         rr:objectMap [
-            rr:column "patient/{id}/neoplasm/TNMStaging/M_stage/{M_stage}"; 
-            rr:datatype xsd:string;
+            rr:parentTriplesMap map:clinicalMStage;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_additional_T_stage;                                                    #new roo predicate
+        rr:predicate roo:has_additional_T_stage;                                                    #new roo predicate 
         rr:objectMap [
-            rr:column "patient/{id}/neoplasm/TNMStaging/T_stage/{additional_T_stage}"; 
-            rr:datatype xsd:string;
+            rr:parentTriplesMap map:additionalTStage;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
         ];
     ];
     rr:predicateObjectMap [
         rr:predicate roo:has_version;                                                               #new roo predicate
         rr:objectMap [
-            rr:parentTriplesMap map:clinicalStageVersion;rr:joinCondition [
+            rr:parentTriplesMap map:clinicalStageVersion;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];
@@ -377,6 +390,62 @@ map:TNM_Staging a rr:TriplesMap;
         ];
     ].
 
+map:clinicalTStage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/TNMStaging/clinicalTStage/{clinicalTStage}";
+        rr:class roo:clinicalTStage;                                                                #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "clinicalTStage"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:clinicalNStage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/TNMStaging/clinicalNStage/{clinicalNStage}";
+        rr:class roo:clinicalNStage;                                                                #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "clinicalNStage"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+ 
+map:clinicalMStage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/TNMStaging/clinicalMStage/{clinicalMStage}";
+        rr:class roo:clinicalMStage;                                                                #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "clinicalMStage"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+ 
+map:additionalTStage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery; 
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/TNMStaging/additionalTStage/{additionalTStage}";
+        rr:class roo:additionalTStage;                                                                #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "additionalTStage"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+    
 map:tumourBoardReview a rr:TriplesMap;
     rr:logicalTable map:basicQuery; 
     rr:subjectMap [
@@ -461,7 +530,7 @@ map:clinicalStageVersion a rr:TriplesMap;
             rr:predicate roo:local_value;
             rr:objectMap [
                 rr:column "UICCVersion";
-                rr:datatype xsd:integer;
+                rr:datatype xsd:string;
             ];
     ].
 
@@ -1407,7 +1476,7 @@ map:comorbidity a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/comorbidity";
-        rr:class roo:ncit:C16457;  #comorbidity     
+        rr:class ncit:C16457;  #comorbidity     
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100423;  #consistsOf
@@ -1417,16 +1486,6 @@ map:comorbidity a rr:TriplesMap;
                 rr:child "id";
                 rr:parent "id";
             ];                                                                                                            
-        ];
-    ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100423;  #consistsOf
-        rr:objectMap [
-            rr:parentTriplesMap map:diabetesMellitus; 
-            rr:joinCondition [
-                rr:child "id";
-                rr:parent "id";
-            ];                                                         
         ];
     ];
      rr:predicateObjectMap [

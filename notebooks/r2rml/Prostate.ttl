@@ -1,0 +1,1032 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix ex: <http://example.com/ns#>.
+@prefix map: <http://mapping.local/>.
+@prefix sty: <http://purl.bioontology.org/ontology/STY/>.
+@prefix sio: <http://semanticscience.org/resource/SIO_>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
+@prefix roo: <http://www.cancerdata.org/roo/>.
+@prefix icd: <http://purl.bioontology.org/ontology/ICD10/>.
+@prefix skos: <http://www.w3.org/2008/05/skos#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix uo: <http://purl.obolibrary.org/obo/UO_>.
+@prefix time: <http://www.w3.org/2006/time#>.
+
+map:basicQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, treatingcentre, contactpersonforparticlecentre, referringcentre, registrationdate, sex, age, birthyear, educationlevel, relationshipstatus, smokingstatus, packyears, timestoppedsmoking, alcoholusehistory, bodyweight, bodyheight, charlsoncomorbidityindex, weightloss3monthsbeforert
+FROM PBDWHackathon2018;""";
+    rdfs:label """Every row in this table should correspond to a unique patient.<br/>
+The target variables have the following name and specific meaning:
+The table should contain a unique patient identifier,treatingCentre,contactPersonForParticleCentre,referringCentre,registrationDate,sex,age,birthYear,educationLevel,relationshipStatus,smokingStatus,packYears,timeStoppedSmoking,alcoholUseHistory,bodyWeight,bodyHeight,charlsonComorbidityIndex,weightLoss3MonthsBeforeRT.<br/>
+<ul>
+<li>id: unique identifier of the patient</li>
+<li>age:  patient's age at diagnosis</li>
+<li>sex:  patient's biological sex</li>
+</ul>""";
+     skos:definition "id,treatingcentre,contactpersonforparticlecentre,referringcentre,registrationdate,sex,age,birthyear,educationlevel,relationshipstatus,smokingstatus,packyears,timestoppedsmoking,alcoholusehistory,bodyweight,bodyheight,charlsoncomorbidityindex,weightloss3monthsbeforert".
+# no caps in skos definition!
+
+map:patient a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}";
+        rr:class ncit:C16960; #patient
+    ];       
+    rr:predicateObjectMap [
+        rr:predicate roo:P100061; #has_person_identifier
+        rr:objectMap [
+            rr:parentTriplesMap map:identifier;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100255; #has_comorbidity
+        rr:objectMap [
+            rr:parentTriplesMap map:comorbidity;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_medical_history; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:medicalHistory;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_medication; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:medication;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; # has procedure                                                             # new roo predicate 
+        rr:objectMap [
+            rr:parentTriplesMap map:preparationProcedure;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+        rr:predicateObjectMap [
+        rr:predicate roo:P100024; # has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:radiotherapy;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100020; #has_disease
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024;# has_procedure 
+        rr:objectMap [
+            rr:parentTriplesMap map:surgery;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:comorbidity a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/comorbidity";
+        rr:class ncit:C16457;  #comorbidity     
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:abdominalSurgery; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:inflammatoryBowelDisease; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:bladderDisorder; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:cardiovascularDisorder; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:useOfMaterialForVoiding; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ].
+
+
+map:abdominalSurgery a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/comorbidity/abdominalSurgery/{abdominalSurgery}";
+        rr:class ncit:C16120; #Abdominal Surgical Procedure
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "abdominalSurgery";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:inflammatoryBowelDisease a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/comorbidity/inflammatoryBowelDisease/{inflammatoryBowelDisease}";
+        rr:class ncit:C3138; #inflammatory Bowel Disease
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "inflammatoryBowelDisease";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:bladderDisorder a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/comorbidity/bladderDisorder/{bladderDisorder}";
+        rr:class ncit:C2900; #bladder Disorder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "bladderDisorder";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:cardiovascularDisorder a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/comorbidity/cardiovascularDisorder/{cardiovascularDisorder}";
+        rr:class ncit:C2931; #cardiovascular Disorder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "cardiovascularDisorder";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:cardiovascularDisease a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/comorbidity/cardiovascularDisease/{cardiovascularDisease}";
+        rr:class ncit:C2931; #cardiovascular disorder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "cardiovascularDisease";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:useOfMaterialForVoiding a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/comorbidity/useOfMaterialForVoiding/{useOfMaterialForVoiding}";
+        rr:class roo:useOfMaterialForVoiding;                                                                    #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "useOfMaterialForVoiding";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:medicalHistory a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/medicalHistory";
+        rr:class roo:medicalHistory;                                                                             #new roo class    
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:transUrethralResection; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ].
+
+map:medication a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/medication";
+        rr:class ncit:C459; #medication  
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100395;  #has_manifestation
+        rr:objectMap [
+            rr:parentTriplesMap map:voidingMedication; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100395;  #has_manifestation
+        rr:objectMap [
+            rr:parentTriplesMap map:urogenitalDisordersMedication; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100395;  #has_manifestation
+        rr:objectMap [
+            rr:parentTriplesMap map:voidingMedication; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100395;  #has_manifestation
+        rr:objectMap [
+            rr:parentTriplesMap map:antiCoagulantAgent; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ].
+
+map:voidingMedication a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/medication/voidingMedication/{voidingMedication}";
+        rr:class roo:voidingMedication;                                                                             #new roo class    
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "voidingMedication";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:urogenitalDisordersMedication a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/medication/urogenitalDisordersMedication/{urogenitalDisordersMedication}";
+        rr:class roo:urogenitalDisordersMedication;                                                             #new roo class    
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "urogenitalDisordersMedication";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:antiCoagulantAgent a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/medication/antiCoagulantAgent/{antiCoagulantAgent}";
+        rr:class ncit:C263;  #antiCoagulant Agent 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "antiCoagulantAgent";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:transUrethralResection a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/medicalHistory/transUrethralResection/";
+        rr:class ncit:C15705;  #trans Urethral Resection
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:transUrethralResectionProcedure; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100252; #has_date_of_procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:transUrethralResectionDate; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ].
+
+map:transUrethralResectionProcedure a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/medicalHistory/transUrethralResection/transUrethralResectionProcedure/{transUrethralResectionProcedure}";
+        rr:class roo:transUrethralResectionProcedure;                                                       #new roo class 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "antiCoagulantAgent";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:transUrethralResectionDate a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/medicalHistory/transUrethralResection/transUrethralResectionDate/{transUrethralResectionDate}";
+        rr:class roo:transUrethralResectionDate;                                                           #new roo class 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "antiCoagulantAgent";
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:preparationProcedure a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure";
+        rr:class roo:preparationProcedure;  #                                                            new roo class                                                           
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024;  #has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:laboratoryTest;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has_unit
+        rr:objectMap [
+            rr:parentTriplesMap map:prostateVolume;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024;  #has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:pSMAPET;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_subtype; #                                                            new roo predicate  
+        rr:objectMap [
+            rr:parentTriplesMap map:modality;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024;  #has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:prostateUltrasound;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                       
+        ]; 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024;  #has procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:prostateBiopsy;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                       
+        ]; 
+    ].
+
+map:laboratoryTest a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/laboratoryTest";
+        rr:class ncit:C117142; #laboratory test    
+    ];
+    rr:predicateObjectMap [                                                     
+        rr:predicate roo:has_PSA_test;                                                            #new roo class                   
+        rr:objectMap [
+             rr:parentTriplesMap map:prostateSpecificAntibodyAntigen;
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];   
+        ];
+    ];
+    rr:predicateObjectMap [                                                     
+        rr:predicate roo:has_testosteron_test;                                                            #new roo class                   
+        rr:objectMap [
+             rr:parentTriplesMap map:totalTestosteroneTest;
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];   
+        ];
+    ].
+
+map:prostateSpecificAntibodyAntigen a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/laboratoryTest/prostateSpecificAntibodyAntigen/{prostateSpecificAntibodyAntigen}";
+        rr:class roo:prostateSpecificAntibodyAntigen;                                                           #new roo class 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "prostateSpecificAntibodyAntigen";
+            rr:datatype xsd:float;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:microGramPerLiter;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                       
+        ]; 
+    ].
+
+map:microGramPerLiter a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/laboratoryTest/microGramPerLiter";
+        rr:class ncit:C67306; #Microgram per Liter
+    ].
+
+map:prostateVolume a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/prostateVolume/{prostateVolume}";
+        rr:class BioPortal cui:C1441416; #prostate volume 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "prostateVolume";
+            rr:datatype xsd:float;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:cubicCentimeter;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                       
+        ]; 
+    ].
+
+map:totalTestosteroneTest a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/laboratoryTest/totalTestosteroneTest/{totalTestosteroneTest}";
+        rr:class ncit:C74793;#Total Testosterone Measurement 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "totalTestosteroneTest";
+            rr:datatype xsd:float;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:nanoMolePerLitre;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                       
+        ]; 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100267;  #has version
+        rr:objectMap [
+            rr:parentTriplesMap map:withAndrogenDeprivationTherapy;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                       
+        ]; 
+    ].
+
+map:nanoMolePerLitre  a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/laboratoryTest/totalTestosteroneTest/nanoMolePerLitre";
+        rr:class ncit:C67432; #nanoMole per litre
+    ].
+
+map:withAndrogenDeprivationTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/laboratoryTest/totalTestosteroneTest/withAndrogenDeprivationTherapy/{withAndrogenDeprivationTherapy}";
+        rr:class ncit:C15676; #androgen suppression
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "withAndrogenDeprivationTherapy";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:cTScan a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/preparationProcedure/cTScan/{cTScan}";
+            rr:class ncit:C17204; #computed tomography
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "cTScan";
+                rr:datatype xsd:string;
+            ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_target;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:pelvicScan;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                       
+        ]; 
+    ].
+
+map:pelvicScan a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/cTScan/pelvicScan/{pelvicScan}";
+        rr:class roo:pelvicScan;                                                                    #new roo predicate        
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "pelvicScan";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:pSMAPET a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/preparationProcedure/pSMAPET/{pSMAPET}";
+            rr:class roo:pSMAPET;                                                                   #new roo class
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:P100042; #has_value
+            rr:objectMap [
+                rr:column "pSMAPET";
+                rr:datatype xsd:boulean;
+            ];
+    ].
+
+map:prostateUltrasound a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/preparationProcedure/prostateUltrasound/{prostateUltrasound}";
+            rr:class roo:prostateUltrasound;                                                                   #new roo class
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:P100042; #has_value
+            rr:objectMap [
+                rr:column "prostateUltrasound";
+                rr:datatype xsd:boulean;
+            ];
+    ].
+
+map:modality a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/preparationProcedure/modality/{modality}";
+            rr:class ncit:C41147; #modality
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:local_value;
+            rr:objectMap [
+                rr:column "modality";
+                rr:datatype xsd:string;
+            ];
+    ].
+
+map:prostateBiopsy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/preparationProcedure/prostateBiopsy/{prostateBiopsy}";
+            rr:class ncit:C51701; #Biopsy of Prostate
+    ];
+    rr:predicateObjectMap [
+            rr:predicate roo:P100228; #has_date
+            rr:objectMap [
+                rr:column "prostateBiopsy";
+                rr:datatype xsd:date;
+            ];
+    ].
+
+map:neoplasm a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/{tumourType}";
+            rr:class ncit:C3262; #neoplasm
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_score;                                                         #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:gleasonScoreSum;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_score;                                                         #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:gleasonScoreX;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_score;                                                         #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:gleasonScoreY;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_classification;                                                   #new roo predicate                                                          
+        rr:objectMap [
+            rr:parentTriplesMap map:TNM_Staging;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:cribrifromIntraductalGrowth;  
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                  
+        ];
+    ].
+
+map:gleasonScoreSum a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/gleasonScoreSum/{gleasonScoreSum}";
+            rr:class ncit:C48602; #Total Gleason Score for Prostate Cancer                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "gleasonScoreSum";
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:gleasonScoreX a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/gleasonScoreSum/{gleasonScoreSum}";
+            rr:class ncit:C48603; #primary gleason pattern                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "gleasonScoreSum";
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:gleasonScoreY a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/gleasonScoreY/{gleasonScoreY}";
+            rr:class ncit:C48604; #Secondary Gleason Pattern                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "gleasonScoreY";
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:TNM_Staging a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/TNMStaging";
+            rr:class ncit:C38027; #stage grouping (TNM stage grouping)                                                     
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_version;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:clinicalStageMRI;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_version;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:clinicalStageDigitalRectalExam;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_version;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:clinicalStageCholinePET;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_version;                                                               #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:clinicalStagePSMAPET;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+
+map:clinicalStageMRI a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/TNMStaging/clinicalStageMRI/{clinicalStageMRI}";
+            rr:class roo:clinicalStageMRI;                                                   #new roo class                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "clinicalStageMRI";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:clinicalStageDigitalRectalExam a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/TNMStaging/clinicalStageDigitalRectalExam/{clinicalStageDigitalRectalExam}";
+            rr:class roo:clinicalStageDigitalRectalExam;                                                   #new roo class                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "clinicalStageDigitalRectalExam";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:clinicalStageCholinePET a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/TNMStaging/clinicalStageCholinePET/{clinicalStageCholinePET}";
+            rr:class roo:clinicalStageCholinePET;                                                   #new roo class                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "clinicalStageCholinePET";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:clinicalStagePSMAPET a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/TNMStaging/clinicalStagePSMAPET/{clinicalStagePSMAPET}";
+            rr:class roo:clinicalStagePSMAPET;                                                   #new roo class                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "clinicalStagePSMAPET";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:cribrifromIntraductalGrowth a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/cribrifromIntraductalGrowth/{cribrifromIntraductalGrowth}";
+            rr:class roo:cribrifromIntraductalGrowth;                                                   #new roo class                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "cribrifromIntraductalGrowth";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:surgery a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery";
+        rr:class 	ncit:C157740 ;  #cancer surgery
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:has_lymph_node_dissection;                                             #new roo predicate                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:lymphNodeDissection;  
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                  
+        ];
+    ].
+
+map:lymphNodeDissection a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery/lymphNodeDissection/";
+        rr:class ncit:C15677; #Axillary Lymph Node Dissection
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of                                                       
+        rr:objectMap [
+            rr:parentTriplesMap map:lymphNodeDissectionStatus;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100286 ;  #has_pathological_n_stage
+        rr:objectMap [
+            rr:parentTriplesMap map:pathologicalNStageLymphNode;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ];
+    rr:predicateObjectMap [                                                     
+        rr:predicate roo:has_involved_nodes;                                        #new roo predicate                  
+        rr:objectMap [
+             rr:parentTriplesMap map:numberOfInvolvedNodes;
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];   
+        ];
+    ];
+
+map:lymphNodeDissectionStatus a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery/lymphNodeDissection/lymphNodeDissectionStatus/{lymphNodeDissectionStatus}";
+        rr:class 	roo:lymphNodeDissectionStatus;                                     #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "lymphNodeDissectionStatus";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:pathologicalNStageLymphNode a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery/lymphNodeDissection/pathologicalNStageLymphNode/{pathologicalNStageLymphNode}";
+        rr:class 	roo:lymphNodeDissectionStatus;                                     #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "pathologicalNStageLymphNode";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:numberOfInvolvedNodes a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery/lymphNodeDissection/numberOfInvolvedNodes/{numberOfInvolvedNodes}";
+        rr:class 	roo:numberOfInvolvedNodes;                                     #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "numberOfInvolvedNodes";
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+

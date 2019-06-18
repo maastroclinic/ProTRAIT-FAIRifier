@@ -111,7 +111,7 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_reported;                                                             # new roo predicate                                                                                           # reports?
+        rr:predicate roo:has_reported;                                                             # new roo predicate  
         rr:objectMap [
             rr:parentTriplesMap map:patientReportedOutcomeMeasures;
             rr:joinCondition [
@@ -1569,7 +1569,7 @@ map:gTV a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:CC; 
+            rr:parentTriplesMap map:cubicCentimeter; 
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1792,7 +1792,7 @@ map:cTV1 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:CC;
+            rr:parentTriplesMap map:cubicCentimeter;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1817,7 +1817,7 @@ map:CTV2 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:CC;
+            rr:parentTriplesMap map:cubicCentimeter;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1847,10 +1847,10 @@ map:boostTechnique a rr:TriplesMap;
         ];
     ].
 
-map:CC a rr:TriplesMap;
+map:cubicCentimeter a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/preparationProcedure/GTVVolume/CC";
+        rr:template "patient/{id}/preparationProcedure/GTVVolume/cubicCentimeter";
         rr:class uo:0000097; #cubic centimeter                                                     
     ].
 
@@ -2309,7 +2309,7 @@ map:bloodPressureFinding a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/bloodPressureFinding";
-        rr:class roo:ncit:C54707; #blood pressure finding?     
+        rr:class ncit:C54707; #blood pressure finding?     
     ];
     rr:predicateObjectMap [                                                     
         rr:predicate roo:P100423;  #consists_of                   
@@ -2365,7 +2365,7 @@ map:laboratoryTest a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/laboratoryTest";
-        rr:class roo:ncit:C54707; #blood pressure finding?     
+        rr:class ncit:C117142; #laboratory test        
     ];
     rr:predicateObjectMap [                                                     
         rr:predicate roo:has_HbA1c_test;                                                            #new roo class                   
