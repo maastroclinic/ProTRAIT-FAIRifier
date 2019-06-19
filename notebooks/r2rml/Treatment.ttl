@@ -377,7 +377,7 @@ map:preOperativeConsultation a rr:TriplesMap;
     rr:subjectMap [
             rr:datatype xsd:date;
         rr:template "patient/{id}/radiotherapy/preOperativeConsultation/{dateOfPreOperativeConsultation}";
-        rr:class roo:positionVerification;                                                         #new roo class
+        rr:class roo:preOperativeConsultation;                                                         #new roo class
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100228; #has_date 
