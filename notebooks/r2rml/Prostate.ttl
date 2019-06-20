@@ -114,6 +114,36 @@ map:patient a rr:TriplesMap;
                 rr:parent "id";
             ];
         ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100258 ; # has_disease_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:radiationInducedSideEffects;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100258 ; # has_disease_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:fiducialMarkerInducedSideEffects;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_reported;                                                             # new roo predicate  
+        rr:objectMap [
+            rr:parentTriplesMap map:patientReportedOutcomeMeasures;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
     ].
 
 map:radiotherapy a rr:TriplesMap;
@@ -146,6 +176,193 @@ map:radiotherapy a rr:TriplesMap;
         rr:predicate roo:P100212; #has property
         rr:objectMap [
             rr:parentTriplesMap map:fractionDose;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:deliveredDose;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ].
+
+map:deliveredDose a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/deliveredDose/";
+        rr:class roo:C100011; #delivered dose
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_target;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:deliveredDoseToProstate;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_target;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:deliveredDoseToSeminalVesicleBase;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_target;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:deliveredDoseToSeminalVesicleWhole;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_target;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:deliveredDoseToProstateRegion;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_target;                                                                #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:deliveredDoseToSeminalVesicleRegion;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+
+map:deliveredDoseToProstate a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/deliveredDose/deliveredDoseToProstate/{deliveredDoseToProstate}";
+        rr:class roo:deliveredDoseToProstate;                                                       #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:p100042; #has_value
+        rr:objectMap [
+            rr:column "deliveredDoseToProstate";
+            rr:datatype xsd:float;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:gY;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ].
+
+map:deliveredDoseToSeminalVesicleBase a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/deliveredDose/deliveredDoseToSeminalVesicleBase/{deliveredDoseToSeminalVesicleBase}";
+        rr:class roo:deliveredDoseToSeminalVesicleBase;                                                       #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:p100042; #has_value
+        rr:objectMap [
+            rr:column "deliveredDoseToSeminalVesicleBase";
+            rr:datatype xsd:float;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:gY;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ].
+
+map:deliveredDoseToSeminalVesicleWhole a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/deliveredDose/deliveredDoseToSeminalVesicleWhole/{deliveredDoseToSeminalVesicleWhole}";
+        rr:class roo:deliveredDoseToSeminalVesicleWhole;                                                       #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:p100042; #has_value
+        rr:objectMap [
+            rr:column "deliveredDoseToSeminalVesicleWhole";
+            rr:datatype xsd:float;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:gY;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ].
+
+map:deliveredDoseToProstateRegion a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/deliveredDose/deliveredDoseToProstateRegion/{deliveredDoseToProstateRegion}";
+        rr:class roo:deliveredDoseToProstateRegion;                                                       #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:p100042; #has_value
+        rr:objectMap [
+            rr:column "deliveredDoseToProstateRegion";
+            rr:datatype xsd:float;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:gY;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ].
+
+map:deliveredDoseToSeminalVesicleRegion a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/deliveredDose/deliveredDoseToSeminalVesicleRegion/{deliveredDoseToSeminalVesicleRegion}";
+        rr:class roo:deliveredDoseToSeminalVesicleRegion;                                                       #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:p100042; #has_value
+        rr:objectMap [
+            rr:column "deliveredDoseToSeminalVesicleRegion";
+            rr:datatype xsd:float;
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100027;  #has unit
+        rr:objectMap [
+            rr:parentTriplesMap map:gY;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -496,11 +713,21 @@ map:antiCoagulantAgent a rr:TriplesMap;
 map:transUrethralResection a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/medicalHistory/transUrethralResection/";
+        rr:template "patient/{id}/surgery/transUrethralResection/";
         rr:class ncit:C15705;  #trans Urethral Resection
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100423;  #consistsOf
+        rr:predicate roo:P100423;  #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:transUrethralResectionStatus; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423;  #consists_of
         rr:objectMap [
             rr:parentTriplesMap map:transUrethralResectionProcedure; 
             rr:joinCondition [
@@ -520,16 +747,30 @@ map:transUrethralResection a rr:TriplesMap;
         ];
     ].
 
+map:transUrethralResectionStatus a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery/transUrethralResection/transUrethralResectionStatus/{transUrethralResectionStatus}";
+        rr:class roo:transUrethralResectionStatus;                                                       #new roo class 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_trans_urethral_resection_status;
+        rr:objectMap [
+            rr:column "transUrethralResectionStatus";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
 map:transUrethralResectionProcedure a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/medicalHistory/transUrethralResection/transUrethralResectionProcedure/{transUrethralResectionProcedure}";
+        rr:template "patient/{id}/surgery/transUrethralResection/transUrethralResectionProcedure/{transUrethralResectionProcedure}";
         rr:class roo:transUrethralResectionProcedure;                                                       #new roo class 
     ];
     rr:predicateObjectMap [
         rr:predicate roo:local_value;
         rr:objectMap [
-            rr:column "antiCoagulantAgent";
+            rr:column "transUrethralResectionProcedure";
             rr:datatype xsd:boulean;
         ];
     ].
@@ -537,13 +778,13 @@ map:transUrethralResectionProcedure a rr:TriplesMap;
 map:transUrethralResectionDate a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/medicalHistory/transUrethralResection/transUrethralResectionDate/{transUrethralResectionDate}";
+        rr:template "patient/{id}/surgery/transUrethralResection/transUrethralResectionDate/{transUrethralResectionDate}";
         rr:class roo:transUrethralResectionDate;                                                           #new roo class 
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "antiCoagulantAgent";
+            rr:column "transUrethralResectionDate";
             rr:datatype xsd:date;
         ];
     ].
@@ -993,6 +1234,78 @@ map:neoplasm a rr:TriplesMap;
                 rr:parent "id";
             ];                                  
         ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:extraCapsularGrowth;  
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                  
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:seminalVesiclesInvasion;  
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                  
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:pStage;  
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                  
+        ];
+    ].
+
+map:extraCapsularGrowth a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/extraCapsularGrowth/{extraCapsularGrowth}";
+            rr:class roo:extraCapsularGrowth;                                                   #new roo class                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "extraCapsularGrowth";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:seminalVesiclesInvasion a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/seminalVesiclesInvasion/{seminalVesiclesInvasion}";
+            rr:class roo:seminalVesiclesInvasion;                                                   #new roo class                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "seminalVesiclesInvasion";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:pStage a rr:TriplesMap;
+    rr:subjectMap map:basicQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/neoplasm/pStage/{pStage}";
+            rr:class roo:pStage;                                                   #new roo class                                                   
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:p100042; #has_value
+        rr:objectMap [
+            rr:column "pStage";
+            rr:datatype xsd:integer;
+        ];
     ].
 
 map:gleasonScoreSum a rr:TriplesMap;
@@ -1168,6 +1481,95 @@ map:surgery a rr:TriplesMap;
                 rr:child "id";
                 rr:parent "id";
             ];                                  
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024;#has_procedure                                        
+        rr:objectMap [
+             rr:parentTriplesMap map:prostatectomy;  
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                  
+        ];
+    ].
+
+map:prostatectomy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery/prostatectomy/";
+        rr:class ncit:C15307; #prostatectomy
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of                                                       
+        rr:objectMap [
+            rr:parentTriplesMap map:prostatectomyStatus;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of                                                       
+        rr:objectMap [
+            rr:parentTriplesMap map:prostatectomyDate;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of                                                       
+        rr:objectMap [
+            rr:parentTriplesMap map:radicality;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+
+map:prostatectomyStatus a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery/lymphNodeDissection/prostatectomy/prostatectomyStatus/{prostatectomyStatus}";
+        rr:class 	roo:prostatectomyStatus;                                     #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "prostatectomyStatus";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:prostatectomyDate a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery/lymphNodeDissection/prostatectomy/prostatectomyDate/{prostatectomyDate}";
+        rr:class 	roo:prostatectomyDate;                                     #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100295; #has_procedure_date
+        rr:objectMap [
+            rr:column "prostatectomyDate";
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:radicality a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/surgery/lymphNodeDissection/prostatectomy/radicality/{radicality}";
+        rr:class 	roo:radicality;                                     #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value; 
+        rr:objectMap [
+            rr:column "radicality";
+            rr:datatype xsd:string;
         ];
     ].
 
@@ -1727,5 +2129,451 @@ map:prostateDVH a rr:TriplesMap;
         ];
     ]. 
 
+map:radiationInducedSideEffects a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects";
+        rr:class roo:radiationInducedSideEffects;                                           #new roo class                                                       
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:fecalIncontinence; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:proctitis; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:rectalHemorrhage; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:fecalIncontinence; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:cystitisNonInfective; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:urinaryFrequency; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:urinaryIncontinence; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:urinaryUrgency; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:urinaryTractObstruction; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:erectileDysfunction; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:Pain; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:skinAtrophy; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:otherAdverseEvents; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ].
 
+map:fecalIncontinence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/fecalIncontinence/{fecalIncontinence}";
+        rr:class ncit:C143482; #Fecal Incontinence, CTCAE
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "constipation"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
 
+map:proctitis a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/proctitis/{proctitis}";
+        rr:class ncit:C57857; #proctitis, ctcae
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "proctitis"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:cystitisNonInfective a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/cystitisNonInfective/{cystitisNonInfective}";
+        rr:class ncit:C143393; #cystitis Non Infective, ctcae
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "cystitisNonInfective"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:urinaryFrequency a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/urinaryFrequency/{urinaryFrequency}";
+        rr:class ncit:C143901; #urinary Frequency, ctcae
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "urinaryFrequency"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:urinaryIncontinence a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/urinaryIncontinence/{urinaryIncontinence}";
+        rr:class ncit:C146786; #Urinary Incontinence, CTCAE 5.0
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "urinaryIncontinence"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:urinaryUrgency a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/urinaryUrgency/{urinaryUrgency}";
+        rr:class ncit:C143907; #urinary Urgency, ctcae
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "urinaryUrgency"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:urinaryTractObstruction a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/urinaryTractObstruction/{urinaryTractObstruction}";
+        rr:class ncit:C143905; #urinaryTractObstruction, ctcae
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "urinaryTractObstruction"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:erectileDysfunction a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/erectileDysfunction/{erectileDysfunction}";
+        rr:class ncit:C55615; #erectile Dysfunction, ctcae
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "erectileDysfunction"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:Pain a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/Pain/{Pain}";
+        rr:class ncit:C57788; #Tumor Pain, CTCAE 5.0                
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "Pain"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:skinAtrophy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/skinAtrophy/{skinAtrophy}";
+        rr:class ncit:C146644; #skin Atrophy, ctcae
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "skinAtrophy"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:otherAdverseEvents a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiationInducedSideEffects/otherAdverseEvents/{otherAdverseEvents}";
+        rr:class ncit:C78604; #Adverse Event Occurrence
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "otherAdverseEvents"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:fiducialMarkerInducedSideEffects a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/fiducialMarkerInducedSideEffects";
+        rr:class roo:fiducialMarkerInducedSideEffects;                                                  #new roo class                                                          
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:prostateInfection; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:Hematuria; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:rectalHemorrhage; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:hematospermia; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ].
+
+map:prostateInfection a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/fiducialMarkerInducedSideEffects/prostateInfection/{prostateInfection}";
+        rr:class ncit:C143783; #Prostate Infection, CTCAE
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "prostateInfection"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:Hematuria a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/fiducialMarkerInducedSideEffects/Hematuria/{Hematuria}";
+        rr:class ncit:C78604; #Hematuria, ctcae
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "Hematuria"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:rectalHemorrhage a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/fiducialMarkerInducedSideEffects/rectalHemorrhage/{rectalHemorrhage}";
+        rr:class ncit:C56560; #rectalHemorrhage, ctcae
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "rectalHemorrhage"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:hematospermia a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/fiducialMarkerInducedSideEffects/hematospermia/{hematospermia}";
+        rr:class ncit:C96935; #hematospermia
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "hematospermia"; 
+            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+        ];
+    ].
+
+map:patientReportedOutcomeMeasures a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/patientReportedOutcomeMeasures";
+        rr:class roo:patientReportedOutcomeMeasures;                                                     #new roo class                                                        
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:EORTCQLQ_PR25; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100423  ;  #consistsOf
+        rr:objectMap [
+            rr:parentTriplesMap map:internationalProstateSymptomScore; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+
+map:EORTCQLQ_PR25 a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/patientReportedOutcomeMeasures/EORTCQLQ_PR25/{EORTCQLQ_PR25}";
+        rr:class ncit:EORTCQLQ_PR25;                                                                    #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "EORTCQLQ_PR25"; 
+            rr:datatype xsd:string;                                                                    #??? list?
+        ];
+    ].
+
+map:internationalProstateSymptomScore a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/patientReportedOutcomeMeasures/internationalProstateSymptomScore/{internationalProstateSymptomScore}";
+        rr:class ncit:C113446; #International Prostate Symptom Score 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "internationalProstateSymptomScore"; 
+            rr:datatype xsd:string;                                                                    #??? list?
+        ];
+    ].
