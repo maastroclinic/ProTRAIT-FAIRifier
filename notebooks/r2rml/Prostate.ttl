@@ -266,7 +266,7 @@ map:deliveredDoseToProstate a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -290,7 +290,7 @@ map:deliveredDoseToSeminalVesicleBase a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -314,7 +314,7 @@ map:deliveredDoseToSeminalVesicleWhole a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -338,7 +338,7 @@ map:deliveredDoseToProstateRegion a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -362,7 +362,7 @@ map:deliveredDoseToSeminalVesicleRegion a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1725,7 +1725,7 @@ map:totalDosePTV1 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1749,7 +1749,7 @@ map:totalDosePTV2 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1773,7 +1773,7 @@ map:totalDosePTV3 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1797,7 +1797,7 @@ map:totalDosePTV4 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1821,7 +1821,7 @@ map:totalDosePTV5 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1902,7 +1902,7 @@ map:fractionDosePTV1 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1926,7 +1926,7 @@ map:fractionDosePTV2 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1950,7 +1950,7 @@ map:fractionDosePTV3 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1974,7 +1974,7 @@ map:fractionDosePTV4 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -1998,7 +1998,7 @@ map:fractionDosePTV5 a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100027;  #has unit
         rr:objectMap [
-            rr:parentTriplesMap map:gY;
+            rr:parentTriplesMap map:gray;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -2276,7 +2276,7 @@ map:fecalIncontinence a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "constipation"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2290,7 +2290,7 @@ map:proctitis a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "proctitis"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2304,7 +2304,7 @@ map:cystitisNonInfective a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "cystitisNonInfective"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2318,7 +2318,7 @@ map:urinaryFrequency a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "urinaryFrequency"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2332,7 +2332,7 @@ map:urinaryIncontinence a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "urinaryIncontinence"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2346,7 +2346,7 @@ map:urinaryUrgency a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "urinaryUrgency"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2360,7 +2360,7 @@ map:urinaryTractObstruction a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "urinaryTractObstruction"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2374,7 +2374,7 @@ map:erectileDysfunction a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "erectileDysfunction"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2388,7 +2388,7 @@ map:Pain a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "Pain"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2402,7 +2402,7 @@ map:skinAtrophy a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "skinAtrophy"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2416,7 +2416,7 @@ map:otherAdverseEvents a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "otherAdverseEvents"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2477,7 +2477,7 @@ map:prostateInfection a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "prostateInfection"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2491,7 +2491,7 @@ map:Hematuria a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "Hematuria"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2505,7 +2505,7 @@ map:rectalHemorrhage a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "rectalHemorrhage"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2519,7 +2519,7 @@ map:hematospermia a rr:TriplesMap;
         rr:predicate roo:local_value;
         rr:objectMap [
             rr:column "hematospermia"; 
-            rr:datatype xsd:string;                                                                    #??? ctcae v4.0 grades?
+            rr:datatype xsd:string; 
         ];
     ].
 
@@ -2560,7 +2560,7 @@ map:EORTCQLQ_PR25 a rr:TriplesMap;
         rr:predicate roo:local_value;  
         rr:objectMap [
             rr:column "EORTCQLQ_PR25"; 
-            rr:datatype xsd:string;                                                                    #??? list?
+            rr:datatype xsd:string;
         ];
     ].
 
@@ -2574,6 +2574,6 @@ map:internationalProstateSymptomScore a rr:TriplesMap;
         rr:predicate roo:local_value;  
         rr:objectMap [
             rr:column "internationalProstateSymptomScore"; 
-            rr:datatype xsd:string;                                                                    #??? list?
+            rr:datatype xsd:string;
         ];
     ].
