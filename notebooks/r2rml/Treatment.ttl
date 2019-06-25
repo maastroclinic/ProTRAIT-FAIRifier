@@ -1603,10 +1603,10 @@ map:targetVolume a rr:TriplesMap;
         ];
     ].
 
-map:gTV a rr:TriplesMap;
+map:grossTargetVolume a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/preparationProcedure/gTV";
+        rr:template "patient/{id}/preparationProcedure/grossTargetVolume";
         rr:class ncit:C112913; #gross target volume
     ];
      rr:predicateObjectMap [
@@ -1622,15 +1622,15 @@ map:gTV a rr:TriplesMap;
      rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value
         rr:objectMap [
-            rr:column "patient/{id}/preparationProcedure/gTVVolume"; 
+            rr:column "patient/{id}/preparationProcedure/grossTargetVolume"; 
             rr:datatype xsd:integer; 
         ];
     ].
 
-map:pTV a rr:TriplesMap;
+map:planningTargetVolume a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/preparationProcedure/pTV";
+        rr:template "patient/{id}/preparationProcedure/planningTargetVolume";
         rr:class ncit:C82606; #Planning Target Volume                                                     
     ];
      rr:predicateObjectMap [
@@ -1707,7 +1707,7 @@ map:pTV a rr:TriplesMap;
 map:intentOfRT a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/preparationProcedure/pTV/intentOfRT{intentOfRT}";
+        rr:template "patient/{id}/preparationProcedure/planningTargetVolume/intentOfRT{intentOfRT}";
         rr:class roo:intentOfRT; #new roo class                                                     
     ];
      rr:predicateObjectMap [
@@ -1721,8 +1721,8 @@ map:intentOfRT a rr:TriplesMap;
 map:meanDoseOfPTV a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/preparationProcedure/pTV/meanDoseOfPTV{meanDoseOfPTV}";
-        rr:class ncit:C112912; #clinical target volume                                                     
+        rr:template "patient/{id}/preparationProcedure/planningTargetVolume/meanDoseOfPTV{meanDoseOfPTV}";
+        rr:class roo:meanDoseOfPTV; #new roo class                                                     
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100027; #has_unit
@@ -1752,7 +1752,7 @@ map:gray a rr:TriplesMap;
 map:v95OfPTV a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/preparationProcedure/pTV/v95OfPTV{v95OfPTV}";
+        rr:template "patient/{id}/preparationProcedure/planningTargetVolume/v95OfPTV{v95OfPTV}";
         rr:class roo:v95OfPTV; #new roo class                                                   
     ];
      rr:predicateObjectMap [
@@ -1776,7 +1776,7 @@ map:v95OfPTV a rr:TriplesMap;
 map:d98OfPTV a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/preparationProcedure/pTV/d98OfPTV{d98OfPTV}";
+        rr:template "patient/{id}/preparationProcedure/planningTargetVolume/d98OfPTV{d98OfPTV}";
         rr:class roo:d98OfPTV; #new roo class                                                   
     ];
      rr:predicateObjectMap [
@@ -1800,7 +1800,7 @@ map:d98OfPTV a rr:TriplesMap;
 map:d2OfPTV a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
-        rr:template "patient/{id}/preparationProcedure/pTV/d2OfPTV{d2OfPTV}";
+        rr:template "patient/{id}/preparationProcedure/planningTargetVolume/d2OfPTV{d2OfPTV}";
         rr:class roo:d2OfPTV; #new roo class                                                   
     ];
      rr:predicateObjectMap [
@@ -1825,7 +1825,7 @@ map:cTV1 a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/cTV1{cTV1}";
-        rr:class ncit:C112912; #clinical target volume                                                     
+        rr:class ncit:C112912; #clinical target volume                                                      !!                                      
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100027; #has_unit
@@ -1849,7 +1849,7 @@ map:cTV2 a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/cTV2/{cTV2}";
-        rr:class ncit:C112912; #clinical target volume                                      
+        rr:class ncit:C112912; #clinical target volume                                                  !!
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100027; #has_unit
