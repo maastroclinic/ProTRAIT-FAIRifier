@@ -48,7 +48,7 @@ map:patient a rr:TriplesMap;
     ];
 #to characteristics
     rr:predicateObjectMap [
-        rr:predicate roo:has_reported;                                                             # new roo predicate
+        rr:predicate roo:has_reported; #new roo predicate
             rr:parentTriplesMap map:WHOPerformanceStatus;
             rr:joinCondition [
                 rr:child "id";
@@ -57,7 +57,7 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100029; # is_diagnosed_with 
+        rr:predicate roo:P100029; #is_diagnosed_with 
         rr:objectMap [
             rr:parentTriplesMap map:hereditaryBreastCancer;
             rr:joinCondition [
@@ -67,7 +67,7 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100029; # is_diagnosed_with                                               #naar characteristics  
+        rr:predicate roo:P100029; #is_diagnosed_with 
         rr:objectMap [
             rr:parentTriplesMap map:cardiovascularDiseaseRisk;
             rr:joinCondition [
@@ -77,7 +77,7 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_menopausal_status; #                                               # new roo predicate   
+        rr:predicate roo:has_menopausal_status; #new roo predicate   
         rr:objectMap [
             rr:parentTriplesMap map:menopausalStatus;
             rr:joinCondition [
@@ -97,7 +97,7 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100024;# has_procedure 
+        rr:predicate roo:P100024; #has_procedure 
         rr:objectMap [
             rr:parentTriplesMap map:surgery;
             rr:joinCondition [
@@ -107,7 +107,7 @@ map:patient a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100024; # has_procedure                                                             # new roo predicate 
+        rr:predicate roo:P100024; #has_procedure 
         rr:objectMap [
             rr:parentTriplesMap map:preparationProcedure;
             rr:joinCondition [
@@ -117,7 +117,7 @@ map:patient a rr:TriplesMap;
         ];
     ];
         rr:predicateObjectMap [
-        rr:predicate roo:P100024; # has_procedure
+        rr:predicate roo:P100024; #has_procedure
         rr:objectMap [
             rr:parentTriplesMap map:radiotherapy;
             rr:joinCondition [
@@ -127,7 +127,7 @@ map:patient a rr:TriplesMap;
         ];
     ];    
     rr:predicateObjectMap [
-        rr:predicate roo:P100024; # has_procedure
+        rr:predicate roo:P100024; #has_procedure
         rr:objectMap [
             rr:parentTriplesMap map:chemotherapy;
             rr:joinCondition [
@@ -152,7 +152,7 @@ map:WHOPerformanceStatus a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_reported;                                                             # new roo predicate
+        rr:predicate roo:has_reported; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:patientReportedOutcomeMeasures;
             rr:joinCondition [
@@ -169,7 +169,7 @@ map:neoplasm a rr:TriplesMap;
             rr:class ncit:C3262; #neoplasm
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:is_invasive;                                                               #new roo predicate
+        rr:predicate roo:is_invasive; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:invasiveBreastCancer;
             rr:joinCondition [
@@ -179,7 +179,7 @@ map:neoplasm a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:is_in_situ;                                                                 #new roo predicate
+        rr:predicate roo:is_in_situ; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:inSituBreastCancer;
             rr:joinCondition [
@@ -189,7 +189,7 @@ map:neoplasm a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_classification;                                                            #new roo predicate                                                          
+        rr:predicate roo:has_classification; #new roo predicate                                                          
         rr:objectMap [
             rr:parentTriplesMap map:pTStage;
             rr:joinCondition [
@@ -199,7 +199,7 @@ map:neoplasm a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_classification;                                                            #new roo predicate                                                          
+        rr:predicate roo:has_classification; #new roo predicate                                                          
         rr:objectMap [
             rr:parentTriplesMap map:ypTStage;
             rr:joinCondition [
@@ -209,7 +209,7 @@ map:neoplasm a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_classification;                                                            #new roo predicate                                                          
+        rr:predicate roo:has_classification; #new roo predicate                                                          
         rr:objectMap [
             rr:parentTriplesMap map:pNStage;
             rr:joinCondition [
@@ -219,7 +219,7 @@ map:neoplasm a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_classification;                                                            #new roo predicate                                                          
+        rr:predicate roo:has_classification; #new roo predicate                                                          
         rr:objectMap [
             rr:parentTriplesMap map:ypNStage;
             rr:joinCondition [
@@ -263,9 +263,9 @@ map:invasiveBreastCancer a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_size;                                                                             #new roo predicate                                                        
+        rr:predicate roo:has_size; #new roo predicate                                                        
         rr:objectMap [
-            rr:parentTriplesMap map:invasionDepth;  # or is "size invasive component" the size of the tumour???
+            rr:parentTriplesMap map:invasionDepth;
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -273,9 +273,9 @@ map:invasiveBreastCancer a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_differentiation_grade;                                                           #new roo predicate                                                        
+        rr:predicate roo:has_differentiation_grade; #new roo predicate                                                        
         rr:objectMap [
-            rr:parentTriplesMap map:differentiationGrade;  #
+            rr:parentTriplesMap map:differentiationGrade; 
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -313,7 +313,7 @@ map:invasiveBreastCancer a rr:TriplesMap;
         ];
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_progesteron_receptor_status;                                                #new roo predicate                                  
+        rr:predicate roo:has_progesteron_receptor_status; #new roo predicate                                  
         rr:objectMap [
              rr:parentTriplesMap map:progesteronReceptorStatus; 
              rr:joinCondition [
@@ -323,7 +323,7 @@ map:invasiveBreastCancer a rr:TriplesMap;
         ];
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_estrogen_receptor_status;                                                   #new roo predicate                                  
+        rr:predicate roo:has_estrogen_receptor_status; #new roo predicate                                  
         rr:objectMap [
              rr:parentTriplesMap map:estrogenReceptorStatus; 
              rr:joinCondition [
@@ -333,7 +333,7 @@ map:invasiveBreastCancer a rr:TriplesMap;
         ];
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_HER2_receptor_status;                                                       #new roo predicate                                  
+        rr:predicate roo:has_HER2_receptor_status; #new roo predicate                                  
         rr:objectMap [
              rr:parentTriplesMap map:HER2ReceptorStatus; 
              rr:joinCondition [
@@ -343,7 +343,7 @@ map:invasiveBreastCancer a rr:TriplesMap;
         ];
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_KI67_antigen_status;                                                       #new roo predicate                                  
+        rr:predicate roo:has_KI67_antigen_status; #new roo predicate                                  
         rr:objectMap [
              rr:parentTriplesMap map:KI67AntigenStatus; 
              rr:joinCondition [
@@ -357,7 +357,7 @@ map:histologicTyping a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/invasiveBreastCancer/histologicTyping/{histologicTyping}";
-        rr:class ncit:C154802;#Histologic Type of Cancer
+        rr:class ncit:C154802; #Histologic Type of Cancer
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -371,7 +371,7 @@ map:multifocal a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/invasiveBreastCancer/multifocal/{multifocal}";
-        rr:class ncit:C94770;#Multifocal Breast Carcinoma
+        rr:class ncit:C94770; #Multifocal Breast Carcinoma
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -385,7 +385,7 @@ map:invasionDepth a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/invasiveBreastCancer/invasionDepth/{invasionDepth}";
-        rr:class roo:invasionDepth;                                                                                         #new roo class
+        rr:class roo:invasionDepth; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -416,7 +416,7 @@ map:differentiationGrade a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/invasiveBreastCancer/differentiationGrade/{differentiationGrade}";
-        rr:class ncit:C93526;#Cellular Differentiation Grade Code
+        rr:class ncit:C93526; #Cellular Differentiation Grade Code
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -430,7 +430,7 @@ map:progesteronReceptorStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/invasiveBreastCancer/progesteronReceptorStatus/{progesteronReceptorStatus}";
-        rr:class ncit:C16149;#progesteronReceptorStatus
+        rr:class ncit:C16149; #progesteronReceptorStatus
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -444,7 +444,7 @@ map:estrogenReceptorStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/invasiveBreastCancer/estrogenReceptorStatus/{estrogenReceptorStatus}";
-        rr:class ncit:C16150;#estrogenReceptorStatus
+        rr:class ncit:C16150; #estrogenReceptorStatus
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -458,7 +458,7 @@ map:HER2ReceptorStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/invasiveBreastCancer/HER2ReceptorStatus/{HER2ReceptorStatus}";
-        rr:class roo:HER2ReceptorStatus;                                                            #new roo class
+        rr:class roo:HER2ReceptorStatus; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -472,7 +472,7 @@ map:KI67AntigenStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/invasiveBreastCancer/KI67AntigenStatus/";
-        rr:class roo:KI67AntigenStatus;                                                            #new roo class
+        rr:class roo:KI67AntigenStatus; #new roo class
     ]; 
     rr:predicateObjectMap [
         rr:predicate roo:P100397; #has_result
@@ -499,7 +499,7 @@ map:KI67AntigenTestResult a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/invasiveBreastCancer/KI67AntigenStatus/KI67AntigenTestResult/{KI67AntigenTestResult}";
-        rr:class roo:KI67AntigenTestResult;                                                            #new roo class
+        rr:class roo:KI67AntigenTestResult; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -527,7 +527,7 @@ map:inSituBreastCancer a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/inSituBreastCancer/";
-        rr:class roo:KI67AntigenStatus; #Stage 0 Breast Cancer AJCC v6 and v7
+        rr:class ncit:C3641; #Stage 0 Breast Cancer AJCC v6 and v7
     ]; 
     rr:predicateObjectMap [
         rr:predicate roo:P100397; #has_result
@@ -560,7 +560,7 @@ map:inSituBreastCancer a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_size;                                                                          #new roo predicate                                                        
+        rr:predicate roo:has_size; #new roo predicate                                                        
         rr:objectMap [
             rr:parentTriplesMap map:tumourSize;
             rr:joinCondition [
@@ -570,9 +570,9 @@ map:inSituBreastCancer a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_differentiation_grade;                                                           #new roo predicate                                                        
+        rr:predicate roo:has_differentiation_grade; #new roo predicate                                                        
         rr:objectMap [
-            rr:parentTriplesMap map:differentiationGrade;  #
+            rr:parentTriplesMap map:differentiationGrade;  
             rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
@@ -618,7 +618,7 @@ map:pTStage a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/pTStage/{pTStage}";
-        rr:class roo:pTStage;                                                                  #new roo class
+        rr:class roo:pTStage; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -632,7 +632,7 @@ map:ypTStage a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/ypTStage/{ypTStage}";
-        rr:class roo:ypTStage;                                                                  #new roo class
+        rr:class roo:ypTStage; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -646,7 +646,7 @@ map:pNStage a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/pNStage/{pNStage}";
-        rr:class roo:pNStage;                                                                  #new roo class
+        rr:class roo:pNStage; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -660,7 +660,7 @@ map:ypNStage a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/ypNStage/{ypNStage}";
-        rr:class roo:ypNStage;                                                                  #new roo class
+        rr:class roo:ypNStage; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -674,10 +674,10 @@ map:surgery a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery";
-        rr:class 	ncit:C157740 ;  #cancer surgery
+        rr:class ncit:C157740; #cancer surgery
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_type;                                                           #new roo predicate                                                        
+        rr:predicate roo:has_type; #new roo predicate                                                        
         rr:objectMap [
             rr:parentTriplesMap map:surgicalProcedure;
             rr:joinCondition [
@@ -687,7 +687,7 @@ map:surgery a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100423;  #consists_of                                                       
+        rr:predicate roo:P100423; #consists_of                                                       
         rr:objectMap [
             rr:parentTriplesMap map:plasticSurgery;
             rr:joinCondition [
@@ -697,7 +697,7 @@ map:surgery a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_type;                                                           #new roo predicate                                                        
+        rr:predicate roo:has_type; #new roo predicate                                                        
         rr:objectMap [
             rr:parentTriplesMap map:reResection;
             rr:joinCondition [
@@ -707,7 +707,7 @@ map:surgery a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_lymph_node_dissection;                                                  #new roo predicate                                                        
+        rr:predicate roo:has_lymph_node_dissection; #new roo predicate                                                        
         rr:objectMap [
             rr:parentTriplesMap map:axillaryLymphNodeDissection;
             rr:joinCondition [
@@ -721,7 +721,7 @@ map:surgicalProcedure a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/surgicalProcedure/{surgicalProcedure}";
-        rr:class ncit:C15329; #surgicalProcedure
+        rr:class ncit:C15329; #surgical procedure
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -754,7 +754,7 @@ map:reResection a rr:TriplesMap;
         rr:class ncit:C48600; #Re-Excision
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100423;  #consists_of                                                       
+        rr:predicate roo:P100423; #consists_of                                                       
         rr:objectMap [
             rr:parentTriplesMap map:reResectionStatus;
             rr:joinCondition [
@@ -764,10 +764,10 @@ map:reResection a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100295;  #has_procedure_date                    
+        rr:predicate roo:P100295; #has_procedure_date                    
         rr:objectMap [
-             rr:parentTriplesMap map:procedureDate;
-             rr:joinCondition [
+            rr:parentTriplesMap map:procedureDate;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
@@ -784,7 +784,7 @@ map:reResection a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100291 ;  #has_patient_finding                                                       
+        rr:predicate roo:P100291; #has_patient_finding                                                       
         rr:objectMap [
             rr:parentTriplesMap map:postOpHematoma;
             rr:joinCondition [
@@ -794,7 +794,7 @@ map:reResection a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100291 ;  #has_patient_finding                                                        
+        rr:predicate roo:P100291; #has_patient_finding                                                        
         rr:objectMap [
             rr:parentTriplesMap map:postOpSeroma;
             rr:joinCondition [
@@ -804,7 +804,7 @@ map:reResection a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:P100291 ;  #has_patient_finding                                                      
+        rr:predicate roo:P100291; #has_patient_finding                                                      
         rr:objectMap [
             rr:parentTriplesMap map:postOpBreastInfection;
             rr:joinCondition [
@@ -818,7 +818,7 @@ map:reResectionStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/reResection/reResectionStatus/{reResectionStatus}";
-        rr:class roo:reResectionStatus;                                                                 #new roo class
+        rr:class roo:reResectionStatus; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -832,7 +832,7 @@ map:residualTumourStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/neoplasm/reResection/residualTumourStatus/{residualTumourStatus}";
-        rr:class roo:residualTumourStatus;                                                                 #new roo class
+        rr:class roo:residualTumourStatus; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -901,70 +901,70 @@ map:axillaryLymphNodeDissection a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100295;  #has_procedure_date                    
+        rr:predicate roo:P100295; #has_procedure_date                    
         rr:objectMap [
-             rr:parentTriplesMap map:procedureDate;
-             rr:joinCondition [
+            rr:parentTriplesMap map:procedureDate;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:has_resected_nodes;                                        #new roo predicate                  
+        rr:predicate roo:has_resected_nodes; #new roo predicate                  
         rr:objectMap [
-             rr:parentTriplesMap map:numberOfResectedNodes;
-             rr:joinCondition [
+            rr:parentTriplesMap map:numberOfResectedNodes;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:has_involved_nodes;                                        #new roo predicate                  
+        rr:predicate roo:has_involved_nodes; #new roo predicate                  
         rr:objectMap [
-             rr:parentTriplesMap map:numberOfInvolvedNodes;
-             rr:joinCondition [
+            rr:parentTriplesMap map:numberOfInvolvedNodes;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:has_size;                                                  #new roo predicate                  
+        rr:predicate roo:has_size; #new roo predicate                  
         rr:objectMap [
-             rr:parentTriplesMap map:sizeOfLargestPathologicalLymphNode;
-             rr:joinCondition [
+            rr:parentTriplesMap map:sizeOfLargestPathologicalLymphNode;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:has_extra_nodal_growth;                                        #new roo predicate                  
+        rr:predicate roo:has_extra_nodal_growth; #new roo predicate                  
         rr:objectMap [
-             rr:parentTriplesMap map:extraNodalGrowth;
-             rr:joinCondition [
+            rr:parentTriplesMap map:extraNodalGrowth;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:has_top_node_status;                                        #new roo predicate                  
+        rr:predicate roo:has_top_node_status; #new roo predicate                  
         rr:objectMap [
-             rr:parentTriplesMap map:topNodeStatus;
-             rr:joinCondition [
+            rr:parentTriplesMap map:topNodeStatus;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:has_intramammary_nodes;                                        #new roo predicate                  
+        rr:predicate roo:has_intramammary_nodes; #new roo predicate                  
         rr:objectMap [
-             rr:parentTriplesMap map:intraMammaryNode;
-             rr:joinCondition [
+            rr:parentTriplesMap map:intraMammaryNode;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
@@ -975,9 +975,9 @@ map:axillaryLymphNodeDissectionStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/axillaryLymphNodeDissectionStatus/{axillaryLymphNodeDissectionStatus}";
-        rr:class roo:axillaryLymphNodeDissectionStatus;                                                                 #new roo class
+        rr:class roo:axillaryLymphNodeDissectionStatus; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:local_value; 
         rr:objectMap [
             rr:column "axillaryLymphNodeDissectionPerformed"; 
@@ -989,9 +989,9 @@ map:numberOfResectedNodes a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/numberOfResectedNodes/{numberOfResectedNodes}";
-        rr:class roo:numberOfResectedNodes;                                                                 #new roo class
+        rr:class roo:numberOfResectedNodes; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
             rr:column "numberOfResectedNodes"; 
@@ -1003,9 +1003,9 @@ map:numberOfInvolvedNodes a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/numberOfInvolvedNodes/{numberOfInvolvedNodes}";
-        rr:class ncit:C4904;  #Metastatic Malignant Neoplasm in Lymph Node
+        rr:class ncit:C4904; #Metastatic Malignant Neoplasm in Lymph Node
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
             rr:column "numberOfInvolvedNodes"; 
@@ -1017,7 +1017,7 @@ map:sizeOfLargestPathologicalLymphNode a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/sizeOfLargestPathologicalLymphNode/{sizeOfLargestPathologicalLymphNode}";
-        rr:class roo:LymphNodeSize;                                                                 #new roo class
+        rr:class roo:LymphNodeSize; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
@@ -1041,23 +1041,23 @@ map:extraNodalGrowth a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/extraNodalGrowth";
-        rr:class roo:extraNodalGrowth;                                                           #new roo predicate
+        rr:class roo:extraNodalGrowth; #new roo predicate
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100423;  #consists_of                   
+        rr:predicate roo:P100423; #consists_of                   
         rr:objectMap [
-             rr:parentTriplesMap map:extraNodalGrowthStatus;
-             rr:joinCondition [
+            rr:parentTriplesMap map:extraNodalGrowthStatus;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate  roo:P100423;  #consists_of          
+        rr:predicate  roo:P100423; #consists_of          
         rr:objectMap [
-             rr:parentTriplesMap map:numberOfNodesWithExtraNodalGrowth;
-             rr:joinCondition [
+            rr:parentTriplesMap map:numberOfNodesWithExtraNodalGrowth;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
@@ -1068,9 +1068,9 @@ map:extraNodalGrowthStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/extraNodalGrowth/extraNodalGrowthStatus/{extraNodalGrowthStatus}";
-        rr:class roo:extraNodalGrowthStatus;                                                           #new roo predicate
+        rr:class roo:extraNodalGrowthStatus; #new roo predicate
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
             rr:column "extraNodalGrowthStatus"; 
@@ -1082,9 +1082,9 @@ map:numberOfNodesWithExtraNodalGrowth a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/extraNodalGrowth/numberOfNodesWithExtraNodalGrowth/{numberOfNodesWithExtraNodalGrowth}";
-        rr:class roo:extraNodalGrowthStatus;                                                           #new roo predicate
+        rr:class roo:extraNodalGrowthStatus; #new roo predicate
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
             rr:column "numberOfNodesWithExtraNodalGrowth"; 
@@ -1096,9 +1096,9 @@ map:topNodeStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/topNodeStatus/{topNodeStatus}";
-        rr:class roo:topNodeStatus;   #high axillary of lv3?                                             #new roo class
+        rr:class roo:topNodeStatus; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
             rr:column "topNodeStatus"; 
@@ -1110,33 +1110,33 @@ map:intraMammaryNode a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/intraMammaryNode";
-        rr:class roo:intraMammaryNode;                                                           #new roo predicate
+        rr:class roo:intraMammaryNode; #new roo predicate
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100423;  #consists_of                   
+        rr:predicate roo:P100423; #consists_of                   
         rr:objectMap [
-             rr:parentTriplesMap map:intraMammaryNodeStatus;
-             rr:joinCondition [
+            rr:parentTriplesMap map:intraMammaryNodeStatus;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate  roo:P100423;  #consists_of          
+        rr:predicate  roo:P100423; #consists_of          
         rr:objectMap [
-             rr:parentTriplesMap map:numberOfintraMammaryNodesResected;
-             rr:joinCondition [
+            rr:parentTriplesMap map:numberOfintraMammaryNodesResected;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate  roo:P100423;  #consists_of          
+        rr:predicate  roo:P100423; #consists_of          
         rr:objectMap [
-             rr:parentTriplesMap map:numberOfintraMammaryNodesInvolved;
-             rr:joinCondition [
+            rr:parentTriplesMap map:numberOfintraMammaryNodesInvolved;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
@@ -1147,9 +1147,9 @@ map:intraMammaryNodeStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/intraMammaryNode/intraMammaryNodeStatus/{intraMammaryNodeStatus}";
-        rr:class roo:intraMammaryNodeStatus;                                                                 #new roo class
+        rr:class roo:intraMammaryNodeStatus; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
             rr:column "topNodeStatus"; 
@@ -1161,9 +1161,9 @@ map:numberOfintraMammaryNodesResected a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/intraMammaryNode/numberOfintraMammaryNodesResected/{numberOfintraMammaryNodesResected}";
-        rr:class roo:numberOfintraMammaryNodesResected;                                                                 #new roo class
+        rr:class roo:numberOfintraMammaryNodesResected; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
             rr:column "numberOfintraMammaryNodesResected"; 
@@ -1175,9 +1175,9 @@ map:numberOfintraMammaryNodesInvolved a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/surgery/axillaryLymphNodeDissection/intraMammaryNode/numberOfintraMammaryNodesInvolved/{numberOfintraMammaryNodesInvolved}";
-        rr:class roo:numberOfintraMammaryNodesInvolved;                                                                 #new roo class
+        rr:class roo:numberOfintraMammaryNodesInvolved; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
             rr:column "numberOfintraMammaryNodesInvolved"; 
@@ -1189,10 +1189,10 @@ map:preparationProcedure a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure";
-        rr:class roo:preparationProcedure;  #                                                            new roo class                                                           
+        rr:class roo:preparationProcedure;  #new roo class                                                           
     ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100024;  #has procedure
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has procedure
         rr:objectMap [
             rr:parentTriplesMap map:axillaryPuncture; #axillary us-fna?
             rr:joinCondition [
@@ -1201,8 +1201,8 @@ map:preparationProcedure a rr:TriplesMap;
             ]; 
         ];
     ];
-     rr:predicateObjectMap [
-        rr:predicate roo:P100024;  #has procedure
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has procedure
         rr:objectMap [
             rr:parentTriplesMap map:lymphNodeMapping;
             rr:joinCondition [
@@ -1216,20 +1216,20 @@ map:axillaryPuncture a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/axillaryPuncture";
-        rr:class roo:axillaryPuncture; #Ultra sound fine needle aspiration?                                                          #new roo predicate
+        rr:class roo:axillaryPuncture; #Ultra sound fine needle aspiration? #new roo predicate
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100423;  #consists_of                   
+        rr:predicate roo:P100423; #consists_of                   
         rr:objectMap [
-             rr:parentTriplesMap map:axillaryPunctureStatus;
-             rr:joinCondition [
+            rr:parentTriplesMap map:axillaryPunctureStatus;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100423;  #consists_of                   
+        rr:predicate roo:P100423; #consists_of                   
         rr:objectMap [
              rr:parentTriplesMap map:axillaryPunctureResult;
              rr:joinCondition [
@@ -1243,9 +1243,9 @@ map:axillaryPunctureStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/axillaryPuncture/axillaryPunctureStatus/{axillaryPunctureStatus}";
-        rr:class roo:axillaryPunctureStatus;                                                                 #new roo class
+        rr:class roo:axillaryPunctureStatus; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value 
         rr:objectMap [
             rr:column "axillaryPunctureStatus"; 
@@ -1257,9 +1257,9 @@ map:axillaryPunctureResult a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/axillaryPuncture/axillaryPunctureResult/{axillaryPunctureResult}";
-        rr:class roo:axillaryPunctureResult;                                                                 #new roo class
+        rr:class roo:axillaryPunctureResult; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:local_value; 
         rr:objectMap [
             rr:column "axillaryPunctureResult"; 
@@ -1274,20 +1274,20 @@ map:lymphNodeMapping a rr:TriplesMap;
         rr:class ncit:C18210; #lymph node mapping               
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100423;  #consists_of                   
+        rr:predicate roo:P100423; #consists_of                   
         rr:objectMap [
-             rr:parentTriplesMap map:lymphNodeMappingStatus;
-             rr:joinCondition [
+            rr:parentTriplesMap map:lymphNodeMappingStatus;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100019;  #brings_about                   
+        rr:predicate roo:P100019; #brings_about                   
         rr:objectMap [
-             rr:parentTriplesMap map:sNBiopsy;
-             rr:joinCondition [
+            rr:parentTriplesMap map:sNBiopsy;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
@@ -1298,9 +1298,9 @@ map:lymphNodeMappingStatus  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/lymphNodeMapping/lymphNodeMappingStatus/{lymphNodeMappingStatus}";
-        rr:class roo:lymphNodeMappingStatus;                                                                 #new roo class
+        rr:class roo:lymphNodeMappingStatus; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:local_value; 
         rr:objectMap [
             rr:column "lymphNodeMappingStatus"; 
@@ -1315,37 +1315,37 @@ map:sNBiopsy a rr:TriplesMap;
         rr:class ncit:C15667; #sentinel node biopsy               
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100423;  #consists_of                   
+        rr:predicate roo:P100423; #consists_of                   
         rr:objectMap [
-             rr:parentTriplesMap map:sNProcedurePlanning;
-             rr:joinCondition [
+            rr:parentTriplesMap map:sNProcedurePlanning;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100423;  #consists_of                   
+        rr:predicate roo:P100423; #consists_of                   
         rr:objectMap [
-             rr:parentTriplesMap map:sNProcedurePlanning;
-             rr:joinCondition [
+            rr:parentTriplesMap map:sNProcedurePlanning;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:has_resected_nodes;                                                         #new roo predicate                   
+        rr:predicate roo:has_resected_nodes; #new roo predicate                   
         rr:objectMap [
-             rr:parentTriplesMap map:numberOfResectedNodes;
-             rr:joinCondition [
+            rr:parentTriplesMap map:numberOfResectedNodes;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:has_involved_nodes;                                                        #new roo predicate                   
+        rr:predicate roo:has_involved_nodes; #new roo predicate                   
         rr:objectMap [
              rr:parentTriplesMap map:numberOfInvolvedNodes;
              rr:joinCondition [
@@ -1355,17 +1355,17 @@ map:sNBiopsy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:has_extra_nodal_growth;                                                     #new roo predicate                   
+        rr:predicate roo:has_extra_nodal_growth; #new roo predicate                   
         rr:objectMap [
-             rr:parentTriplesMap map:extraNodalGrowth;
-             rr:joinCondition [
+            rr:parentTriplesMap map:extraNodalGrowth;
+            rr:joinCondition [
                 rr:child "id";
                 rr:parent "id";
             ];   
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100423;  #consists_of                   
+        rr:predicate roo:P100423; #consists_of                   
         rr:objectMap [
              rr:parentTriplesMap map:sentinalNodeResult;
              rr:joinCondition [
@@ -1375,7 +1375,7 @@ map:sNBiopsy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [                                                     
-        rr:predicate roo:P100423;  #consists_of                   
+        rr:predicate roo:P100423; #consists_of                   
         rr:objectMap [
              rr:parentTriplesMap map:parasternalDrainage;
              rr:joinCondition [
@@ -1389,7 +1389,7 @@ map:sNProcedurePlanning a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/lymphNodeMapping/sNBiopsy/sNProcedurePlanning/{sNProcedurePlanning}";
-        rr:class roo:sNProcedurePlanning;                                                                 #new roo class
+        rr:class roo:sNProcedurePlanning; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -1403,7 +1403,7 @@ map:sentinalNodeResult  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/lymphNodeMapping/sNBiopsy/sentinalNodeResult/{sentinalNodeResult}";
-        rr:class roo:sentinalNodeResult;                                                                 #new roo class
+        rr:class roo:sentinalNodeResult; #new roo class
     ];
      rr:predicateObjectMap [
         rr:predicate roo:local_value; 
@@ -1417,9 +1417,9 @@ map:parasternalDrainage  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/preparationProcedure/lymphNodeMapping/sNBiopsy/parasternalDrainage/{parasternalDrainage}";
-        rr:class roo:parasternalDrainage;                                                                 #new roo class
+        rr:class roo:parasternalDrainage; #new roo class
     ];
-     rr:predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate roo:local_value; 
         rr:objectMap [
             rr:column "parasternalDrainage"; 
@@ -1430,11 +1430,11 @@ map:parasternalDrainage  a rr:TriplesMap;
 map:radiotherapy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/{id}/radiotherapy";
-            rr:class ncit:C15313; #radiation therapy
+        rr:template "patient/{id}/radiotherapy";
+        rr:class ncit:C15313; #radiation therapy
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_target; #                                                            new roo predicate  
+        rr:predicate roo:has_target; #new roo predicate  
         rr:objectMap [
             rr:parentTriplesMap map:breastTarget;
             rr:joinCondition [
@@ -1444,7 +1444,7 @@ map:radiotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_target; #                                                            new roo predicate  
+        rr:predicate roo:has_target; #new roo predicate  
         rr:objectMap [
             rr:parentTriplesMap map:partialBreastTarget;
             rr:joinCondition [
@@ -1454,7 +1454,7 @@ map:radiotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_target; #                                                            new roo predicate  
+        rr:predicate roo:has_target; #new roo predicate  
         rr:objectMap [
             rr:parentTriplesMap map:chestWallTarget;
             rr:joinCondition [
@@ -1464,7 +1464,7 @@ map:radiotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_target; #                                                            new roo predicate  
+        rr:predicate roo:has_target; #new roo predicate  
         rr:objectMap [
             rr:parentTriplesMap map:level1and2Target;
             rr:joinCondition [
@@ -1474,7 +1474,7 @@ map:radiotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_target; #                                                            new roo predicate  
+        rr:predicate roo:has_target; #new roo predicate  
         rr:objectMap [
             rr:parentTriplesMap map:level3and4Target;
             rr:joinCondition [
@@ -1484,7 +1484,7 @@ map:radiotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_target; #                                                            new roo predicate  
+        rr:predicate roo:has_target; #new roo predicate  
         rr:objectMap [
             rr:parentTriplesMap map:interPectoralNodesTarget;
             rr:joinCondition [
@@ -1494,7 +1494,7 @@ map:radiotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_target; #                                                            new roo predicate  
+        rr:predicate roo:has_target; #new roo predicate  
         rr:objectMap [
             rr:parentTriplesMap map:interMammaryNodesTarget;
             rr:joinCondition [
@@ -1508,10 +1508,10 @@ map:breastTarget  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/radiotherapy/breastTarget/{breastTarget}";
-        rr:class ncit:C12971;  #breast
+        rr:class ncit:C12971; #breast
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:predicate roo:has_treatment; #new roo predicate                         
         rr:objectMap [
             rr:column "breastTarget"; 
             rr:datatype xsd:boulean; 
@@ -1522,10 +1522,10 @@ map:chestWallTarget  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/radiotherapy/chestWallTarget/{chestWallTarget}";
-        rr:class ncit:C62484;  #chest wall
+        rr:class ncit:C62484; #chest wall
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:predicate roo:has_treatment; #new roo predicate                         
         rr:objectMap [
             rr:column "chestWallTarget"; 
             rr:datatype xsd:boulean; 
@@ -1536,10 +1536,10 @@ map:level1and2Target  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/radiotherapy/level1and2Target/{level1and2Target}";
-        rr:class roo:level1and2;                                                                        #rew roo class
+        rr:class roo:level1and2; #rew roo class
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:predicate roo:has_treatment; #new roo predicate                         
         rr:objectMap [
             rr:column "level1and2Target"; 
             rr:datatype xsd:boulean; 
@@ -1550,10 +1550,10 @@ map:level3and4Target  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/radiotherapy/level3and4Target/{level3and4Target}";
-        rr:class roo:level3and4;                                                                        #rew roo class
+        rr:class roo:level3and4; #rew roo class
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:predicate roo:has_treatment;  #new roo predicate                         
         rr:objectMap [
             rr:column "level3and4Target"; 
             rr:datatype xsd:boulean; 
@@ -1564,10 +1564,10 @@ map:interPectoralNodesTarget  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/radiotherapy/interPectoralNodesTarget/{interPectoralNodesTarget}";
-        rr:class ncit:ncit:C120322;  #pecotral lymph node                                               #pectoral lymph node = interpectoral lymph nodecorrect?
+        rr:class ncit:C120322; #pectoral lymph node,
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:predicate roo:has_treatment; #new roo predicate                         
         rr:objectMap [
             rr:column "interPectoralNodesTarget"; 
             rr:datatype xsd:boulean; 
@@ -1578,10 +1578,10 @@ map:interMammaryNodesTarget  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/radiotherapy/interMammaryNodesTarget/{interMammaryNodesTarget}";
-        rr:class ncit:C32853;  #internal mammary lymph node
+        rr:class ncit:C32853; #internal mammary lymph node
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:has_treatment;  #                                                            new roo predicate                         
+        rr:predicate roo:has_treatment; #new roo predicate                         
         rr:objectMap [
             rr:column "interMammaryNodesTarget"; 
             rr:datatype xsd:boulean; 
@@ -1595,7 +1595,7 @@ map:chemotherapy a rr:TriplesMap;
         rr:class ncit:C15632; #chemotherapy
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:fECOrCEF;
             rr:joinCondition [
@@ -1605,7 +1605,7 @@ map:chemotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:aC;
             rr:joinCondition [
@@ -1615,7 +1615,7 @@ map:chemotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:cMF;
             rr:joinCondition [
@@ -1625,7 +1625,7 @@ map:chemotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:docetaxal;
             rr:joinCondition [
@@ -1635,7 +1635,7 @@ map:chemotherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                               #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:paclitaxel;
             rr:joinCondition [
@@ -1649,10 +1649,10 @@ map:fECOrCEF  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/chemotherapy/fECOrCEF/{fECOrCEF}";
-        rr:class ncit:C9595;  #FEC Regimen
+        rr:class ncit:C9595; #FEC Regimen
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  # has_value                        
+        rr:predicate roo:P100042; # has_value                        
         rr:objectMap [
             rr:column "fECOrCEF"; 
             rr:datatype xsd:boulean; 
@@ -1663,7 +1663,7 @@ map:aC  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/chemotherapy/aC/{aC}";
-        rr:class ncit:C63415;  #AC Regimen
+        rr:class ncit:C63415; #AC Regimen
     ];
      rr:predicateObjectMap [
         rr:predicate roo:P100042;  #has_value                         
@@ -1673,42 +1673,42 @@ map:aC  a rr:TriplesMap;
         ];
     ].
 
-map:cMF  a rr:TriplesMap;
+map:cMF a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/chemotherapy/cMF/{cMF}";
-        rr:class ncit:C9874;  #CMF Regimen
+        rr:class ncit:C9874; #CMF Regimen
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "cMF"; 
             rr:datatype xsd:boulean; 
         ];
     ].
 
-map:docetaxal  a rr:TriplesMap;
+map:docetaxal a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/chemotherapy/docetaxal/{docetaxal}";
-        rr:class ncit:C1526;  #docetaxel
+        rr:class ncit:C1526; #docetaxel
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "docetaxal"; 
             rr:datatype xsd:boulean; 
         ];
     ].
 
-map:paclitaxel  a rr:TriplesMap;
+map:paclitaxel a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/chemotherapy/paclitaxel/{paclitaxel}";
-        rr:class ncit:C1411;  #paclitaxel
+        rr:class ncit:C1411; #paclitaxel
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "paclitaxel"; 
             rr:datatype xsd:boulean; 
@@ -1718,11 +1718,11 @@ map:paclitaxel  a rr:TriplesMap;
 map:hormoneTherapy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/{id}/hormoneTherapy";
-            rr:class ncit:C15445; #hormone therapy
+        rr:template "patient/{id}/hormoneTherapy";
+        rr:class ncit:C15445; #hormone therapy
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:tamoxifen;
             rr:joinCondition [
@@ -1732,7 +1732,7 @@ map:hormoneTherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:aromataseInhibitor;
             rr:joinCondition [
@@ -1742,7 +1742,7 @@ map:hormoneTherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:otherHormoneTherapy;
             rr:joinCondition [
@@ -1752,28 +1752,28 @@ map:hormoneTherapy a rr:TriplesMap;
         ];
     ].
 
-map:tamoxifen  a rr:TriplesMap;
+map:tamoxifen a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/hormoneTherapy/tamoxifen/{tamoxifen}";
-        rr:class ncit:C62078;  #tamoxifen
+        rr:class ncit:C62078; #tamoxifen
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "tamoxifen"; 
             rr:datatype xsd:boulean; 
         ];
     ].
     
-map:aromataseInhibitor  a rr:TriplesMap;
+map:aromataseInhibitor a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/hormoneTherapy/aromataseInhibitor/{aromataseInhibitor}";
-        rr:class ncit:C1740;  #Aromatase Inhibitor
+        rr:class ncit:C1740; #Aromatase Inhibitor
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "aromataseInhibitor"; 
             rr:datatype xsd:boulean; 
@@ -1784,10 +1784,10 @@ map:otherHormoneTherapy  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/hormoneTherapy/otherHormoneTherapy/{otherHormoneTherapy}";
-        rr:class ncit:C147908;  #Hormone Therapy Agent
+        rr:class ncit:C147908; #Hormone Therapy Agent
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "otherHormoneTherapy"; 
             rr:datatype xsd:boulean; 
@@ -1797,11 +1797,11 @@ map:otherHormoneTherapy  a rr:TriplesMap;
 map:targetedTherapy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
     rr:subjectMap [
-            rr:template "patient/{id}/targetedTherapy";
-            rr:class ncit:C93352; #targeted therapy
+        rr:template "patient/{id}/targetedTherapy";
+        rr:class ncit:C93352; #targeted therapy
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:trastuzumab;
             rr:joinCondition [
@@ -1811,7 +1811,7 @@ map:targetedTherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:pertuzumab;
             rr:joinCondition [
@@ -1821,7 +1821,7 @@ map:targetedTherapy a rr:TriplesMap;
         ];
     ];
     rr:predicateObjectMap [
-        rr:predicate roo:has_manifestation;                                                                #new roo predicate
+        rr:predicate roo:has_manifestation; #new roo predicate
         rr:objectMap [
             rr:parentTriplesMap map:otherTargetedTherapy;
             rr:joinCondition [
@@ -1831,28 +1831,28 @@ map:targetedTherapy a rr:TriplesMap;
         ];
     ].
      
-map:trastuzumab  a rr:TriplesMap;
+map:trastuzumab a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/targetedTherapy/trastuzumab/{trastuzumab}";
         rr:class ncit:C1647;  #Trastuzumab
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "Trastuzumab"; 
             rr:datatype xsd:boulean; 
         ];
     ].
      
-map:pertuzumab  a rr:TriplesMap;
+map:pertuzumab a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/targetedTherapy/pertuzumab/{pertuzumab}";
-        rr:class ncit:C38692;  #pertuzumab
+        rr:class ncit:C38692; #pertuzumab
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "pertuzumab"; 
             rr:datatype xsd:boulean; 
@@ -1863,10 +1863,10 @@ map:patientReportedOutcomeMeasures a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/patientReportedOutcomeMeasures";
-        rr:class roo:patientReportedOutcomeMeasures;                              #new roo class                                                        
+        rr:class roo:patientReportedOutcomeMeasures; #new roo class                                                        
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100423  ;  #consistsOf
+        rr:predicate roo:P100423; #consistsOf
         rr:objectMap [
             rr:parentTriplesMap map:EORTCQLQ_BR23;   
             rr:joinCondition [
@@ -1876,7 +1876,7 @@ map:patientReportedOutcomeMeasures a rr:TriplesMap;
         ];
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100423  ;  #consistsOf
+        rr:predicate roo:P100423; #consistsOf
         rr:objectMap [
             rr:parentTriplesMap map:sneeuwQuestionnaire;   
             rr:joinCondition [
@@ -1886,7 +1886,7 @@ map:patientReportedOutcomeMeasures a rr:TriplesMap;
         ];
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100423  ;  #consistsOf
+        rr:predicate roo:P100423; #consistsOf
         rr:objectMap [
             rr:parentTriplesMap map:cardiovascularRiskQuestionnaire;   
             rr:joinCondition [
@@ -1900,10 +1900,10 @@ map:EORTCQLQ_BR23  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/patientReportedOutcomeMeasures/EORTCQLQ_BR23/{EORTCQLQ_BR23}";
-        rr:class ncit:C148236;  #Quality of Life Questionnaire BR-23
+        rr:class ncit:C148236; #Quality of Life Questionnaire BR-23
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "EORTCQLQ_BR23"; 
             rr:datatype xsd:string; 
@@ -1914,10 +1914,10 @@ map:sneeuwQuestionnaire  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/patientReportedOutcomeMeasures/sneeuwQuestionnaire/{sneeuwQuestionnaire}";
-        rr:class roo:sneeuwQuestionnaire;                                                                                   #new roo class
+        rr:class roo:sneeuwQuestionnaire; #new roo class
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "sneeuwQuestionnaire"; 
             rr:datatype xsd:string; 
@@ -1928,10 +1928,10 @@ map:cardiovascularRiskQuestionnaire  a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
     rr:subjectMap [
         rr:template "patient/{id}/patientReportedOutcomeMeasures/cardiovascularRiskQuestionnaire/{cardiovascularRiskQuestionnaire}";
-        rr:class roo:cardiovascularRiskQuestionnaire;                                                                     #new roo class
+        rr:class roo:cardiovascularRiskQuestionnaire; #new roo class
     ];
      rr:predicateObjectMap [
-        rr:predicate roo:P100042;  #has_value                         
+        rr:predicate roo:P100042; #has_value                         
         rr:objectMap [
             rr:column "cardiovascularRiskQuestionnaire"; 
             rr:datatype xsd:string; 
