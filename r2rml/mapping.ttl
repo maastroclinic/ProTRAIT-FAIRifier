@@ -1,0 +1,730 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix ex: <http://example.com/ns#>.
+@prefix map: <http://mapping.local/>.
+@prefix sty: <http://purl.bioontology.org/ontology/STY/>.
+@prefix sio: <http://semanticscience.org/resource/SIO_>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
+@prefix roo: <http://www.cancerdata.org/roo/>.
+@prefix icd: <http://purl.bioontology.org/ontology/ICD10/>.
+@prefix skos: <http://www.w3.org/2008/05/skos#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix uo: <http://purl.obolibrary.org/obo/UO_>.
+@prefix time: <http://www.w3.org/2006/time#>.
+
+
+###########################################
+# Add age at diagnosis 
+###########################################    
+map:ageAtDiagnosisQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, age FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+    
+map:ageAtDiagnosis a rr:TriplesMap;
+    rr:logicalTable map:ageAtDiagnosisQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/ageAtDiagnosis/{age}";
+        rr:class roo:C100002; #age_at_diagnosis
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value
+        rr:objectMap [
+            rr:column "age"; 
+            rr:datatype xsd:integer;
+        ];
+    ];                                                            
+    rr:predicateObjectMap [
+        rr:predicate roo:P100029; #is_diagnosed_with
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ]. 
+
+map:neoplasm a rr:TriplesMap;
+    rr:logicalTable map:ageAtDiagnosisQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm";
+        rr:class ncit:C3262; #neoplasm
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100016; #has_age_at_diagnosis
+        rr:objectMap [
+            rr:parentTriplesMap map:ageAtDiagnosis;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+    
+###########################################
+# Add alcohol use history 
+########################################### 
+map:alcoholUseHistoryQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, alcoholusehistory FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:alcoholUseHistory a rr:TriplesMap;
+    rr:logicalTable map:alcoholUseHistoryQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/personalHistory/alcoholUseHistory/{alcoholusehistory}";
+            rr:class ncit:C81229; #alcohol use history
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "alcoholusehistory";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100022; #has_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:alcoholUseHistory;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add birth year 
+###########################################   
+map:birthYearQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, birthyear FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:birthYear a rr:TriplesMap;
+    rr:logicalTable map:birthYearQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/birthYear/{birthyear}";
+        rr:class ncit:C25155; #birth
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has_unit
+        rr:objectMap [
+            rr:column "birthyear";
+            rr:datatype xsd:gYear; #gYear?
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:is_born; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:birthYear;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add bodyheight
+########################################### 
+map:bodyHeightQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, bodyheight FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:bodyHeight a rr:TriplesMap;
+    rr:logicalTable map:bodyHeightQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/bodyHeight/{bodyheight}";
+        rr:class ncit:C94488; #stature
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has_unit
+        rr:objectMap [
+            rr:parentTriplesMap map:centimeter;
+            rr:joinCondition [
+                rr:child "id";      
+                rr:parent "id";
+            ];
+        ];       
+    ].
+
+map:centimeter a rr:TriplesMap;
+    rr:logicalTable map:bodyHeightQuery;    
+    rr:subjectMap [
+        rr:template "centimeter";
+        rr:class uo:0000015; #centimeter
+    ].  
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100248; #has_body_height
+        rr:objectMap [
+            rr:parentTriplesMap map:bodyHeight;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add bodyweight 
+########################################### 
+map:bodyWeightQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, bodyweight FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:bodyWeight a rr:TriplesMap;
+    rr:logicalTable map:bodyWeightQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/bodyWeight/{bodyweight}";
+        rr:class ncit:C81328; #bodyweight
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has_unit
+        rr:objectMap [
+            rr:parentTriplesMap map:kilogram;
+            rr:joinCondition [
+                rr:child "id";  
+                rr:parent "id";
+            ];
+        ];       
+    ].
+
+map:kilogram a rr:TriplesMap;
+    rr:logicalTable map:bodyWeightQuery; #what query do units get?   
+    rr:subjectMap [
+        rr:template "kilogram";
+        rr:class uo:0000009; #kilogram
+    ].  
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100249; #has_body_weight
+        rr:objectMap [
+            rr:parentTriplesMap map:bodyWeight;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add charlson comorbidity index
+###########################################     
+map:charlsonComorbidityIndexQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, charlsoncomorbidityindex FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:charlsonComorbidityIndex a rr:TriplesMap;
+    rr:logicalTable map:charlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/comorbidity/charlsonComorbidityIndex/{charlsoncomorbidityindex}";
+        rr:class roo:charlsonComorbidityIndex; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "charlsoncomorbidityindex"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100022; #has_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:charlsonComorbidityIndex;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add comorbidity                                                   #Why is this created? no reference in xls
+########################################### 
+# map:comorbidityQuery a rr:LogicalTable;
+#     rr:sqlQuery """SELECT id, comorbidity FROM PBDWHackathon2018;""";
+#     rdfs:label "";
+#     skos:definition "".
+
+# map:comorbidity a rr:TriplesMap;
+#     rr:logicalTable map:comorbidityQuery;    
+#     rr:subjectMap [
+#             rr:template "patient/{id}/comorbidityIndex/{comorbidity}";
+#             rr:class ncit:C2991; #disease or disorder
+#     ];
+#     rr:predicateObjectMap [
+#         rr:predicate roo:local_value;
+#         rr:objectMap [
+#             rr:column "comorbidity"; 
+#             rr:datatype xsd:string;
+#         ];
+#     ].
+
+# map:patient a rr:TriplesMap;
+#     rr:logicalTable map:comorbidityQuery;
+#     rr:subjectMap [
+#         rr:template "patient/{id}";
+#         rr:class ncit:C16960; #patient
+#     ];  
+#     rr:predicateObjectMap [                                                               
+#         rr:predicate roo:P100255; #has_comorbidity
+#         rr:objectMap [
+#             rr:parentTriplesMap map:comorbidity;
+#             rr:joinCondition [
+#                 rr:child "id";
+#                 rr:parent "id";
+#             ];
+#         ];
+#     ].
+
+###########################################
+# Add educationlevel 
+###########################################  
+map:educationLevelQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, educationlevel FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:educationLevel a rr:TriplesMap;
+    rr:logicalTable map:educationLevelQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/educationLevel/{educationlevel}";
+        rr:class ncit:C17953; #education level
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "educationlevel";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:has_education_level; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:educationLevel;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add patient 
+###########################################
+map:patientQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:patient a rr:TriplesMap;
+    rr:logicalTable map:patientQuery;
+    rr:subjectMap [
+        rr:template "patient";
+        rr:class ncit:C16960; #patient
+    ].
+
+###########################################
+# Add identifier                                
+###########################################
+map:identifier a rr:TriplesMap;
+    rr:logicalTable map:patientQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/";
+        rr:class ncit:C25364; #identifier
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "id"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100061; #has_person_identifier
+        rr:objectMap [
+            rr:parentTriplesMap map:identifier;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+
+###########################################
+# Add referring Centre
+###########################################
+map:referringCentreQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, referringcentre FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:referringCentre a rr:TriplesMap;
+    rr:logicalTable map:referringCentreQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/referringCentre/{referringcentre}";
+        rr:class ncit:C19326; #clinics and hospitals 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "referringcentre"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:referred_by; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:referringCentre;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add relationship status 
+########################################### 
+map:relationshipStatusQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, relationshipstatus FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:relationshipStatus a rr:TriplesMap;
+    rr:logicalTable map:relationshipStatusQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/relationshipStatus/{relationshipstatus}";
+        rr:class ncit:C25188; #marital status
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "relationshipstatus";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:has_relationship_status; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:relationshipStatus;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add biological Sex 
+###########################################    
+map:sexQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, sex FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:biologicalSex a rr:TriplesMap;
+    rr:logicalTable map:sexQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/biologicalSex/{sex}";
+        rr:class ncit:C28421; #sex
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "sex";
+            rr:datatype xsd:string;
+        ];
+    ].  
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100018; #has_biological_sex
+        rr:objectMap [
+            rr:parentTriplesMap map:biologicalSex;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add smoking status 
+###########################################  
+map:smokingStatusQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, smokingstatus, timestoppedsmoking FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:smokingStatus a rr:TriplesMap;
+    rr:logicalTable map:smokingStatusQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/smokingStatus/{smokingstatus}";
+        rr:class ncit:C19796; #smoking status
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "smokingstatus"; 
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100306; #has_smoking_status
+        rr:objectMap [
+            rr:parentTriplesMap map:formerSmoker;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100306; #has_smoking_status
+        rr:objectMap [
+            rr:parentTriplesMap map:currentSmoker;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:formerSmoker a rr:TriplesMap;
+    rr:logicalTable map:smokingStatusQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/smokingStatus/formerSmoker/{smokingstatus}";
+        rr:class ncit:C67148; #former smoker
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value; 
+        rr:objectMap [
+            rr:column "smokingstatus";
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has_unit
+        rr:objectMap [
+            rr:parentTriplesMap map:packYears;                                      
+            rr:joinCondition [ 
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_time_period; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:timeStoppedSmoking;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:timeStoppedSmoking a rr:TriplesMap;
+    rr:logicalTable map:smokingStatusQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/smokingStatus/formerSmoker/timeStoppedSmoking/{timestoppedsmoking}";
+        rr:class roo:timeStoppedSmoking;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value; 
+        rr:objectMap [
+            rr:column "timestoppedsmoking";
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has_unit
+        rr:objectMap [
+            rr:parentTriplesMap map:month;
+            rr:joinCondition [
+                rr:child "id"; 
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:currentSmoker a rr:TriplesMap;
+    rr:logicalTable map:smokingStatusQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/smokingStatus/currentSmoker/{smokingstatus}";
+        rr:class ncit:C67147;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value; 
+        rr:objectMap [
+            rr:column "smokingstatus";
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has_unit
+        rr:objectMap [
+            rr:parentTriplesMap map:packYears;
+            rr:joinCondition [
+                rr:child "id";      
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:packYears a rr:TriplesMap;
+    rr:logicalTable map:smokingStatusQuery;    
+    rr:subjectMap [
+        rr:template "packyears";
+        rr:class ncit:C73993; #pack year
+    ].
+
+map:month a rr:TriplesMap;
+    rr:logicalTable map:smokingStatusQuery;    
+    rr:subjectMap [
+        rr:template "month";             
+        rr:class uo:0000035; #month
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100306; #has smoking status
+        rr:objectMap [
+            rr:parentTriplesMap map:smokingStatus;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add treating centre
+###########################################
+map:treatingCentreQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, treatingcentre, registrationdate, contactpersonforparticlecentre FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:treatingCentre a rr:TriplesMap;
+    rr:logicalTable map:treatingCentreQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/treatingCentre/{treatingcentre}";
+        rr:class ncit:C19326;  #clinics and hospitals
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "treatingcentre"; 
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_contact_person; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:contactPersonForParticleCentre; #deleted in newest version
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_registration_date; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:registrationDate;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];        
+        ];
+    ]. 
+
+map:registrationDate a rr:TriplesMap;
+    rr:logicalTable map:treatingCentreQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/registration/{registrationdate}";
+        rr:class ncit:C25646; #registration
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value
+        rr:objectMap [
+            rr:column "registrationdate"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:contactPersonForParticleCentre a rr:TriplesMap;
+    rr:logicalTable map:treatingCentreQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/treatingCentre/contactPersonForParticleCentre/{contactpersonforparticlecentre}";
+        rr:class ncit:C25461; #contact person 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "contactpersonforparticlecentre"; 
+            rr:datatype xsd:string;
+        ];
+    ].      
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100039; #is_treated_in
+        rr:objectMap [
+            rr:parentTriplesMap map:treatingCentre;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+###########################################
+# Add weightloss at three months
+########################################### 
+map:weightLoss3MonthsQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, weightloss3monthsbeforert FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:weightLoss3Months a rr:TriplesMap;
+    rr:logicalTable map:weightLoss3MonthsQuery; 
+    rr:subjectMap [
+        rr:template "patient/{id}/weightLoss3MonthsBeforeRt/{weightloss3monthsbeforert}";
+        rr:class ncit:C138908; #weightloss over past 3 months
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "weightloss3monthsbeforert"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100022; #has_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:weightLoss3Months;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

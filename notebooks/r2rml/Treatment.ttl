@@ -809,7 +809,7 @@ map:startDateOfChemotherapy a rr:TriplesMap;
             rr:column "startDateOfChemoTherapy}"; 
             rr:datatype xsd:date;
         ];
-    ];
+    ].
 
 map:endDateOfChemoTherapy a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
@@ -823,7 +823,7 @@ map:endDateOfChemoTherapy a rr:TriplesMap;
             rr:column "endDateOfChemoTherapy}"; 
             rr:datatype xsd:date;
         ];
-    ];
+    ].
 
 map:systemicTreatment a rr:TriplesMap;
     rr:logicalTable map:basicQuery;

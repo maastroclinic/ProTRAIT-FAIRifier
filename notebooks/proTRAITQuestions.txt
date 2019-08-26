@@ -1,0 +1,40 @@
+Questions proTRAIT
+
+Klnische vragen proTRAIT - mammae
+•	NCIT (national cancer institute thesaurus) mainly uses CTCAE v 5.0 is there a reason for us to use v 4.03? using version 5 seems more future proof to me? Now some subjects have a v5.0 ontology (NCIT) because the v4.03 ontology does not exist.
+	SOLVED 	- using CTCAE  v5.0 now
+•	(row204) Combining DVT and Lung embolism in one ontology seems strange, NCIT has an ontology for each one separate, since every embolism comes from a deep vein thrombus is it OK to change the subject ontology to DVT only, or should we create 2 separate subjects?
+		- NKR (IKNL) item lists, or create new ontology
+•	(row 29) Size invasive component uses NCIT ontology for invasive depth; is this a correct assumption?
+		- use size
+•	Size of pathological lymph node has no unit, is mm the correct unit?
+	SOLVED - YES
+•	(row 84) axillary puncture uses NCIT ontology for ultra sound fine needle aspiration; is this a correct assumption?
+		- No check NKR item lists
+•	(row 182 and row 189) can these use the same pain chest wall subject ontology? If not then what is the difference for the ontology description. 
+	SOLVED	- new list without duplicates is created
+•	(row 108) I have interpreted/specified the subheading “radiotherapy related factors” into “proton therapy related” factors? 
+		- check which items are photon and which ones are proton
+•	(row 121) Interpectoral nodes uses NCIT ontology for pectoral node; is this a correct assumption?
+		- NOT CLEAR YET
+•	(row 151) no list but a table behind subject “dose to oar treatment planning”?  What is going to happen to this table?
+	SOLVED	- check with open clinica excel file for the appropriate items 
+•	(row 185) arm edema uses NCIT ontology for edema limbs CTCAE is this a correct assumption? (edema specific for an arm doesn’t exist with a CTCAE connotation) 
+	SOLVED	- yes
+•	(row 187) fibrosis uses NCIT ontology for fibrosis cosmesis CTCAE is the a correct assumption?
+	SOLVED	- change to CTCAE fibrosis deep connective tissue
+•	(row 190) rib fracture, No ontology available with a CTCAE connotation, create a new one or is one without CTCAE acceptable?
+	SOLVED 	- CTCAE fracture
+•	(row132) boost technique uses the NCIT ontology for “boost radiation therapy” is this a correct assumption?
+	SOLVED	- correct ontology
+
+Klnische vragen proTRAIT - prostate
+•	(row143) pain (document location), uses NCIT tumor pain CTCAE, is this a correct assumption. Also should there be a separate subject for the location variable? 
+•	(row 44&45) Gleason score x and y use the NCIT ontology for the gleason score primary and secondary. Is this the correct assumption?
+•	(row 98) Prostate loge = prostate region?
+•	(row109) is there a difference between this Gleason sum score and the on row 43? Or can they use the same ontology.
+•	(row 28&29) when ADT uses the NCIT androgen suppression ontology, is this a correct assumption?
+
+
+
+
