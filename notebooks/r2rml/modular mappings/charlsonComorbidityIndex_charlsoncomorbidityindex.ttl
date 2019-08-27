@@ -1,0 +1,33 @@
+
+###########################################
+# Add charlson comorbidity index
+###########################################     
+map:charlsonComorbidityIndexQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, charlsoncomorbidityindex FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:charlsonComorbidityIndex a rr:TriplesMap;
+    rr:logicalTable map:charlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/comorbidity/charlsonComorbidityIndex/{charlsoncomorbidityindex}";
+        rr:class roo:charlsonComorbidityIndex; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "charlsoncomorbidityindex"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100022; #has_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:charlsonComorbidityIndex;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

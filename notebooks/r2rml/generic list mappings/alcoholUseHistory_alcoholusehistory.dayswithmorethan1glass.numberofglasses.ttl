@@ -1,0 +1,81 @@
+
+###########################################
+# Add alcohol use history 
+########################################### 
+map:alcoholUseHistoryQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_ALCOHOL as alcoholusehistory, GEN_ALCOHOL_DAYS as dayswithmorethan1glass, GEN_ALCOHOL_GLASS as numberofglasses FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:alcoholUseHistory a rr:TriplesMap;
+    rr:logicalTable map:alcoholUseHistoryQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/personalHistory/alcoholUseHistory/{alcoholusehistory}";
+        rr:class ncit:C81229; #alcohol use history
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "alcoholusehistory";
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:daysWithMoreThan1Glass;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:numberOfGlasses;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:daysWithMoreThan1Glass a rr:TriplesMap;
+    rr:logicalTable map:alcoholUseHistoryQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/personalHistory/alcoholUseHistory/daysWithMoreThan1Glass/{dayswithmorethan1glass}";
+        rr:class roo:daysWithMoreThan1Glass; #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "dayswithmorethan1glass"; 
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:numberOfGlasses a rr:TriplesMap;
+    rr:logicalTable map:alcoholUseHistoryQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/personalHistory/alcoholUseHistory/numberOfGlasses/{numberofglasses}";
+        rr:class roo:numberOfGlasses; #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "numberofglasses"; 
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100022; #has_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:alcoholUseHistory;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

@@ -1,0 +1,33 @@
+
+###########################################
+# Add birth year 
+###########################################   
+map:birthYearQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_YEAR_BIRTH as birthyear FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:birthYear a rr:TriplesMap;
+    rr:logicalTable map:birthYearQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/birthYear/{birthyear}";
+        rr:class ncit:C25155; #birth
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has_unit
+        rr:objectMap [
+            rr:column "birthyear";
+            rr:datatype xsd:gYear;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:is_born; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:birthYear;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

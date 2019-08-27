@@ -1,0 +1,33 @@
+
+###########################################
+# Add biological Sex 
+###########################################    
+map:sexQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_GENDER as sex FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:biologicalSex a rr:TriplesMap;
+    rr:logicalTable map:sexQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/biologicalSex/{sex}";
+        rr:class ncit:C28421; #sex
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "sex";
+            rr:datatype xsd:string;
+        ];
+    ].  
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100018; #has_biological_sex
+        rr:objectMap [
+            rr:parentTriplesMap map:biologicalSex;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

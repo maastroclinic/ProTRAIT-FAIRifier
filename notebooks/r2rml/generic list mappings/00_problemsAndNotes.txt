@@ -1,0 +1,4 @@
+- what to do with the units? where do we put them? what object query do they get?
+- what names do we give the sql column names in the query, same as the openclinica names? same as omop/odesi?
+- multiple types of data in one column? string and boulean?
+- you cannot link the map:neoplasm to multiple queries eg. map:previousNeoplasmDiagnosisQuery either choose a different map (and use the same uri) or link from the first map.

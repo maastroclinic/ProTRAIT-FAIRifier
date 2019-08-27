@@ -1,0 +1,33 @@
+
+##########################################
+# Add comorbidity                                                   #Why is this created? no reference in xls
+########################################## 
+map:comorbidityQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT id, comorbidity FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:comorbidity a rr:TriplesMap;
+    rr:logicalTable map:comorbidityQuery;    
+    rr:subjectMap [
+            rr:template "patient/{id}/comorbidityIndex/{comorbidity}";
+            rr:class ncit:C2991; #disease or disorder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "comorbidity"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [                                                               
+        rr:predicate roo:P100255; #has_comorbidity
+        rr:objectMap [
+            rr:parentTriplesMap map:comorbidity;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

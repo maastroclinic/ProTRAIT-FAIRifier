@@ -1,0 +1,51 @@
+
+###########################################
+# Add age at diagnosis 
+###########################################    
+map:ageAtDiagnosisQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_AGE as age FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+    
+map:ageAtDiagnosis a rr:TriplesMap;
+    rr:logicalTable map:ageAtDiagnosisQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/ageAtDiagnosis/{age}";
+        rr:class roo:C100002; #age_at_diagnosis
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value
+        rr:objectMap [
+            rr:column "age"; 
+            rr:datatype xsd:integer;
+        ];
+    ];                                                            
+    rr:predicateObjectMap [
+        rr:predicate roo:P100029; #is_diagnosed_with
+        rr:objectMap [
+            rr:parentTriplesMap map:neoplasm;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ]. 
+
+map:neoplasm a rr:TriplesMap;
+    rr:logicalTable map:ageAtDiagnosisQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm";
+        rr:class ncit:C3262; #neoplasm
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100016; #has_age_at_diagnosis
+        rr:objectMap [
+            rr:parentTriplesMap map:ageAtDiagnosis;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+    

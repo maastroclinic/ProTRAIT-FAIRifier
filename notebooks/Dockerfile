@@ -1,11 +1,11 @@
 FROM python:2-slim
 
 RUN apt-get update && apt-get install -y git build-essential graphviz
-
+apt-get install libpq-dev
 RUN pip install --upgrade pip
 RUN pip install git+https://github.com/c-martinez/grlc.git@candyGene
 RUN pip install jupyter ipywidgets matplotlib pandas
-RUN pip install psycopg2-binary sqlalchemy SPARQLWrapper pymssql graphviz
+RUN pip install psycopg 2 psycopg2-binary sqlalchemy SPARQLWrapper pymssql graphviz
 RUN jupyter nbextension enable --py widgetsnbextension
 
 WORKDIR /root

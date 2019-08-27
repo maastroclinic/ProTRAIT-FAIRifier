@@ -1,0 +1,43 @@
+
+###########################################
+# Add bodyweight 
+########################################### 
+map:bodyWeightQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_WEIGHT as bodyweight FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:bodyWeight a rr:TriplesMap;
+    rr:logicalTable map:bodyWeightQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/bodyWeight/{bodyweight}";
+        rr:class ncit:C81328; #bodyweight
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has_unit
+        rr:objectMap [
+            rr:parentTriplesMap map:kilogram;
+            rr:joinCondition [
+                rr:child "id";  
+                rr:parent "id";
+            ];
+        ];       
+    ].
+
+map:kilogram a rr:TriplesMap;
+    rr:logicalTable map:bodyWeightQuery; #what query do units get?   
+    rr:subjectMap [
+        rr:template "kilogram";
+        rr:class uo:0000009; #kilogram
+    ].  
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100249; #has_body_weight
+        rr:objectMap [
+            rr:parentTriplesMap map:bodyWeight;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
