@@ -3,7 +3,7 @@
 # Add comorbidity                                                   #Why is this created? no reference in xls
 ########################################## 
 map:comorbidityQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT id, comorbidity FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT NULL as id, NULL as comorbidity FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 

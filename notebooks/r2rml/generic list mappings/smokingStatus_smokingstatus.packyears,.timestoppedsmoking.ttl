@@ -126,14 +126,14 @@ map:currentSmoker a rr:TriplesMap;
 map:packYears a rr:TriplesMap;
     rr:logicalTable map:smokingStatusQuery;    
     rr:subjectMap [
-        rr:template "packyears";
+        rr:template "patient/{id}/packyears";
         rr:class ncit:C73993; #pack year
     ].
 
 map:month a rr:TriplesMap;
     rr:logicalTable map:smokingStatusQuery;    
     rr:subjectMap [
-        rr:template "month";             
+        rr:template "patient/{id}/month";             
         rr:class uo:0000035; #month
     ].
 

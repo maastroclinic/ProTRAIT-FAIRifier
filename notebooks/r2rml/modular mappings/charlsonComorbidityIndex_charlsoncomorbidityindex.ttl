@@ -3,7 +3,7 @@
 # Add charlson comorbidity index
 ###########################################     
 map:charlsonComorbidityIndexQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT id, charlsoncomorbidityindex FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT NULL as id, NULL as charlsoncomorbidityindex FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 

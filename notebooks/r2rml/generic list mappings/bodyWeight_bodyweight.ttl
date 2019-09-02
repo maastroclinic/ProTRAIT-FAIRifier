@@ -27,7 +27,7 @@ map:bodyWeight a rr:TriplesMap;
 map:kilogram a rr:TriplesMap;
     rr:logicalTable map:bodyWeightQuery; #what query do units get?   
     rr:subjectMap [
-        rr:template "kilogram";
+        rr:template "patient/{id}/kilogram";
         rr:class uo:0000009; #kilogram
     ].  
 

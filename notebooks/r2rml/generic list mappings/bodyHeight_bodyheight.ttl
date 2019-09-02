@@ -27,7 +27,7 @@ map:bodyHeight a rr:TriplesMap;
 map:centimeter a rr:TriplesMap;
     rr:logicalTable map:bodyHeightQuery;    
     rr:subjectMap [
-        rr:template "centimeter";
+        rr:template "patient/{id}/centimeter";
         rr:class uo:0000015; #centimeter
     ].  
 
