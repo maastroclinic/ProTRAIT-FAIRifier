@@ -1,0 +1,146 @@
+
+##########################################
+# Add preparation procedures                                           
+########################################## 
+map:preparationProceduresQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT GEN_IDNUMBER as id, HN_CT as cTScan, HN_PETCT as PETCT, HN_MRI as MRI, HN_ULTRAS as ultrasound, HN_SN as sentinelNodeProcedure FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:preparationProcedure a rr:TriplesMap;
+    rr:logicalTable map:preparationProceduresQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure";
+        rr:class roo:preparationProcedure; #new roo class                                                           
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has_procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:PETCT; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has_procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:MRI; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has_procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:ultrasound;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has_procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:sentinelNodeProcedure;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has_procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:cTScan;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:pETCT a rr:TriplesMap;
+    rr:logicalTable map:preparationProceduresQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/PETCT/{PETCT}";
+        rr:class ncit:C103512; #Positron Emission Tomography and Computed Tomography Scan
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value; #has_value
+        rr:objectMap [
+            rr:column "PETCT"; 
+            rr:datatype xsd:string; 
+        ];
+    ].
+
+map:mRI a rr:TriplesMap;
+    rr:logicalTable map:preparationProceduresQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/MRI/{MRI}";
+        rr:class ncit:C16809; #Magnetic Resonance Imaging
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "MRI"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ]. 
+
+map:ultrasound a rr:TriplesMap;
+    rr:logicalTable map:preparationProceduresQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/ultrasound/{ultrasound}";
+        rr:class ncit:C17230; #Ultrasonography
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "ultrasound";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:sentinelNodeProcedure a rr:TriplesMap;
+    rr:logicalTable map:preparationProceduresQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/sentinelNodeProcedure/{sentinelNodeProcedure}";
+        rr:class ncit:C15667; #sentinel node biopsy
+    ];        
+    rr:predicateObjectMap [
+        rr:predicate roo:has_value;
+        rr:objectMap [
+            rr:column "sentinelNodeProcedure";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:cTScan a rr:TriplesMap;
+    rr:logicalTable map:preparationProceduresQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/preparationProcedure/cTScan/{cTScan}";
+        rr:class ncit:C17204; #computed tomography
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "cTScan";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:has_preparation_procedures; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:preparationProceduresQuery;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

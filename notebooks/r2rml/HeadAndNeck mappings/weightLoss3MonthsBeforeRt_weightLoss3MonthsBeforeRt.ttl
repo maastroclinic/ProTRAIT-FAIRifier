@@ -1,0 +1,50 @@
+
+##########################################
+# Add weight loss over the past 3 months                                    #caps?               
+########################################## 
+map:clinicalVariablesQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT GEN_IDNUMBER as id, HN_WEIGHT_LOSS as weightLoss3MonthsBeforeRt FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:clinicalVariables a rr:TriplesMap;
+    rr:logicalTable map:clinicalVariablesQuery; 
+    rr:subjectMap [
+        rr:template "patient/{id}";
+        rr:class ncit:C16960; #patient
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100022; #has_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:weightLoss3months;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+         ];
+    ].
+
+map:weightLoss3months a rr:TriplesMap;
+    rr:logicalTable map:clinicalVariablesQuery; 
+    rr:subjectMap [
+        rr:template "patient/{id}/weightLoss3MonthsBeforeRt/{weightLoss3MonthsBeforeRt}";
+        rr:class ncit:C138908; #Weight Loss over Past 3 Months
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "weightLoss3MonthsBeforeRt"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:has_clinical_variables; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:clinicalVariables;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
