@@ -1,0 +1,129 @@
+
+########################################## 
+# Add radiotherapy dates                             
+########################################## 
+map:radiotherapyDatesQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    HN_THERRT_START as startDateOftherapeuticTargetRT,
+    HN_THERRT_STOP as endDateOftherapeuticTargetRT,
+    HN_PROPHRT_START as startDateOfprophylacticTargetRT,
+    HN_PROPHRT_STOP as endDateOfprophylacticTargetRT
+        FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:radiotherapyDates a rr:TriplesMap;
+    rr:logicalTable map:radiotherapyDatesQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/radiotherapyDates";
+        rr:class roo:radiotherapyDates; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100300; #has RT start date
+        rr:objectMap [
+            rr:parentTriplesMap map:startDateOftherapeuticTargetRT; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100299; #has RT end date
+        rr:objectMap [
+            rr:parentTriplesMap map:endDateOftherapeuticTargetRT; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100300; #has RT start date
+        rr:objectMap [
+            rr:parentTriplesMap map:startDateOfprophylacticTargetRT; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100299; #has RT end date
+        rr:objectMap [
+            rr:parentTriplesMap map:endDateOfprophylacticTargetRT; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+
+map:startDateOftherapeuticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:radiotherapyDatesQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/radiotherapyDates/startDateOftherapeuticTargetRT/{startDateOftherapeuticTargetRT}"; 
+        rr:class roo:startDateOfRT; #new roo class 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "startDateOftherapeuticTargetRT";  
+            rr:datatype xsd:date; 
+        ];
+    ].
+
+map:endDateOftherapeuticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:radiotherapyDatesQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/radiotherapyDates/endDateOftherapeuticTargetRT/{endDateOftherapeuticTargetRT}";  
+        rr:class ncit:C156814; #Date of Last Radiation Treatment 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value
+        rr:objectMap [
+            rr:column "endDateOftherapeuticTargetRT";  
+            rr:datatype xsd:date; 
+        ];
+    ].
+
+map:startDateOfprophylacticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:radiotherapyDatesQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/radiotherapyDates/startDateOfprophylacticTargetRT/{startDateOfprophylacticTargetRT}"; 
+        rr:class roo:startDateOfRT; #new roo class 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "startDateOfprophylacticTargetRT";  
+            rr:datatype xsd:date; 
+        ];
+    ].
+
+map:endDateOfprophylacticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:radiotherapyDatesQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/radiotherapyDates/endDateOfprophylacticTargetRT/{endDateOfprophylacticTargetRT}";  
+        rr:class ncit:C156814; #Date of Last Radiation Treatment 
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value
+        rr:objectMap [
+            rr:column "endDateOfprophylacticTargetRT";  
+            rr:datatype xsd:date; 
+        ];
+    ].
+
+map:radiotherapy rr:predicateObjectMap [
+        rr:predicate roo:has_radiotherapy_dates; #new roo predicate 
+        rr:objectMap [
+            rr:parentTriplesMap map:radiotherapyDates;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].   

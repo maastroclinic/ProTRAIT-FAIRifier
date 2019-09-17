@@ -1,0 +1,454 @@
+
+########################################## 
+# add head and neck charlson comorbidity index
+########################################## 
+map:charlsonComorbidityIndexQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    HN_TOX_MI as myocardialInfarction,
+    HN_TOX_HEART_FAIL as heartFailure,
+    HN_TOX_PER_VAS_DIS as claudicatioIntermittens,
+    HN_TOX_CVA_TIA as cvaOrTIA,
+    HN_TOX_DEMEN as dementia,
+    HN_TOX_COPD as cOPD,
+    HN_TOX_CON_TIS_DIS as connectiveTissueDisease,
+    HN_TOX_PEP_ULC_DIS as pepticUlcerDisease,
+    HN_TOX_LIV_DIS as liverDisease,
+    HN_TOX_DM as diabetesMellitus,
+    HN_TOX_DM_status as diabetesMellitusStatus,
+    HN_TOX_HEMIP as hemiplegia,
+    HN_TOX_CKD as chronicKidneyDisease,
+    HN_TOX_PREV_SOL_TUM as previousSolidTumour,
+    HN_TOX_PREV_LEUK as previousLeukemia,
+    HN_TOX_PREV_LYMPH as previousLymphoma
+    HN_TOX_AID as aids
+        FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:headAndNeckCharlsonComorbidityIndex a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/";
+        rr:class roo:headAndNeckCharlsonComorbidityIndex; #new roo classification
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:myocardialInfarction; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:heartFailure; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:claudicatioIntermittens; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:cvaOrTIA; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:dementia; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:cOPD; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:connectiveTissueDisease; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:pepticUlcerDisease; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:liverDisease; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:diabetesMellitus; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:diabetesMellitusStatus; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:hemiplegia; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:chronicKidneyDisease; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:previousSolidTumour; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:previousLeukemia; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:previousLymphoma; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:aids; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:myocardialInfarction a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/myocardialInfarction/{myocardialInfarction}";
+        rr:class ncit:C27996; #myocardial infarction
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "myocardialInfarction"; 
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:heartFailure a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/heartFailure/{heartFailure}";
+        rr:class ncit:C50577; #heart failure
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "heartFailure"; 
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:claudicatioIntermittens a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/claudicatioIntermittens/{claudicatioIntermittens}";
+        rr:class ncit:C50495; #claudication
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "claudicatioIntermittens";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:cvaOrTIA a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/cvaOrTIA/{cvaOrTIA}";
+        rr:class roo:cvaOrTIA; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "cvaOrTIA";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:dementia a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/dementia/{dementia}";
+        rr:class ncit:???; #dementia
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "dementia";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:cOPD a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/cOPD/{cOPD}";
+        rr:class ncit:C3199; #Chronic Obstructive Pulmonary Disease
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "cOPD";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:connectiveTissueDisease a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/connectiveTissueDisease/{connectiveTissueDisease}";
+        rr:class ncit:C26729; #Connective Tissue Disorder
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "connectiveTissueDisease";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:pepticUlcerDisease a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/pepticUlcerDisease/{pepticUlcerDisease}";
+        rr:class ncit:C3318; #Peptic Ulcer
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "pepticUlcerDisease";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:liverDisease a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/liverDisease/{liverDisease}";
+        rr:class ncit:C113609; #chronic liver disease
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "liverDisease";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:diabetesMellitus a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/diabetesMellitus/{diabetesMellitus}";
+        rr:class ncit:C2985; #Diabetes Mellitus
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "diabetesMellitus";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:diabetesMellitusStatus a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/diabetesMellitusStatus/{diabetesMellitusStatus}";
+        rr:class roo:diabetesMellitusStatus; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "diabetesMellitusStatus";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:hemiplegia a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/hemiplegia/{hemiplegia}";
+        rr:class ncit:C64329; #hemiplegia
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "hemiplegia";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:chronicKidneyDisease a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/chronicKidneyDisease/{chronicKidneyDisease}";
+        rr:class ncit:C80078; #chronic Kidney Disease
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "chronicKidneyDisease";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:previousSolidTumour a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/previousSolidTumour/{previousSolidTumour}";
+        rr:class ncit:C9292; #Solid Neoplasm
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "previousSolidTumour";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:previousLeukemia a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/previousLeukemia/{previousLeukemia}";
+        rr:class ncit:C3161; #Leukemia
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "previousLeukemia";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:previousLymphoma a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/previousLymphoma/{previousLymphoma}";
+        rr:class ncit:C3208; #Lymphoma
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "previousLymphoma";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:aids a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/aids/{aids}";
+        rr:class roo:aids #aids
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "aids";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:radiotherapy rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:headAndNeckCharlsonComorbidityIndex; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+

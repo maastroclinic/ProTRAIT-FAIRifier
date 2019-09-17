@@ -1,0 +1,103 @@
+
+##########################################
+# Add viral status                                         
+########################################## 
+map:viralStatusQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    HN_P16 as p16Status,
+    HN_HPV as hpvResult,
+    HN_EBV as ebvStatus
+        FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:viralStatus a rr:TriplesMap;
+    rr:logicalTable map:viralStatusQuery;    
+    rr:subjectMap [
+        rr:template "patient/neoplasm/viralStatus";
+        rr:class roo:viralStatus; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_p16; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:p16Status;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_ebv; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:ebvStatus;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:p16Status a rr:TriplesMap;
+    rr:logicalTable map:viralStatusQuery;    
+    rr:subjectMap [
+        rr:template "patient/neoplasm/viralStatus/{p16Status}";
+        rr:class ncit:C95990; #p16 Positive Neoplastic Cells Present
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "p16Status";
+            rr:datatype xsd:string;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100291; #has_patient_finding
+        rr:objectMap [
+            rr:parentTriplesMap map:hpvResult;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:hpvResult a rr:TriplesMap;
+    rr:logicalTable map:viralStatusQuery; 
+    rr:subjectMap [
+        rr:template "patient/neoplasm/viralStatus/p16Status/hpvResult/{hpvResult}";
+        rr:class roo:hpv_pcr_result; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "hpvStatus";
+            rr:datatype xsd:string;
+        ];
+    ].
+    
+map:ebvStatus a rr:TriplesMap;
+    rr:logicalTable map:viralStatusQuery; 
+    rr:subjectMap [
+        rr:template "patient/neoplasm/viralStatus/ebvStatus/{ebvStatus}";
+        rr:class ncit:C157444; #epstein-barr viral status
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "ebvStatus";
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:neoplasm rr:predicateObjectMap [
+        rr:predicate roo:has_viral_status; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:viralStatus;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

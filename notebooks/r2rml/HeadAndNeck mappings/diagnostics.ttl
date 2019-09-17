@@ -1,8 +1,0 @@
-
-##########################################
-# Add weight loss over the past 3 months                                    #caps?               
-########################################## 
-map:diagnosticsQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, HN_WEIGHT_LOSS as weightLoss3MonthsBeforeRt FROM PBDWHackathon2018;""";
-    rdfs:label "";
-    skos:definition "".

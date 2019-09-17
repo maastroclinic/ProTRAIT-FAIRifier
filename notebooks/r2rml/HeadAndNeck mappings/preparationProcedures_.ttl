@@ -3,7 +3,14 @@
 # Add preparation procedures                                           
 ########################################## 
 map:preparationProceduresQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, HN_CT as cTScan, HN_PETCT as PETCT, HN_MRI as MRI, HN_ULTRAS as ultrasound, HN_SN as sentinelNodeProcedure FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    HN_CT as cTScan, 
+    HN_PETCT as PETCT, 
+    HN_MRI as MRI, 
+    HN_ULTRAS as ultrasound, 
+    HN_SN as sentinelNodeProcedure 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 

@@ -1,0 +1,61 @@
+
+########################################## 
+# Add surgery                                     
+########################################## 
+map:surgeryQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    HN_SURG_TUMOUR as surgeryPrimaryTumour,
+    HN_SURG_TUM_DATE as procedureDate
+        FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:surgery a rr:TriplesMap;
+    rr:logicalTable map:surgeryQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/surgery/{surgeryPrimaryTumour}";
+        rr:class ncit:C157740; #cancer surgery
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "surgeryPrimaryTumour"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ];
+    rr:predicateObjectMap [                                                     
+        rr:predicate roo:P100295; #has_procedure_date                    
+        rr:objectMap [
+             rr:parentTriplesMap map:procedureDate;
+             rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];   
+        ];
+    ].
+
+map:procedureDate a rr:TriplesMap;
+    rr:logicalTable map:surgeryQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/surgery/procedureDate/{procedureDate}";
+        rr:class ncit:C117538; #Procedure Date Time of Reference Timepoint
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                           
+        rr:objectMap [
+            rr:column "procedureDate"; 
+            rr:datatype xsd:date; 
+        ];
+    ].
+
+map:systemicTreatment rr:predicateObjectMap [
+        rr:predicate roo:has_surgery; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:surgery;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

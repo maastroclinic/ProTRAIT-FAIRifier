@@ -1,0 +1,103 @@
+
+########################################## 
+# Add prophylactic rt                            
+########################################## 
+map:prophylacticTargetRTQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+        HN_PROPHRT_DOSE as prophylactictotalDose,
+        HN_PROPHRT_FR_DOSE as prophylacticfractionDose,
+        HN_PROPHRT_FR_N as prophylacticfractions
+        FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:prophylacticTargetRT a rr:TriplesMap;
+    rr:logicalTable map:targetVolumeQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/prophylacticTargetRT/";
+        rr:class roo:targetVolume; #new roo classification
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property
+        rr:objectMap [
+            rr:parentTriplesMap map:prophylactictotalDose; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property
+        rr:objectMap [
+            rr:parentTriplesMap map:prophylacticfractionDose;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property
+        rr:objectMap [
+            rr:parentTriplesMap map:prophylacticfractions; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:prophylactictotalDose a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/prophylacticTargetRT/prophylacticTargetRT/prophylactictotalDose{prophylactictotalDose}";
+        rr:class ncit:C94394; #cumulative dose                                             
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "prophylactictotalDose"; 
+            rr:datatype xsd:float; 
+        ];
+    ].
+
+map:prophylacticfractionDose a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/prophylacticTargetRT/prophylacticfractionDose/{prophylacticfractionDose}";
+        rr:class roo:C100353; #radiotherapy fraction dose                                             
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "prophylacticfractionDose"; 
+            rr:datatype xsd:float; 
+        ];
+    ].
+
+map:prophylacticfractions a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/prophylacticTargetRT/prophylacticfractions/{prophylacticfractions}";
+        rr:class roo:C100056; #radiotherapy fraction
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "prophylacticfractions"; 
+            rr:datatype xsd:float; 
+        ];
+    ].
+
+map:radiotherapy rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property
+        rr:objectMap [
+            rr:parentTriplesMap map:targetVolume; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

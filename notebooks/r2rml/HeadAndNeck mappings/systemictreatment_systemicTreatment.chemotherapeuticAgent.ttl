@@ -1,0 +1,131 @@
+
+########################################## 
+# Add systemic treatment                                       
+########################################## 
+map:systemicTreatmentQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    HN_SYST_TR as systemicTreatment,
+    HN_SYST_TR_TYPE as chemotherapeuticAgent,
+    HN_SYST_TR_CYCL as treatmentCycles,
+    HN_SYST_TR_DOSE_RED as doseReduction,
+    HN_SYST_TR_START as startDateOfSystemicTherapy,
+    HN_SYST_TR_STOP as endDateOfSystemicTherapy
+        FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:systemicTreatment a rr:TriplesMap;
+    rr:logicalTable map:systemicTreatmentQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/systemicTreatment/{systemicTreatment}";
+        rr:class roo:systemicTreatment; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:chemotherapeuticAgent;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:treatmentCycles;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "systemicTreatment"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:chemotherapeuticAgent a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/systemicTreatment/chemotherapeuticAgent/{chemotherapeuticAgent}";
+        rr:class roo:chemotherapeuticAgent #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "chemotherapeuticAgent"; 
+            rr:datatype xsd:string;
+        ];
+    ].
+
+map:treatmentCycles a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/systemicTreatment/treatmentCycles/{treatmentCycles}";
+        rr:class ncit:C25472; #cycle
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "treatmentCycles"; 
+            rr:datatype xsd:integer;
+        ];
+    ].
+
+map:doseReduction a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/systemicTreatment/doseReduction/{doseReduction}";
+        rr:class ncit:C49505; #dose reduced 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "doseReduction"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ].
+
+map:startDateOfSystemicTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/systemicTreatment/startDateOfSystemicTherapy/{startDateOfSystemicTherapy}";
+        rr:class roo:startDateOfChemotherapy; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:p100042; #has_value
+        rr:objectMap [
+            rr:column "startDateOfChemoTherapy}"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:endDateOfSystemicTherapy a rr:TriplesMap;
+    rr:logicalTable map:basicQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/systemicTreatment/endDateOfSystemicTherapy/{endDateOfSystemicTherapy}";
+        rr:class roo:endDateOfChemoTherapy; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:p100042; #has_value
+        rr:objectMap [
+            rr:column "endDateOfChemoTherapy}"; 
+            rr:datatype xsd:date;
+        ];
+    ].
+
+map:cancerTreatment rr:predicateObjectMap [
+        rr:predicate roo:has_systemic_treatment; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:systemicTreatment;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

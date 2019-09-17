@@ -1,0 +1,170 @@
+
+###########################################
+# Add planning comparison 
+###########################################
+map:planningComparisonQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_PLAN_COMPARISON as planningcomparisonyesno, GEN_PLAN_COMP_DATE as planningcomparisondate, GEN_PLAN_COMP_VERSION as planningcomparisonversion, GEN_COMP_OUTCOME as planningcomparisonoutcome, GEN_DEC_PROTONS as protontherapy, GEN_REASON_PROTONS as reasonnegativeprotontherapywithpositivedss FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:radiotherapy a rr:TriplesMap;
+    rr:logicalTable map:planningComparisonQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy";
+        rr:class ncit:C15313; #radiation therapy
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_planning_comparison; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:planningComparison;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:planningComparison a rr:TriplesMap;
+    rr:logicalTable map:planningComparisonQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonYesNo/{planningcomparisonyesno}";
+        rr:class roo:planningComparison; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "planningcomparisonyesno"; 
+            rr:datatype xsd:boolean;
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100228; #has_date
+        rr:objectMap [
+            rr:parentTriplesMap map:PlanningComparisonDate;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:has_version; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:PlanningComparisonVersion;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ]; 
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:parentTriplesMap map:planningComparisonOutcome;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ]; 
+    rr:predicateObjectMap [
+        rr:predicate roo:P100397; #has_result
+        rr:objectMap [
+            rr:parentTriplesMap map:protonTherapy;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:parentTriplesMap map:reasonNegativeProtonTherapyWithPositiveDSS;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
+
+map:PlanningComparisonDate a rr:TriplesMap;
+    rr:logicalTable map:planningComparisonQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonDate/{planningcomparisondate}";
+        rr:class roo:PlanningComparisonDate; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "planningcomparisondate"; 
+            rr:datatype xsd:date;
+        ];
+    ]. 
+
+map:PlanningComparisonVersion a rr:TriplesMap;
+    rr:logicalTable map:planningComparisonQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonVersion/{planningcomparisonversion}";
+        rr:class roo:PlanningComparisonVersion; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "planningcomparisonversion"; 
+            rr:datatype xsd:float;
+        ];
+    ].
+
+map:planningComparisonOutcome a rr:TriplesMap;
+    rr:logicalTable map:planningComparisonQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/planningComparison/PlanningComparisonYesNo/planningComparisonOutcome/{planningcomparisonoutcome}";
+        rr:class roo:planningComparisonOutcome; #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "planningcomparisonoutcome"; 
+            rr:datatype xsd:string;                                                      
+        ];
+    ].
+
+map:protonTherapy a rr:TriplesMap;
+    rr:logicalTable map:planningComparisonQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/radiotherapy/protonTherapy/{protontherapy}";
+        rr:class ncit:C66897; #proton beam radiation therapy
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value 
+        rr:objectMap [
+            rr:column "protontherapy";
+            rr:datatype xsd:boulean;
+        ];
+    ].
+
+map:reasonNegativeProtonTherapyWithPositiveDSS a rr:TriplesMap;
+    rr:logicalTable map:planningComparisonQuery;    
+    rr:subjectMap [
+        rr:template "patient/{id}/vradiotherapy/planningComparison/PlanningComparisonYesNo/reasonNegativeProtonTherapyWithPositivePlanningComparison/{reasonnegativeprotontherapywithpositivedss}";
+        rr:class roo:reasonNegativeProtonTherapyWithPositivePlanningComparison; #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value; 
+        rr:objectMap [
+            rr:column "reasonnegativeprotontherapywithpositivedss"; 
+            rr:datatype xsd:string;  
+        ];
+    ].
+
+map:patient rr:predicateObjectMap [
+        rr:predicate roo:P100024; #has_procedure
+        rr:objectMap [
+            rr:parentTriplesMap map:radiotherapy;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

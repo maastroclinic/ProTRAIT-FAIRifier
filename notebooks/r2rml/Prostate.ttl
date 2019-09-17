@@ -248,7 +248,7 @@ map:deliveredDose a rr:TriplesMap;
                 rr:parent "id";
             ];
         ];
-    ];
+    ].
 
 map:deliveredDoseToProstate a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
@@ -419,7 +419,7 @@ map:fiducialMarker a rr:TriplesMap;
                 rr:parent "id";
             ];
         ];
-    ];  
+    ].  
 
 map:fiducialMarkerStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;    
@@ -1381,7 +1381,7 @@ map:TNM_Staging a rr:TriplesMap;
                 rr:parent "id";
             ];
         ];
-    ];
+    ].
 
 map:clinicalStageMRI a rr:TriplesMap;
     rr:subjectMap map:basicQuery;    
@@ -1515,7 +1515,7 @@ map:prostatectomy a rr:TriplesMap;
                 rr:parent "id";
             ];
         ];
-    ];
+    ].
 
 map:prostatectomyStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
@@ -1594,7 +1594,7 @@ map:lymphNodeDissection a rr:TriplesMap;
                 rr:parent "id";
             ];   
         ];
-    ];
+    ].
 
 map:lymphNodeDissectionStatus a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
@@ -1693,7 +1693,7 @@ map:planningTargetVolume a rr:TriplesMap;
                 rr:parent "id";
             ];
         ];
-    ];
+    ].
 
 map:totalDosePTV1 a rr:TriplesMap;
     rr:logicalTable map:basicQuery;
@@ -2538,7 +2538,7 @@ map:patientReportedOutcomeMeasures a rr:TriplesMap;
                 rr:parent "id";
             ];                                                        
         ];
-    ];
+    ].
 
 map:EORTCQLQ_PR25 a rr:TriplesMap;
     rr:logicalTable map:basicQuery;

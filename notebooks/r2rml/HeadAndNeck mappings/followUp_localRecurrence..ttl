@@ -1,0 +1,239 @@
+
+########################################## same ontologies for dates and for new tumour events? problem?
+# Add follow up                                           
+########################################## 
+map:followUpQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    HN_LOCAL_REC as localRecurrence, 
+    HN_DATE_LOCALREC as dateOfLocalRecurrence, 
+    HN_REGIO_REC as regionalRecurrence,
+    HN_DATE_REGIOREC as dateOfRegionalRecurrence,
+    HN_DIST_METS as distantMetastasis,
+    HN_DATE_DISTMETS as dateOfDistantMetastasis,
+    HN_DATE_LASTFU as dateOfLastFollowUp,
+    HN_STATUS_LASTFU as statusAtLastFollowUp
+           FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:followUp a rr:TriplesMap;
+    rr:logicalTable map:followUpQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/followUp";
+        rr:class ncit:C16033; #Follow-up                                                       
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:localRecurrence; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                            
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:regionalRecurrence; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                         
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:distantMetastasis;  
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                                                                           
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100228; #has_date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfLastFollowUp;  
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100423; #consists_of
+        rr:objectMap [
+            rr:parentTriplesMap map:statusAtLastFollowUp;  
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                        
+        ];
+    ].
+
+map:localRecurrence a rr:TriplesMap;
+    rr:logicalTable map:followUpQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/followUp/localRecurrence{localRecurrence}";
+        rr:class ncit:C94796; #Locally Recurrent Malignant Neoplasm 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "localRecurrence"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100251; #has_date_of_diagnosis                   
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfLocalRecurrence; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                         
+        ];
+    ].
+
+map:regionalRecurrence a rr:TriplesMap;
+    rr:logicalTable map:followUpQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/followUp/regionalRecurrence/{regionalRecurrence}";
+        rr:class roo:regionalRecurrence; #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "regionalRecurrence"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100251; #has_date_of_diagnosis
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfRegionalRecurrence; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                           
+        ];
+    ].
+
+map:distantMetastasis a rr:TriplesMap;
+    rr:logicalTable map:followUpQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/followUp/distantMetastasis/{distantMetastasis}";
+        rr:class ncit:C18206; #distant metastasis 
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "distantMetastasis"; 
+            rr:datatype xsd:boulean;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100251; #has_date_of_diagnosis
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfDistantMetastasis; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                          
+        ];
+    ].
+
+
+map:dateOfLastFollowUp a rr:TriplesMap;
+    rr:logicalTable map:followUpQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/followUp/dateOfLastFollowUp/{dateOfLastFollowUp}";
+        rr:class ncit:C156916; #date of last contact
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "dateOfLastFollowUp"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has property
+        rr:objectMap [
+            rr:parentTriplesMap map:statusAtLastFollowUp;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];                                                          
+        ];
+    ].
+
+map:dateOfLocalRecurrence a rr:TriplesMap;
+    rr:logicalTable map:followUpQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/followUp/localRecurrence/dateOfLocalRecurrence/{dateOfLocalRecurrence}";
+        rr:class ncit:C156855; #date of new tumour event
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "dateOfLocalRecurrence"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ].
+
+map:dateOfRegionalRecurrence a rr:TriplesMap;
+    rr:logicalTable map:followUpQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/followUp/regionalRecurrence/dateOfRegionalRecurrence{dateOfRegionalRecurrence}";
+        rr:class ncit:C156855; #date of new tumour event                                           
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "dateOfRegionalRecurrence"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ].
+
+map:dateOfDistantMetastasis a rr:TriplesMap;
+    rr:logicalTable map:followUpQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/followUp/distantMetastasis/dateOfDistantMetastasis/{dateOfDistantMetastasis}";
+        rr:class ncit:C156855; #date of new tumour event                                              
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "dateOfDistantMetastasis"; 
+            rr:datatype xsd:date;                                                                 
+        ];
+    ].
+
+map:statusAtLastFollowUp a rr:TriplesMap;
+    rr:logicalTable map:followUpQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/neoplasm/followUp/statusAtLastFollowUp/{statusAtLastFollowUp}";
+        rr:class roo:statusAtLastFollowUp; #new roo class
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:local_value;  
+        rr:objectMap [
+            rr:column "statusAtLastFollowUp"; 
+            rr:datatype xsd:string;                                                                 
+        ];
+    ].
+
+map:neoplasm rr:predicateObjectMap [
+        rr:predicate roo:has_follow_up; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:followUp;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

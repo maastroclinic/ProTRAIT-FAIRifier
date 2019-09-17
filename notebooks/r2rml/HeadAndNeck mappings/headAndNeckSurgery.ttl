@@ -1,0 +1,61 @@
+
+########################################## 
+# Add head and neck surgery                                     
+########################################## 
+map:headAndNeckSurgeryQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    HN_SURG_NECK as headAndNeckSurgery,
+    HN_SURG_NECK_DATE as dateOfSurgeryOfTheNeck
+        FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:headAndNeckSurgery a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckSurgeryQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/surgery/headAndNeckSurgery/{headAndNeckSurgery}";
+        rr:class ncit:C157871; #head and neck cancer surgery
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has value
+        rr:objectMap [
+            rr:column "headAndNeckSurgery"; 
+            rr:datatype xsd:boolean; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100295; #has procedure date
+        rr:objectMap [
+            rr:parentTriplesMap map:dateOfSurgeryOfTheNeck;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ]; 
+        ];
+    ].
+
+map:dateOfSurgeryOfTheNeck a rr:TriplesMap;
+    rr:logicalTable map:headAndNeckSurgeryQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/surgery/headAndNeckSurgery/dateOfSurgeryOfTheNeck/{dateOfSurgeryOfTheNeck}";
+        rr:class ncit:C80454; #date of therapeutic procedure
+    ];
+     rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value
+        rr:objectMap [
+            rr:column "dateOfSurgeryOfTheNeck"; 
+            rr:datatype xsd:date; 
+        ];
+    ].
+
+map:surgery rr:predicateObjectMap [
+        rr:predicate roo:has_head_and_neck_surgery; #new roo predicate
+        rr:objectMap [
+            rr:parentTriplesMap map:headAndNeckSurgery;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
