@@ -3,7 +3,12 @@
 # Add treating centre
 ###########################################
 map:treatingCentreQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_TREAT_CENTRE as treatingcentre, GEN_DATE_REGISTR as registrationdate, GEN_REFER_CENTRE as referringcentre FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    GEN_TREAT_CENTRE as treatingcentre, 
+    GEN_DATE_REGISTR as registrationdate, 
+    GEN_REFER_CENTRE as referringcentre 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 

@@ -263,7 +263,7 @@ map:dementia a rr:TriplesMap;
     rr:logicalTable map:headAndNeckCharlsonComorbidityIndexQuery;    
     rr:subjectMap [
         rr:template "patient/{id}/cancerTreatment/radiotherapy/headAndNeckCharlsonComorbidityIndex/dementia/{dementia}";
-        rr:class ncit:???; #dementia
+        rr:class ncit:C4786; #dementia
     ];
     rr:predicateObjectMap [
         rr:predicate roo:P100042; #has_value

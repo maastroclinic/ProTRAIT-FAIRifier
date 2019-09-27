@@ -3,7 +3,10 @@
 # Add relationship status 
 ########################################### 
 map:relationshipStatusQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_RELATION as relationshipstatus FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    GEN_RELATION as relationshipstatus 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 

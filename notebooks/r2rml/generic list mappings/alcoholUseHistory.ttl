@@ -3,7 +3,12 @@
 # Add alcohol use history 
 ########################################### 
 map:alcoholUseHistoryQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_ALCOHOL as alcoholusehistory, GEN_ALCOHOL_DAYS as dayswithmorethan1glass, GEN_ALCOHOL_GLASS as numberofglasses FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    GEN_ALCOHOL as alcoholusehistory, 
+    GEN_ALCOHOL_DAYS as dayswithmorethan1glass, 
+    GEN_ALCOHOL_GLASS as numberofglasses 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 

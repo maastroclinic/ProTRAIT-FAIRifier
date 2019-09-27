@@ -3,7 +3,15 @@
 # Add planning comparison 
 ###########################################
 map:planningComparisonQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_PLAN_COMPARISON as planningcomparisonyesno, GEN_PLAN_COMP_DATE as planningcomparisondate, GEN_PLAN_COMP_VERSION as planningcomparisonversion, GEN_COMP_OUTCOME as planningcomparisonoutcome, GEN_DEC_PROTONS as protontherapy, GEN_REASON_PROTONS as reasonnegativeprotontherapywithpositivedss FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    GEN_PLAN_COMPARISON as planningcomparisonyesno, 
+    GEN_PLAN_COMP_DATE as planningcomparisondate, 
+    GEN_PLAN_COMP_VERSION as planningcomparisonversion, 
+    GEN_COMP_OUTCOME as planningcomparisonoutcome, 
+    GEN_DEC_PROTONS as protontherapy, 
+    GEN_REASON_PROTONS as reasonnegativeprotontherapywithpositivedss 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 

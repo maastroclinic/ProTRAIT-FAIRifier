@@ -3,7 +3,12 @@
 # Add smoking status 
 ###########################################  
 map:smokingStatusQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_SMOKING as smokingstatus, GEN_SM_PACKYEARS as packyears, GEN_SM_STOPMONTHS as timestoppedsmoking FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    GEN_SMOKING as smokingstatus, 
+    GEN_SM_PACKYEARS as packyears, 
+    GEN_SM_STOPMONTHS as timestoppedsmoking 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 

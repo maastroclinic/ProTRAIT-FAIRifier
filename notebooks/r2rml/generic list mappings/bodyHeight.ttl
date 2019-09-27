@@ -3,7 +3,10 @@
 # Add bodyheight
 ########################################### 
 map:bodyHeightQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_HEIGHT as bodyheight FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    GEN_HEIGHT as bodyheight 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 
@@ -13,6 +16,13 @@ map:bodyHeight a rr:TriplesMap;
         rr:template "patient/{id}/bodyHeight/{bodyheight}";
         rr:class ncit:C94488; #stature
     ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042;  #has_value
+        rr:objectMap [
+            rr:column "bodyheight"; 
+            rr:datatype xsd:integer;
+        ];
+    ];  
     rr:predicateObjectMap [
         rr:predicate roo:P100027; #has_unit
         rr:objectMap [

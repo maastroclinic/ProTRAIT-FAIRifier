@@ -3,7 +3,10 @@
 # Add birth year 
 ###########################################   
 map:birthYearQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_YEAR_BIRTH as birthyear FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    GEN_YEAR_BIRTH as birthyear 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
 

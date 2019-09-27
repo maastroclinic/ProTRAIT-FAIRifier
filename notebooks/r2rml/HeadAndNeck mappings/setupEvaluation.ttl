@@ -1,0 +1,82 @@
+
+########################################## 
+# Add setup Evaluation
+########################################## 
+map:setupEvaluationQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+HN_RT_ROB_PLAN
+HN_RT_PTV_MARG_X
+HN_RT_PTV_MARG_Y
+HN_RT_PTV_MARG_Z
+        FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:setupEvaluation a rr:TriplesMap;
+    rr:logicalTable map:pTVMarginQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/setupEvaluation/{setupEvaluation}";
+        rr:class roo:doseEngine; #new roo classification
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:local_value;
+        rr:objectMap [
+            rr:column "setupEvaluation"; 
+            rr:datatype xsd:string; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:mCUncertainty; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ].
+
+
+
+map:mCUncertainty a rr:TriplesMap;
+    rr:logicalTable map:doseEngineQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/doseEngine/mCUncertainty/{mCUncertainty}";
+        rr:class roo:mCUncertainty; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "MCUncertainty"; 
+            rr:datatype xsd:integer; 
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100027; #has_unit
+        rr:objectMap [
+            rr:parentTriplesMap map:percentage;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];       
+    ].
+    
+map:percentage a rr:TriplesMap;
+    rr:logicalTable map:doseEngineQuery;
+    rr:subjectMap [
+        rr:template "percentage";
+        rr:class uo:0000187; #percent                                                     
+    ].
+
+map:radiotherapy rr:predicateObjectMap [
+        rr:predicate roo:has_dose_engine;
+        rr:objectMap [
+            rr:parentTriplesMap map:doseEngine; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].

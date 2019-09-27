@@ -3,7 +3,12 @@
 # Add neoplasm diagnosis 
 ###########################################    
 map:neoplasmDiagnosisQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_DATE_DIAGN as dateoffirstdiagnosis, GEN_TUMOURSITE as tumoursite, GEN_RT_TREATMENT as radiotherapytreatmenttechnique FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    GEN_DATE_DIAGN as dateoffirstdiagnosis, 
+    GEN_TUMOURSITE as tumoursite, 
+    GEN_RT_TREATMENT as radiotherapytreatmenttechnique 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
     

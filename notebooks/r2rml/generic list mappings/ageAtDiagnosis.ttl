@@ -3,7 +3,10 @@
 # Add age at diagnosis 
 ###########################################    
 map:ageAtDiagnosisQuery a rr:LogicalTable;
-    rr:sqlQuery """SELECT GEN_IDNUMBER as id, GEN_AGE as age FROM PBDWHackathon2018;""";
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+    GEN_AGE as age 
+        FROM PBDWHackathon2018;""";
     rdfs:label "";
     skos:definition "".
     

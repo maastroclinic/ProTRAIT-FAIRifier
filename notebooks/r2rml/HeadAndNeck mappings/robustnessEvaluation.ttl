@@ -1,0 +1,278 @@
+
+########################################## 
+# Add robustness evaluation
+########################################## 
+map:robustnessEvaluationQuery a rr:LogicalTable;
+    rr:sqlQuery """SELECT 
+    GEN_IDNUMBER as id, 
+HN_RT_ROB_EVAL as robustnessEvaluationPerformed,
+HN_RT_ROB_EVAL_TRANS_X as robustnessEvaluationTranslationMarginXDirection,
+HN_RT_ROB_EVAL_TRANS_Y as robustnessEvaluationTranslationMarginYDirection,
+HN_RT_ROB_EVAL_TRANS_Z as robustnessEvaluationTranslationMarginZDirection,
+HN_RT_ROB_EVAL_RANGE_UNC_USE as RobustnessEvaluationRangeUncertaintyUsed,
+HN_RT_ROB_EVAL_RANGE_UNC as robustnessEvaluationRangeUncertainty,
+HN_RT_ROB_EVAL_ROT_USE as robustnessEvaluationRotationUsed,
+HN_RT_ROB_EVAL_ROT_PITCH as robustnessEvaluationRotationPitch,
+HN_RT_ROB_EVAL_ROT_ROLL as robustnessEvaluationRotationRoll,
+HN_RT_ROB_EVAL_ROT_YAW as robustnessEvaluationRotationYaw
+        FROM PBDWHackathon2018;""";
+    rdfs:label "";
+    skos:definition "".
+
+map:robustnessEvaluation a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/";
+        rr:class roo:robustnessEvaluation; #new roo classification
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationPerformed; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationTranslationMarginXDirection; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationTranslationMarginYDirection; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationTranslationMarginZDirection; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationRangeUncertaintyUsed; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:RobustnessEvaluationRangeUncertainty; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationRotationUsed; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationRotationPitch; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationRotationRoll; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100212; #has_property                                         
+        rr:objectMap [
+            rr:parentTriplesMap map:robustnessEvaluationRotationYaw; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];  
+        ];
+    ].
+
+map:robustnessEvaluationPerformed a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationPerformed/{robustnessEvaluationPerformed}";
+        rr:class roo:robustnessEvaluationPerformed; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationPerformed"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationTranslationMarginXDirection a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationTranslationMarginXDirection/{robustnessEvaluationTranslationMarginXDirection}";
+        rr:class roo:robustnessEvaluationTranslationMarginXDirection; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationTranslationMarginXDirection"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationTranslationMarginYDirection a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationTranslationMarginYDirection/{robustnessEvaluationTranslationMarginYDirection}";
+        rr:class roo:robustnessEvaluationTranslationMarginYDirection; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationTranslationMarginYDirection"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationTranslationMarginZDirection a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationTranslationMarginZDirection/{robustnessEvaluationTranslationMarginZDirection}";
+        rr:class roo:robustnessEvaluationTranslationMarginZDirection; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationTranslationMarginZDirection"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationRangeUncertaintyUsed a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationRangeUncertaintyUsed/{robustnessEvaluationRangeUncertaintyUsed}";
+        rr:class roo:robustnessEvaluationRangeUncertaintyUsed; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationRangeUncertaintyUsed"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationRangeUncertainty a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationRangeUncertainty/{robustnessEvaluationRangeUncertainty}";
+        rr:class roo:robustnessEvaluationRangeUncertainty; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationRangeUncertainty"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationRotationUsed a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationRotationUsed/{robustnessEvaluationRotationUsed}";
+        rr:class roo:robustnessEvaluationRotationUsed; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationRotationUsed"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationRotationPitch a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationRotationPitch/{robustnessEvaluationRotationPitch}";
+        rr:class roo:robustnessEvaluationRotationPitch; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationRotationPitch"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationRotationRoll a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationRotationRoll/{robustnessEvaluationRotationRoll}";
+        rr:class roo:robustnessEvaluationRotationRoll; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationRotationRoll"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+
+map:robustnessEvaluationRotationYaw a rr:TriplesMap;
+    rr:logicalTable map:robustnessEvaluationQuery;
+    rr:subjectMap [
+        rr:template "patient/{id}/cancerTreatment/radiotherapy/robustnessEvaluation/robustnessEvaluationRotationYaw/{robustnessEvaluationRotationYaw}";
+        rr:class roo:robustnessEvaluationRotationYaw; #new roo class
+    ];
+    rr:predicateObjectMap [
+        rr:predicate roo:P100042; #has_value                                       
+        rr:objectMap [
+            rr:column "robustnessEvaluationRotationYaw"; 
+            rr:datatype xsd:integer; 
+        ];
+    ].
+        
+map:radiotherapy rr:predicateObjectMap [
+        rr:predicate roo:has_dose_engine;
+        rr:objectMap [
+            rr:parentTriplesMap map:doseEngine; 
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "id";
+            ];
+        ];
+    ].
