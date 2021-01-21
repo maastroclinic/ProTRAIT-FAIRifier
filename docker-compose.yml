@@ -1,18 +1,40 @@
 version: "2"
 services:
   postgres:
-    image: postgres
+    image: postgres:9.6
     volumes:
-      - ../clinical-data-workflow/workflows/psql_init/:/docker-entrypoint-initdb.d/
+      #- ../clinical-data-workflow/workflows/psql_init/:/docker-entrypoint-initdb.d/
+      - postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=proTRAIT!1
+      - POSTGRES_DB=protrait
     ports:
-      - "2345:5432"
+      - "5432:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - 'PGADMIN_DEFAULT_EMAIL=datafairy@maastro.nl'
+      - 'PGADMIN_DEFAULT_PASSWORD=proTRAIT!1'
+      - 'PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True'
+      - 'PGADMIN_LISTEN_PORT=5050'
+    ports:
+      - "5050:5050"
+    links:
+      - "postgres"
   r2rml:
     image: jvsoest/r2rml
     links:
       - postgres:dbhost
       - graphdb:graphdb
+    environment:
+       - "DB_JDBC=jdbc:postgresql://dbhost/protrait"
+       - "DB_USER=postgres"
+       - "DB_PASS=proTRAIT!1"
+      # mssql server at maastro:
+      #- "DB_JDBC=jdbc:sqlserver://172.18.22.171:1433;databaseName=proTrait"
+      #- "DB_USER=P0389_usr"
+      #- "DB_PASS=dprmIMs5XYgcQQepFAIR"
   garlic:
     build:
       context: notebooks
@@ -22,7 +44,7 @@ services:
     volumes:
       - ./notebooks:/queries/
     links:
-      - postgres:postgresdb
+      - postgres:dbhost
       - graphdb:graphdb
   graphdb:
     image: jvsoest/graphdb-free:fairstation
@@ -33,7 +55,9 @@ services:
       - GDB_MIN_MEM=1g
       - GDB_MAX_MEM=2g
     # volumes:
-    #   - ./graphdb_template/:/opt/graphdb/home/
+    #   - ./graphdb_template/:/opt/graphdb/home/      
+volumes:
+    postgres_data:
 networks:
   default:
     driver: bridge
