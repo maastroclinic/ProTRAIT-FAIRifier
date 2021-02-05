@@ -31,6 +31,15 @@ services:
        - "DB_JDBC=jdbc:postgresql://dbhost/protrait"
        - "DB_USER=postgres"
        - "DB_PASS=postgres"
+  triplifier:
+    image: registry.gitlab.com/um-cds/fair/tools/triplifier:remoteEndpoint
+    links:
+      - graphdb:graphdb
+      - postgres:postgres
+    volumes:
+      - ./triplifier/triplifier.properties:/triplifier.properties
+    environment:
+      - "SLEEPTIME=10"
   garlic:
     build:
       context: notebooks
