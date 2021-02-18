@@ -1,49 +1,17 @@
-# DataFAIRifier
-The DataFAIRifier is a system that supports the creation and validation of mappings of relational data to ontologies. The system is packaged as a set of Docker images. The frontend of the system is implemented as Jupyter Notebook.
+# ProTRAIT-FAIRifier
 
-This repository describes the bottom-up DataFAIRifier process, and FAIR (Findable, Accessible, Interoperable, Reusable) data station which will be setup when following the instructions.
+This repository contains the software components to create the FAIR data station, used within the ProTRAIT project. This repository is based on the [DataFAIRifier](http://github.com/maastroclinic/DataFAIRifier) repository.
 
 ## Getting started
 
 ### Prerequisites
+
 To run this DataFAIRifier, you need the following software installed on your computer:
 * Docker Engine
 * Docker Compose
 
-### Configuring the infrastructure
-The full docker-compose collection of containers is given in [docker-compose.yml](docker-compose.yml)
-The most minimalistic infrastructure can be executed by writing a docker-compose file (`docker-compose.yml`) with the following contents:
-```
-version: "2"
-services:
-  graphdb:
-    image: jvsoest/graphdb-free:fairstation
-    ports: 
-      - "7200:7200"
-```
+### Running the infrastructure
 
-This will create and run a GraphDB instance on your computer. The GraphDB web interface will be available on [http://localhost:7200](http://localhost:7200/).
-If you want to add computation docker containers to this configuration, you can e.g. the O-RAW DICOM Radiomics pipeline:
-
-```
-version: "2"
-services:
-  graphdb:
-    image: jvsoest/graphdb-free:fairstation
-    ports: 
-      - "7200:7200"
-  oraw:
-    image: jvsoest/oraw
-    volumes:
-      - ./dicom_import/:/data/
-    links:
-      - graphdb:graphdb
-    environment:
-      - RDF4J_URL=http://graphdb:7200
-      - EXCLUDE_STRUCTURE_REGEX="(Patient.*|BODY.*|Body.*|NS.*|Couch.*|Isocenter.*)"
-```
-
-### Running the infrastructure.
 To run this infrastructure, you can go to the folder where you have this docker-compose.yml stored, and type:
 ```docker-compose up```
 This will download the necessary images, and run the container.
@@ -57,8 +25,6 @@ The following commands can help you as well:
 ### How to query and use GraphDB
 Regarding the use of GraphDb, please have a look at the [quick start guide](http://graphdb.ontotext.com/documentation/free/quick-start-guide.html#explore-your-data-and-class-relationships)
 
-## Implementation repositories
-* [ProTRAIT](https://github.com/maastroclinic/ProTRAIT-FAIRifier)
+## Project contribution
 
-## Frozen hackathon repositories
-* [PBDW2018](http://github.com/jvsoest/PBDW2018_hackathon)
+To contribute to this project, please follow the guidelines as explained [here](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project).
