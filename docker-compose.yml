@@ -1,23 +1,13 @@
 version: "2"
 services:
   postgres:
-<<<<<<< HEAD
     image: postgres:12.4
     volumes:
       - ./postgres_init/:/docker-entrypoint-initdb.d/
       - postgres_data_12_4:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=proTRAIT!1
-=======
-    image: postgres:9.6
-    volumes:
-      #- ../clinical-data-workflow/workflows/psql_init/:/docker-entrypoint-initdb.d/
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
->>>>>>> 4d89233bd367a347791cc4af5e508653f35578dc
       - POSTGRES_DB=protrait
     ports:
       - "5432:5432"
@@ -25,11 +15,7 @@ services:
     image: dpage/pgadmin4
     environment:
       - 'PGADMIN_DEFAULT_EMAIL=datafairy@maastro.nl'
-<<<<<<< HEAD
-      - 'PGADMIN_DEFAULT_PASSWORD=proTRAIT!1'
-=======
       - 'PGADMIN_DEFAULT_PASSWORD=postgres'
->>>>>>> 4d89233bd367a347791cc4af5e508653f35578dc
       - 'PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True'
       - 'PGADMIN_LISTEN_PORT=5050'
     ports:
@@ -67,11 +53,7 @@ services:
     # volumes:
     #   - ./graphdb_template/:/opt/graphdb/home/      
 volumes:
-<<<<<<< HEAD
     postgres_data_12_4:
-=======
-    postgres_data:
->>>>>>> 4d89233bd367a347791cc4af5e508653f35578dc
 networks:
   default:
     driver: bridge
