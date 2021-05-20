@@ -32,8 +32,7 @@ services:
        - "DB_USER=postgres"
        - "DB_PASS=postgres"
   garlic:
-    build:
-      context: notebooks
+    image: jvsoest/fair-jupyter
     ports:
       - "8888:8888"
       - "8088:8088"
