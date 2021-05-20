@@ -1,10 +1,10 @@
 version: "2"
 services:
   postgres:
-    image: postgres:9.6
+    image: postgres:12.4
     volumes:
-      #- ../clinical-data-workflow/workflows/psql_init/:/docker-entrypoint-initdb.d/
-      - postgres_data:/var/lib/postgresql/data
+      - ./postgres_init/:/docker-entrypoint-initdb.d/
+      - postgres_data_12_4:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=proTRAIT!1
@@ -57,7 +57,7 @@ services:
     # volumes:
     #   - ./graphdb_template/:/opt/graphdb/home/      
 volumes:
-    postgres_data:
+    postgres_data_12_4:
 networks:
   default:
     driver: bridge
