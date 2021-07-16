@@ -1,6 +1,6 @@
 # ProTRAIT-FAIRifier
 
-This repository contains the software components to create the FAIR data station, used within the ProTRAIT project. This repository is based on the [DataFAIRifier](http://github.com/maastroclinic/DataFAIRifier) repository.
+This repository contains the software components to create the FAIR data station, used within the ProTRAIT project. This repository is based (unlinked fork) on the [DataFAIRifier](https://github.com/MaastrichtU-CDS/DataFAIRifier) repository.
 
 ## Getting started
 
